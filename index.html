@@ -1,4 +1,5 @@
 <!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Quiz Battle</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8E%A1%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;800&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#1f1b4d;--bg:#eef2ff;--pri:#4f46e5;--pk:#ff3d8b;--gold:#ffb300;--gr:#14b870;--rd:#ee3f5c;--ln:#dcd9f7;color-scheme:light}
@@ -17,7 +18,7 @@ main{display:grid;grid-template-columns:1fr 290px;gap:14px;padding:14px}@media(m
 .sw{position:relative}input.sc{margin:0;padding:2px 10px;font:800 46px 'Baloo 2',system-ui,sans-serif;color:var(--pri);background:#f4f3ff;border:2px dashed var(--ln);border-radius:14px;line-height:1.2;transition:border-color .2s,background .2s}input.sc:hover{border-color:var(--pri);background:#fff}input.sc.pop{animation:pop .6s}
 @keyframes pop{40%{transform:scale(1.15);color:var(--pk)}}.dl{position:absolute;right:12px;top:-4px;font:800 32px 'Baloo 2';pointer-events:none;animation:fl 1.3s forwards}.dl.up{color:var(--gr)}.dl.dn{color:var(--rd)}@keyframes fl{to{transform:translateY(-34px);opacity:0}}
 .c.fu{animation:fu .9s}.c.fd{animation:fd .7s}@keyframes fu{30%{background:#d6fbe7}}@keyframes fd{20%,60%{transform:translateX(-6px);background:#ffe0e6}40%,80%{transform:translateX(6px)}}
-.fxs{min-height:56px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}.fb{font-size:36px;line-height:1;display:inline-flex;align-items:flex-end;gap:3px;padding:4px 9px;border-radius:14px;cursor:help;transition:transform .2s}.fb:hover{transform:scale(1.2)}.fb small{font:800 18px 'Baloo 2'}
+.fxs{min-height:56px;display:grid;grid-template-columns:repeat(3,max-content);gap:6px 8px;align-items:center;justify-content:start}.fb{font-size:36px;line-height:1;display:inline-flex;align-items:flex-end;gap:3px;padding:4px 9px;border-radius:14px;cursor:help;transition:transform .2s}.fb:hover{transform:scale(1.2)}.fb small{font:800 18px 'Baloo 2'}
 .fb.g{background:#dcf8ea;animation:glow 2s infinite}.fb.b{background:#ffe3e8;animation:wob 1.2s infinite}@keyframes glow{50%{box-shadow:0 0 0 7px #14b87033;transform:scale(1.08)}}@keyframes wob{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
 .nofx .fb,.nofx .sc,.nofx .dl{animation:none!important}@media(prefers-reduced-motion:reduce){.fb,.sc,.dl{animation:none!important}}
 .big{padding:10px 16px;font-size:17px;font-weight:800}.qa{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}.qa button{width:32px;height:32px;padding:0;border-radius:50%;font-size:13px}.tl{display:flex;gap:6px}.tl button{flex:1}
@@ -32,6 +33,8 @@ dialog{border:0;border-radius:22px;background:#fff;color:var(--ink);width:min(94
 .tw{max-height:74vh;overflow:auto}.hi{border-bottom:1px solid var(--ln);padding:6px 0}.hi ul{font-size:14px}.fl{display:flex;gap:8px}table{width:100%;border-collapse:collapse}td{padding:2px 4px;vertical-align:top}td input,td textarea{margin:0}td textarea{resize:vertical;font-size:15px;line-height:1.3}.tx{width:62%}.tg td:first-child{border-left:4px solid var(--gr)}.tb td:first-child{border-left:4px solid var(--rd)}.tn td:first-child{border-left:4px solid var(--gold)}
 
 button:disabled{opacity:.5;cursor:not-allowed}
+.fxs.s2,.fxs.s3{min-height:0}.fxs.s2 .fb{font-size:28px;padding:3px 7px;border-radius:12px}.fxs.s2 .fb small{font-size:14px}.fxs.s3 .fb{font-size:21px;padding:2px 5px;border-radius:10px}.fxs.s3 .fb small{font-size:11px}.fxs .fb.mo{font:800 16px 'Baloo 2',system-ui,sans-serif;background:#e9e7ff;color:var(--pri);cursor:pointer;align-items:center}
+.mr{display:flex;gap:6px;align-items:center;padding:6px 0;border-bottom:1px solid var(--ln)}.mr span{flex:1;min-width:0}.mr button{flex:0 0 auto;padding:5px 9px;font-size:13px}.bt .hx{display:none}
 .c.m1{border-color:#e0a100;background:linear-gradient(160deg,#fff7d1,#ffe27a)}.c.m1 .nm::before{content:'🥇 '}
 .c.m2{border-color:#98a2b3;background:linear-gradient(160deg,#fcfdff,#d7dde8)}.c.m2 .nm::before{content:'🥈 '}
 .c.m3{border-color:#c47a3d;background:linear-gradient(160deg,#ffeadb,#e7b087)}.c.m3 .nm::before{content:'🥉 '}
@@ -49,25 +52,6 @@ li.r.up{animation:lu .9s}li.r.dn{animation:ld .9s}@keyframes lu{30%{background:#
 .nofx .coinw.tossing,.nofx .die.shake,.nofx li.r.up,.nofx li.r.dn{animation:none!important}
 
 #wl{width:min(98vw,1180px);max-width:1180px}
-#wl .stg{grid-template-columns:minmax(0,1fr) 280px;align-items:stretch;gap:14px}
-#wl .lbw{background:linear-gradient(160deg,#fff8d9,#fff 55%,#f0edff);border:3px solid #ffc83d;box-shadow:0 0 0 4px #ffc83d33,0 12px 32px #4f46e533;max-height:65vh}
-#wl .lbw h3{color:#4f46e5;font-size:22px}
-#wl .lbx{max-height:55vh;overflow:auto}
-aside.wheel-active{border:3px solid #ffc83d;box-shadow:0 0 0 5px #ffc83d44,0 0 30px #ffb30099;animation:rankGlow 1.8s ease-in-out infinite}
-@keyframes rankGlow{50%{box-shadow:0 0 0 8px #ffc83d33,0 0 38px #ffb300bb}}
-/* Bảng xếp hạng cạnh vòng quay: cao hơn, rộng vừa đủ và chỉ cuộn dọc */
-#wl .stg{grid-template-columns:minmax(0,1fr) 330px;min-width:0}
-#wl .stg>.sm{min-width:0}
-#wl .lbw{min-width:0;width:100%;height:min(72vh,760px);max-height:none;overflow-y:auto;overflow-x:hidden}
-#wl .lbx{width:100%;min-width:0;max-height:none;height:auto;overflow-y:visible;overflow-x:hidden}
-#wl .lbx li.r{min-width:0;width:100%;max-width:100%;overflow:hidden}
-#wl .lbx li.r span{min-width:0;flex:1 1 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#wl .lbx li.r small{flex:0 0 auto;max-width:30%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-@media(max-width:760px){
- #wl .stg{grid-template-columns:minmax(0,1fr)}
- #wl .lbw{height:auto;max-height:48vh;overflow-y:auto;overflow-x:hidden}
- #wl .lbx{height:auto;max-height:none;overflow:visible}
-}
 
 /* Đồng bộ nút đóng và thao tác đóng vòng quay với giao diện Quiz Battle */
 #wl{position:relative;border:3px solid #dcd9f7;border-radius:24px;box-shadow:0 22px 70px #1f1b4d66}
@@ -81,36 +65,98 @@ aside.wheel-active{border:3px solid #ffc83d;box-shadow:0 0 0 5px #ffc83d44,0 0 3
 #wl #rv{border:2px solid #393276;box-shadow:inset 0 0 30px #000a,0 8px 20px #4f46e522}
 #wl #wh{font-weight:800;color:#4f46e5}
 @media(max-width:600px){#wl{padding:12px!important}#wl .wheel-kicker{font-size:10px}#wl .wheel-close span{display:none}}
+
+/* Bảng xếp hạng chính nổi lên thành cửa sổ riêng khi quay vòng quay / xử lý quà */
+#bk{display:none;position:fixed;inset:0;background:#1f1b4dcc;backdrop-filter:blur(5px);z-index:900}
+body.rkon #bk{display:block}
+body.rkon{overflow:hidden}
+body.rkon dialog[open],body.rkon #wl[open]{position:fixed;inset:0 calc(min(330px,34vw) + 28px) 0 12px;margin:auto;z-index:910;max-width:calc(100vw - min(330px,34vw) - 52px)!important}
+body.rkon #dg[open]{z-index:920}
+body.rkon aside{position:fixed;align-self:stretch;top:12px;right:12px;bottom:12px;width:min(330px,34vw);max-height:none;z-index:930;overflow-y:auto;overflow-x:hidden;border:3px solid #ffc83d;box-shadow:0 0 0 5px #ffc83d44,0 0 30px #ffb30099;animation:rankGlow 1.8s ease-in-out infinite}
+@keyframes rankGlow{50%{box-shadow:0 0 0 8px #ffc83d33,0 0 38px #ffb300bb}}
+body.rkon .lbx li.r{min-width:0;max-width:100%;overflow:hidden}
+body.rkon .lbx li.r small{flex:0 0 auto;max-width:30%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:760px){
+ body.rkon aside{top:auto;left:8px;right:8px;bottom:8px;width:auto;height:32vh}
+ body.rkon dialog[open],body.rkon #wl[open]{inset:0 8px calc(32vh + 20px) 8px;max-width:calc(100vw - 16px)!important;max-height:calc(68vh - 16px);overflow:auto}
+}
+
+/* Hai nút tròn cạnh tiêu đề */
+header h1{margin:0 8px 0 0}
+header .hm{font-size:20px;padding:6px 9px;border-radius:12px;flex:0 0 auto}
+header .rb{flex:0 0 auto;width:66px;height:66px;min-width:66px;padding:0;border-radius:50%;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:0;line-height:1;text-align:center;border:3px solid #fff;box-shadow:0 4px 14px #4f46e544}
+header .rb b{font:800 21px/1 'Baloo 2',system-ui,sans-serif}
+header .rb small{font:700 10px/1.1 'Baloo 2',system-ui,sans-serif;letter-spacing:0;margin-top:2px;white-space:nowrap}
+header #sp.rb{padding:0;font-size:inherit;background:linear-gradient(145deg,#2fd89a,#0e9f6e);color:#fff;cursor:default}
+header #sp.rb.full{background:linear-gradient(145deg,#ffd35a,#f59e0b);color:#3b2a00;animation:glow 2s infinite}
+header .rb.nr{margin-right:auto;background:linear-gradient(145deg,#ff6aa5,#ee2f6f);color:#fff}
+header .rb.nr b{font-size:26px}
+header .rb.nr:hover:not(:disabled){background:linear-gradient(145deg,#ff86b6,#f2437f);transform:rotate(-8deg) scale(1.1)}
+header .rb.nr:hover b{display:inline-block;animation:spin1 .6s}
+@keyframes spin1{to{transform:rotate(360deg)}}
+/* Màn hình chính + chọn lớp */
+#lobby{position:fixed;inset:0;z-index:800;display:none;overflow:auto;padding:24px 16px;background:radial-gradient(circle at 15% 10%,#fff0c7 0,transparent 40%),radial-gradient(circle at 90% 15%,#ffd6ea 0,transparent 38%),radial-gradient(circle at 50% 100%,#d9d4ff 0,transparent 50%),#eef2ff}
+body.lobby{overflow:hidden}body.lobby #lobby{display:flex}
+#lobby .lw{margin:auto;width:min(1000px,100%);text-align:center}
+#lobby .logo{font-size:clamp(84px,16vw,150px);line-height:1;display:inline-block;animation:lspin 14s linear infinite;filter:drop-shadow(0 10px 18px #4f46e555)}
+@keyframes lspin{to{transform:rotate(360deg)}}
+#lobby h1.lt{margin:6px 0 4px;font-size:clamp(40px,8vw,76px);letter-spacing:.02em;background:linear-gradient(90deg,#4f46e5,#ff3d8b,#ffb300);-webkit-background-clip:text;background-clip:text;color:transparent}
+#lobby .ls{margin:0 0 26px;font-size:clamp(15px,2.4vw,20px);color:#6b66b8;font-weight:700}
+#lobby .play{font-size:clamp(24px,4vw,36px);padding:16px 54px;border-radius:99px;background:linear-gradient(145deg,#ff6aa5,#ee2f6f);color:#fff;box-shadow:0 12px 30px #ee2f6f66;animation:lpulse 1.8s ease-in-out infinite}
+#lobby .play:hover:not(:disabled){background:linear-gradient(145deg,#ff86b6,#f2437f);transform:scale(1.08)}
+@keyframes lpulse{50%{box-shadow:0 12px 44px #ee2f6faa;transform:scale(1.04)}}
+#lobby h2.lh{font-size:clamp(26px,4.5vw,40px);margin:0 0 4px;color:var(--pri)}
+#lobby .lcs{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin:20px 0 14px;text-align:center}#lobby .lcs .lc{flex:0 1 250px;min-width:210px}
+#lobby .lc{display:flex;flex-direction:column;align-items:center;gap:4px;padding:22px 14px;border-radius:26px;background:#fff;border:3px solid var(--ln);box-shadow:0 8px 22px #4f46e522;color:var(--ink);cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s}
+#lobby .lc:hover:not(:disabled){transform:translateY(-8px) scale(1.04);border-color:var(--pk);box-shadow:0 20px 40px #ff3d8b44;background:#fff}
+#lobby .lc .ic{font-size:64px;line-height:1.1}
+#lobby .lc .nm2{font-size:24px;font-weight:800;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#lobby .lc .info{font-size:15px;color:#6b66b8;font-weight:700}
+#lobby .lc .lead{font-size:13px;background:#fff3c4;color:#6b4a00;border-radius:99px;padding:2px 12px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#lobby .lc.add{border-style:dashed;background:#ffffffaa;color:var(--pri);justify-content:center}
+#lobby .lc.add .ic{font-size:54px}
+#lobby .back{margin-top:6px}
+.nofx #lobby .logo,.nofx #lobby .play{animation:none!important}
 </style>
-<header id="hd"><h1>🎡 Quiz Battle</h1><select id="cs" title="Chọn lớp"></select><button data-a="cadd">＋ Lớp</button><button data-a="cren">✏️ Tên lớp</button><button data-a="cdel">🗑 Xóa lớp</button><span id="sp" class="tag"></span><button data-a="nr">↻ Vòng mới</button><button class="g" data-a="edit">＋ Học sinh</button><button data-a="undo">↩ Hoàn tác</button><button data-a="hist">📜 Lịch sử</button><button data-a="mng">🎁 Quản lý phiếu</button><button data-a="ex">⬇ Xuất</button><label><input type="checkbox" id="ng">Điểm âm</label><label><input type="checkbox" id="fo">Tắt hiệu ứng</label><label><input type="checkbox" id="qa">Nút +điểm</label></header>
-<main><section id="gr"></section><aside><h2>🏆 Bảng xếp hạng</h2><ol id="rk" class="lbx"></ol></aside></main><dialog id="dg"></dialog><dialog id="wl"></dialog>
+<header id="hd"><button data-a="home" class="hm" title="Về màn hình chọn lớp">🏠</button><h1>🎡 Quiz Battle</h1><span id="sp" class="rb" title="Số học sinh đã quay trong vòng này"></span><button data-a="nr" class="rb nr" title="Bắt đầu vòng mới (đặt lại trạng thái đã quay)"><b>↻</b><small>Vòng mới</small></button><select id="cs" title="Chọn lớp"></select><button data-a="cadd">＋ Lớp</button><button data-a="cren">✏️ Tên lớp</button><button data-a="cdel">🗑 Xóa lớp</button><button class="g" data-a="mgr">👥 Quản lý lớp</button><button data-a="undo">↩ Hoàn tác</button><button data-a="hist">📜 Lịch sử</button><button data-a="mng">🎁 Quản lý phiếu</button><button data-a="rnx">🎲 Ai quay tiếp?</button><button data-a="qz">❓ Câu hỏi</button><span class="tag" id="pt"></span><button data-a="ex">⬇ Xuất</button><label><input type="checkbox" id="ng">Điểm âm</label><label><input type="checkbox" id="fo">Tắt hiệu ứng</label><label><input type="checkbox" id="qa">Nút +điểm</label></header>
+<div id="lobby"><div class="lw" id="lw"></div></div>
+<main><section id="gr"></section><aside><h2>🏆 Bảng xếp hạng</h2><ol id="rk" class="lbx"></ol></aside></main><div id="bk"></div><dialog id="dg"></dialog><dialog id="wl"></dialog>
 <script>
 const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let S,X,Lg=[],busy=0,PV={},ES=0;
 const GN={A:'Tăng điểm trực tiếp',B:'Nhân đôi & điều kiện',C:'Cướp & hút điểm',D:'Tráo đổi điểm',E:'Trừ điểm',F:'Chia sẻ điểm',G:'Phòng thủ & phản đòn',H:'Khiên bảo vệ',I:'May mắn & bốc lại',J:'Hiệu ứng kéo dài',K:'Nhiệm vụ'},TN={g:'Có lợi',b:'Bất lợi',n:'Trung tính'},KN={a:'Tự động',t:'Chọn mục tiêu',r:'Tương tác'};
-const FI={bomb:'💣',frz:'🧊',drn:'💸',ref:'🪞',prx:'↪️',pdn:'🕊️',dis:'🚫',x3:'✖️3',skp:'⏭️'},FN={bomb:'Bom: nổ sau mỗi 2 lượt quay hợp lệ của người đang giữ; chuyển bom đặt lại bộ đếm',frz:'Đóng băng (không nhận điểm cộng)',drn:'Chuyển 50% điểm nhận được',ref:'Phản đòn',prx:'Chuyển hình phạt',pdn:'Bỏ qua 1 lần phạt',dis:'Khiên bị vô hiệu hóa',x3:'Vòng sau trả lời đúng x3 (GV áp dụng)',skp:'Mất lượt: lần bấm quay kế tiếp bị tiêu thụ, không rút phiếu và không tính lượt quay hợp lệ'};
-const FG={bomb:'b',frz:'b',drn:'b',dis:'b',ref:'g',prx:'g',pdn:'g',x3:'g',skp:'b'},GI={A:'💰',B:'✖️',C:'🏴‍☠️',D:'🔄',E:'💥',F:'🤝',G:'🛡️',H:'🛡️',I:'🎲',J:'⏳',K:'🎯'},AV=['🦊','🐼','🐯','🐸','🦄','🐙','🐰','🐵','🐱','🐶','🦁','🐧'];
+const FI={imm:'🎫',trap:'🪤',bomb:'💣',frz:'🧊',drn:'💸',ref:'🪞',prx:'↪️',pdn:'🕊️',dis:'🚫',x3:'✖️3',skp:'⏭️'},FN={imm:'Vé miễn tử: chặn hoàn toàn lần mất điểm kế tiếp (không bị phản đòn) hoặc 1 lần bị tráo điểm, rồi biến mất',trap:'Bẫy hẹn giờ: sập vào cuối lượt quay thứ 3 của người bị gài, trừ 25 điểm (khiên có thể chặn)',bomb:'Bom: nổ sau mỗi 2 lượt quay hợp lệ của người đang giữ; chuyển bom đặt lại bộ đếm',frz:'Đóng băng (không nhận điểm cộng)',drn:'Chuyển 50% điểm nhận được',ref:'Phản đòn',prx:'Chuyển hình phạt',pdn:'Bỏ qua 1 lần phạt',dis:'Khiên bị vô hiệu hóa',x3:'Vòng sau trả lời đúng x3 (GV áp dụng)',skp:'Mất lượt: lần bấm quay kế tiếp bị tiêu thụ, không rút phiếu và không tính lượt quay hợp lệ'};
+const FG={imm:'g',trap:'b',bomb:'b',frz:'b',drn:'b',dis:'b',ref:'g',prx:'g',pdn:'g',x3:'g',skp:'b'},GI={A:'💰',B:'✖️',C:'🏴‍☠️',D:'🔄',E:'💥',F:'🤝',G:'🛡️',H:'🛡️',I:'🎲',J:'⏳',K:'🎯'},AV=['🦊','🐼','🐯','🐸','🦄','🐙','🐰','🐵','🐱','🐶','🦁','🐧'];
+Object.assign(FI,{gd:'🔰',hlv:'🥀',drp:'🩸',crs:'🎯',dbl:'⚡',aly:'🤝'});
+Object.assign(FG,{gd:'g',hlv:'b',drp:'b',crs:'b',dbl:'b',aly:'g'});
+Object.assign(FN,{gd:'Lớp bảo vệ: chặn lần mất điểm thông thường kế tiếp (không chặn hoán đổi/đặt lại điểm)',hlv:'Rỉ điểm: mỗi lần nhận điểm dương mất 50% số điểm vừa nhận (đếm theo lượt hợp lệ của chính bạn)',drp:'Chảy máu: mất 5 điểm sau mỗi lượt hợp lệ của chính bạn',crs:'Lời nguyền: khi bạn rút phiếu tiếp theo, người đặt lời nguyền mất 15 điểm',dbl:'Nhân đôi hình phạt: lần mất điểm thông thường kế tiếp bị nhân đôi (tối đa 30)',aly:'Đồng minh: nếu bạn bị trừ điểm, người đặt chịu thay tối đa 10 điểm mỗi lần (đếm theo lượt của người đặt)'});
 const P=id=>S.st.find(p=>p.id===id),log=s=>(qlb(),Lg.push(s)),M=()=>X.me,rk=()=>[...S.st].sort((a,b)=>b.p-a.p),oth=()=>S.st.filter(p=>p!==X.me),rnd=n=>1+Math.floor(Math.random()*n),fz=p=>p.fx.some(f=>f.k==='frz'),sk=m=>{log('⚠ '+m);throw'skip'};
 const uid=()=>{let i;do i='s'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);while(S&&P(i));return i};
 // ===== Lõi điểm: mọi thay đổi đều đi qua gain/lose/T/SW =====
-function gain(p,n,src='c',nb=0){n=Math.floor(n);if(n<=0)return 0;if(src!=='m'&&fz(p)){log(`🧊 ${p.n} bị đóng băng, không nhận +${n}`);return 0}if(!nb&&p===X.me&&X.m>1&&!X.bd){const base=n,b=base*X.m;log(`✖️${X.m} Phiếu nhân điểm: +${base} → +${b} (áp dụng một lần)`);n=b;X.bd=1}if(src!=='m'){const d=p.fx.find(f=>f.k==='drn'),o=d&&P(d.o);if(o&&o!==p){const h=Math.floor(n/2);if(h){o.p+=h;n-=h;log(`💸 ${o.n} nhận ${h} điểm từ hiệu ứng chuyển 50%`)}}}log(`${p.n}: +${n} (${p.p}→${p.p+n})`);p.p+=n;return n}
+function gain(p,n,src='c',nb=0){n=Math.floor(n);if(n<=0)return 0;if(src!=='m'&&fz(p)){log(`🧊 ${p.n} bị đóng băng, không nhận +${n}`);return 0}if(!nb&&p===X.me&&X.m>1&&!X.bd){const base=n,b=base*X.m;log(`✖️${X.m} Phiếu nhân điểm: +${base} → +${b} (áp dụng một lần)`);n=b;X.bd=1}if(src!=='m'){const d=p.fx.find(f=>f.k==='drn'),o=d&&P(d.o);if(o&&o!==p){const h=Math.floor(n/2);if(h){o.p+=h;n-=h;log(`💸 ${o.n} nhận ${h} điểm từ hiệu ứng chuyển 50%`)}}}if(src!=='m'&&p.fx.some(f=>f.k==='hlv')){const h=Math.floor(n/2);if(h){n-=h;S.pot=(S.pot||0)+h;log(`🥀 ${p.n} mất ${h} điểm (50%) do hiệu ứng rỉ điểm → vào hũ`)}}log(`${p.n}: +${n} (${p.p}→${p.p+n})`);p.p+=n;return n}
 function lose(p,n,att,blk=1,dp=0){n=Math.floor(S.neg?n:Math.min(n,Math.max(0,p.p)));if(n<=0)return 0;const f=k=>p.fx.find(x=>x.k===k),rm=x=>p.fx.splice(p.fx.indexOf(x),1),atk=att&&att!==p;let x;
  // Shield protects ordinary eligible losses and theft. Direct score-setting passes dp=1 or blk=0 explicitly.
  if(blk&&p.sh>0&&!f('dis')){log(`🛡️ Khiên của ${p.n} chặn ${n} điểm mất`);return 0}
+ if(!dp&&(x=f('imm'))){rm(x);log(`🎫 ${p.n} dùng Vé miễn tử: chặn ${n} điểm mất`);return 0}
+ if(blk&&!dp&&(x=f('gd'))){rm(x);log(`🔰 ${p.n} dùng Lớp bảo vệ: chặn ${n} điểm mất`);return 0}
  if(!dp&&atk&&(x=f('ref'))){log(`🪞 ${p.n} phản đòn khoản phạt ${n} điểm về ${att.n} (chỉ phản một lần)`);lose(att,n,null,blk,1);return 0}
  if(!dp&&!att&&p===X.me&&(x=f('prx'))){rm(x);const r=rk(),t=x.d==='top'?(r[0]!==p?r[0]:r[1]):P(x.d);if(t&&t!==p){log(`↪️ ${t.n} gánh phạt thay ${p.n}`);lose(t,n,null,blk,1);return 0}log(`↪️ Không có người gánh phạt hợp lệ: ${p.n} tự chịu`)}
  if(!dp&&(x=f('pdn'))){rm(x);log(`🕊️ ${p.n} bỏ qua hình phạt ${n} điểm`);if(atk){const paid=lose(att,10,p,1,1);if(paid)gain(p,paid,'c',1)}return 0}
- log(`${p.n}: -${n} (${p.p}→${p.p-n})`);p.p-=n;return n}
+ if(blk&&!dp&&(x=f('dbl'))){rm(x);const m2=Math.max(n,Math.min(2*n,30));n=S.neg?m2:Math.min(m2,Math.max(0,p.p));log(`⚡ Hình phạt bị nhân đôi: mất ${n} điểm`)}
+ {const al=p.fx.find(f=>f.k==='aly'),ao=al&&P(al.o);if(ao&&ao!==p){const pd=lose(ao,Math.min(10,n),null,1,1);if(pd){n-=pd;log(`🤝 ${ao.n} chịu thay ${pd} điểm cho ${p.n}`)}}}
+ if(n<=0)return 0;
+ log(`${p.n}: -${n} (${p.p}→${p.p-n})`);p.p-=n;if(X.sink&&!att){S.pot=(S.pot||0)+n;log(`🏺 +${n} vào hũ điểm chung`)}return n}
 
 const T=(f,t,n)=>{const taken=lose(f,n,t);if(taken>0)gain(t,taken,'c',1);return taken},G=(p,n)=>gain(p,n),GX=(p,n)=>gain(p,n,'c',1),setp=(p,v)=>{log(`${p.n}: ${p.p}→${v}`);p.p=v},addSh=(p,n)=>{log(`${p.n}: 🛡️ ${p.sh}→${p.sh+n}`);p.sh+=n};
 const mv=(f,t,n)=>{if(fz(t))return log('🧊 Người nhận bị đóng băng: hủy');gain(t,lose(f,n,null,0,1),'c',1)};
-function SW(a,b){if(!a||!b||a===b)sk('Cần hai người khác nhau');log(`🔄 ${a.n} (${a.p}) ⇄ ${b.n} (${b.p})`);[a.p,b.p]=[b.p,a.p]}
+function SW(a,b){if(!a||!b||a===b)sk('Cần hai người khác nhau');const iv=[a,b].find(q=>q.fx.some(f=>f.k==='imm'));if(iv){iv.fx.splice(iv.fx.findIndex(f=>f.k==='imm'),1);return log(`🎫 ${iv.n} dùng Vé miễn tử: hủy lần tráo điểm ${a.n} ⇄ ${b.n}`)}log(`🔄 ${a.n} (${a.p}) ⇄ ${b.n} (${b.p})`);[a.p,b.p]=[b.p,a.p]}
 function fe(p,o){p.fx=p.fx.filter(f=>f.k!==o.k);p.fx.push({...o,fr:1,o:X.me.id});log(`${FI[o.k]} ${FN[o.k]} → ${p.n}`)}
 // ===== Hộp thoại =====
 const dg=$('#dg');dg.oncancel=e=>e.preventDefault();$('#wl').oncancel=e=>e.preventDefault();
-function dlg(h,b,init,w){return new Promise(r=>{const wr=busy;dg.style.maxWidth=w||(wr?'900px':'');dg.style.width=(w||wr)?'96vw':'';const body=h+'<div class="bt">'+b.map((x,i)=>`<button data-i="${i}" class="${x[2]||''}">${x[0]}</button>`).join('')+'</div>';dg.innerHTML=wr?`<div class="stg"><div class="sm">${body}</div>${lbBox()}</div>`:body;dg.querySelectorAll('.bt button').forEach(k=>k.onclick=()=>{let v=b[k.dataset.i][1];if(typeof v==='function')v=v();if(v===false)return;dg.close();r(v)});dg.open||dg.showModal();lbRefresh();init&&init()})}
-async function pk(k,list,t='Chọn mục tiêu'){list=list||oth();const m=k==='m';if(!m&&list.length<k)sk('Không đủ mục tiêu hợp lệ');const R=rk(),sel=new Set(),up=()=>dg.querySelectorAll('.pi').forEach(x=>x.classList.toggle('on',sel.has(x.dataset.i)));
- const r=await dlg(`<h3>${t}${m?'':` (chọn ${k})`}</h3><div class="pl">`+list.map(p=>`<button class="pi" data-i="${p.id}">${esc(p.av)} <b>${esc(p.n)}</b> · hạng ${R.indexOf(p)+1} · ${p.p} điểm${p.sh?` · 🛡️${p.sh}`:''}${p.fx.map(f=>FI[f.k]).join('')}</button>`).join('')+'</div>',[['Hủy',0],['Xác nhận',()=>(m||sel.size===k)?[...sel]:false,'p']],()=>dg.querySelectorAll('.pi').forEach(b=>b.onclick=()=>{const i=b.dataset.i;if(sel.has(i))sel.delete(i);else{if(!m&&sel.size>=k){if(k===1)sel.clear();else return}sel.add(i)}up()}),'1000px');
+function dlg(h,b,init,w){return new Promise(r=>{const wr=busy;dg.style.maxWidth=w||(wr?'900px':'');dg.style.width=(w||wr)?'96vw':'';const body=h+'<div class="bt">'+b.map((x,i)=>`<button data-i="${i}" class="${x[2]||''}">${x[0]}</button>`).join('')+'</div>';dg.innerHTML=body;dg.querySelectorAll('.bt button').forEach(k=>k.onclick=()=>{let v=b[k.dataset.i][1];if(typeof v==='function')v=v();if(v===false)return;dg.close();r(v)});openD(dg);lbRefresh();init&&init()})}
+const spre=t=>{const m=M(),k=/cùng bàn/.test(t)?'tb':/cùng hàng/.test(t)?'rw':'';return m&&k&&m[k]?oth().filter(q=>q[k]===m[k]).map(q=>q.id):[]};
+async function pk(k,list,t='Chọn mục tiêu'){list=list||oth();const m=k==='m';if(!m&&list.length<k)sk('Không đủ mục tiêu hợp lệ');const R=rk(),sel=new Set(m?spre(t):[]),up=()=>dg.querySelectorAll('.pi').forEach(x=>x.classList.toggle('on',sel.has(x.dataset.i)));
+ const r=await dlg(`<h3>${t}${m?'':` (chọn ${k})`}</h3><div class="pl">`+list.map(p=>`<button class="pi${sel.has(p.id)?' on':''}" data-i="${p.id}">${esc(p.av)} <b>${esc(p.n)}</b> · hạng ${R.indexOf(p)+1} · ${p.p} điểm${p.sh?` · 🛡️${p.sh}`:''}${p.fx.map(f=>FI[f.k]).join('')}</button>`).join('')+'</div>',[['Hủy',0],['Xác nhận',()=>(m||sel.size===k)?[...sel]:false,'p']],()=>dg.querySelectorAll('.pi').forEach(b=>b.onclick=()=>{const i=b.dataset.i;if(sel.has(i))sel.delete(i);else{if(!m&&sel.size>=k){if(k===1)sel.clear();else return}sel.add(i)}up()}),'1000px');
  if(r===0)throw'cancel';return r.map(P)}
 async function tp(n,ex=1){const r=rk(),s=r[n<0?r.length-1:n-1],c=s?r.filter(q=>q.p===s.p&&!(ex&&q===X.me)):[];if(!c.length)sk('Không có mục tiêu hợp lệ');return c.length>1?(await pk(1,c,'Đồng hạng — chọn mục tiêu'))[0]:c[0]}
 async function num(t,a,b){const r=await dlg(`<h3>${esc(t)}</h3><input id="ni" type="number" min="${a}" max="${b}">`,[['Hủy',0],['OK',()=>{const v=+$('#ni').value;return Number.isInteger(v)&&v>=a&&v<=b?v:false},'p']]);if(!r)throw'cancel';return r}
@@ -124,10 +170,11 @@ const tileF=c=>`<div class="tl2 ${c.t}"><i>${GI[c.g]}</i><span>${esc(short(txt(c
 function lbHTML(){const R=rk();const h=R.map(p=>{const k=rankOf(R,p),o=lbPrev[p.id],ch=o!==undefined&&o!==p.p?(p.p>o?'up':'dn'):'';return `<li class="r ${p.p>0&&k<4?'rk'+k:''} ${p.id===CUR?'me':''} ${ch}"><i>${k}</i>${esc(p.av)}<span>${esc(p.n)}</span><b>${p.p}</b><small>${p.sh?'🛡️'+p.sh:''}${p.fx.map(f=>FI[f.k]).join('')}</small></li>`}).join('');return h}
 function lbRefresh(){if(!S)return;const h=lbHTML();document.querySelectorAll('.lbx').forEach(o=>{if(o.dataset.h!==h){o.innerHTML=h;o.dataset.h=h}});lbPrev=Object.fromEntries(S.st.map(p=>[p.id,p.p]))}
 function qlb(){clearTimeout(lbT);lbT=setTimeout(lbRefresh,0)}
-function restoreRank(){const rank=$('#rk'),aside=document.querySelector('main aside');if(rank&&rank.dataset.home){aside.appendChild(rank);delete rank.dataset.home}aside.classList.remove('wheel-active')}
+const openD=d=>{if(!d.open)busy?d.show():d.showModal()};
+function restoreRank(){document.body.classList.remove('rkon');$('#bk').onclick=null}
 
 const sleep=ms=>new Promise(r=>setTimeout(r,ms)),clk=id=>new Promise((res,rej)=>{$('#'+id).onclick=()=>res(1);const x=$('#st_x');if(x)x.onclick=()=>rej('cancel')}),CB='<button id="st_x">Hủy</button>',CE='style="justify-content:center"';
-function stg(h,keep){if(!keep)X.mk=Lg.length;dg.style.maxWidth='900px';dg.style.width='96vw';dg.innerHTML=`<div class="stg"><div class="sm ctr">${h}</div>${lbBox()}</div>`;dg.open||dg.showModal();lbRefresh()}
+function stg(h,keep){if(!keep)X.mk=Lg.length;dg.style.maxWidth='900px';dg.style.width='96vw';dg.innerHTML=`<div class="sm ctr">${h}</div>`;openD(dg);lbRefresh()}
 async function fin(t){const chips=Lg.slice(X.mk||0).slice(-8).map(x=>`<span class="ch">${esc(x)}</span>`).join('')||'<span class="ch">Không có thay đổi điểm</span>';
  if(!dg.open||!dg.querySelector('.sm.ctr'))stg(`<h3>${t||'Kết quả'}</h3>`,1);
  dg.querySelector('.sm').insertAdjacentHTML('beforeend',`<div>${chips}</div><div class="bt" ${CE}><button class="g big" id="fn_ok">Tiếp tục</button></div>`);
@@ -158,6 +205,21 @@ async function reroll(title,lab){const c=pickC(1);if(!c)sk('Không còn phiếu 
  await sleep(S.fo?350:4400);$('#rr_h').textContent='Trúng phiếu mới!';
  $('#rr_o').innerHTML=`<h3 class="rt">${{g:'🟢',b:'🔴',n:'🟡'}[c.t]} ${esc(txt(c))}</h3><p>${KN[c.k]} · ${TN[c.t]}</p><div class="bt" ${CE}><button class="g big" id="rr_ok">${lab(c)}</button></div>`;
  await clk('rr_ok');return c}
+
+// ===== Giao diện tương tác mới: vòng quay chọn mục, chọn người ngẫu nhiên, rút thêm phiếu =====
+async function roul(title,labs,desc){const r=Math.floor(Math.random()*labs.length),n=labs.length;
+ stg(`<h3>${title}</h3><p id="ro_h">${desc||'Bấm nút để quay'}</p><div class="opt" id="ro_o">${labs.map(l=>`<button style="pointer-events:none">${esc(l)}</button>`).join('')}</div><div class="bt" ${CE}><button class="g big" id="ro_go">🎰 QUAY</button>${CB}</div>`);
+ await clk('ro_go');$('#st_x').remove();$('#ro_go').disabled=true;$('#ro_h').textContent='Đang quay...';
+ const bs=[...$('#ro_o').children],tot=S.fo?r:n*3+r;let iv=60;
+ for(let k=0;k<=tot;k++){bs.forEach((b,x)=>b.classList.toggle('on',x===k%n));await sleep(S.fo?40:iv);iv*=1.07}
+ $('#ro_h').innerHTML=`🎉 Ra: <b>${esc(labs[r])}</b>`;await sleep(S.fo?200:900);return r}
+async function rpick(title,list,desc){const r=list[Math.floor(Math.random()*list.length)];
+ stg(`<h3>${title}</h3><p id="rp_h">${desc||'Bấm nút để chọn ngẫu nhiên'}</p><div class="rn" id="rp_r" style="font-size:52px">?</div><div class="bt" ${CE}><button class="g big" id="rp_go">🎲 CHỌN NGẪU NHIÊN</button>${CB}</div>`);
+ await clk('rp_go');$('#st_x').remove();$('#rp_go').disabled=true;$('#rp_h').textContent='Đang chọn...';
+ const end=Date.now()+(S.fo?300:2000);let iv=60,l=null;
+ while(Date.now()<end){let q;do q=list[Math.floor(Math.random()*list.length)];while(list.length>1&&q===l);l=q;$('#rp_r').textContent=q.av+' '+q.n;await sleep(iv);iv*=1.1}
+ $('#rp_r').textContent=r.av+' '+r.n;$('#rp_h').innerHTML=`🎯 Chọn trúng <b>${esc(r.n)}</b>!`;await sleep(S.fo?200:900);return r}
+async function drawAgain(title){const c=await reroll(title,()=>'⚡ XỬ LÝ PHIẾU MỚI');log('🎴 Phiếu mới: '+txt(c));X.pen=c.t==='b';X.sink=c.g==='E';X.fs=0;await c.f();if(X.fs!==2)await fin()}
 // ===== Danh sách 100 phiếu (g=có lợi, b=bất lợi, n=trung tính | a=tự động, t=chọn mục tiêu, r=tương tác) =====
 const NF=' (Không bị Đóng băng chặn.)',C=[],cn={},D=(g,t,k,n,f)=>C.push({id:g+(cn[g]=(cn[g]||0)+1),g,t,k,n:g==='D'?n+NF:n,f});
 [['Cộng ngay 30 điểm trực tiếp từ Giáo viên.',30],['Cộng ngay 10 điểm vào điểm của bạn.',10],['Nhận ngay 40 điểm vào điểm của bạn.',40],['Cộng ngay 35 điểm vào điểm của bạn.',35],['Cộng ngay 15 điểm vào quỹ điểm hiện tại.',15],['Nhận ngay 30 điểm từ Giáo viên.',30],['Cộng ngay 20 điểm vào tài khoản của bạn.',20],['Nhận ngay 50 điểm từ Giáo viên.',50],['Cộng 25 điểm vào điểm của bạn.',25]].forEach(([t,n])=>D('A','g','a',t,()=>G(M(),n)));
@@ -255,7 +317,7 @@ D('H','b','a','Mất toàn bộ Khiên Bảo Vệ đang có.',()=>{if(M().sh){lo
 D('H','n','t','Đổi toàn bộ số khiên của bạn với một bạn tự chọn.',async()=>{const[p]=await pk(1);log(`🔄 Khiên: ${M().n} (${M().sh}) ⇄ ${p.n} (${p.sh})`);[M().sh,p.sh]=[p.sh,M().sh]});
 D('J','g','a','Tháo bom: gỡ quả bom đang đặt trên người bạn.',()=>{const b=M().fx.some(f=>f.k==='bomb');M().fx=M().fx.filter(f=>f.k!=='bomb');log(b?'💣 Đã gỡ bom':'Bạn không có bom nên không có tác dụng')});
 D('J','g','t','Chuyển quả bom đang có trên người bạn sang một bạn khác.',async()=>{if(!M().fx.some(f=>f.k==='bomb'))return log('Bạn không có bom nên không có tác dụng');const[p]=await pk(1);M().fx=M().fx.filter(f=>f.k!=='bomb');fe(p,{k:'bomb',l:999,c:0})});
-D('J','g','a','Giải trừ: xóa mọi hiệu ứng bất lợi đang có trên người bạn (bom, đóng băng, chuyển 50% điểm, mất lượt).',()=>{const n=M().fx.length;M().fx=M().fx.filter(f=>!['bomb','frz','drn','skp','dis'].includes(f.k));log(M().fx.length<n?'✨ Đã xóa các hiệu ứng bất lợi':'Không có hiệu ứng bất lợi nào để xóa')});
+D('J','g','a','Giải trừ: xóa mọi hiệu ứng bất lợi đang có trên người bạn (bom, bẫy, đóng băng, chuyển 50% điểm, mất lượt).',()=>{const n=M().fx.length;M().fx=M().fx.filter(f=>!['bomb','trap','frz','drn','skp','dis','hlv','drp','crs','dbl'].includes(f.k));log(M().fx.length<n?'✨ Đã xóa các hiệu ứng bất lợi':'Không có hiệu ứng bất lợi nào để xóa')});
 D('J','g','a','Quay thêm: bạn được quay thêm ngay 1 lượt nữa.',()=>{ES=M().id;log('🎡 Được quay thêm 1 lượt')});
 D('J','b','a','Bạn nhận một quả bom: bộ đếm tăng khi bạn hoàn tất lượt quay hợp lệ. Sau mỗi 2 lượt, bom gây phạt 40 điểm; khiên có thể chặn. Có thể gỡ bằng Tháo bom hoặc Giải trừ.',()=>fe(M(),{k:'bomb',l:999,c:0}));
 D('J','b','a','Bạn bị đóng băng: không được cộng điểm trong 1 lượt quay tiếp theo.',()=>fe(M(),{k:'frz',l:1}));
@@ -266,6 +328,53 @@ D('E','b','a','Thuế đầu bảng: nếu bạn đang nằm trong Top 3 thì m�
 D('E','b','r','Thử thách giải hạn: làm đủ một thử thách (hát, nhảy hoặc trả lời nhanh) để không mất điểm, nếu không làm được thì mất 10 điểm.',async()=>await dlg('<h3>Thử thách giải hạn</h3><p>Học sinh đã hoàn thành thử thách chưa?</p>',[['Chưa làm được',0],['Hoàn thành',1,'g']])?log('Hoàn thành thử thách: không bị trừ điểm'):lose(M(),10,null));
 D('I','n','r','Cược điểm: chọn cược 10 hoặc 20 điểm, tung đồng xu: Ngửa thắng +số điểm cược, Sấp thua −số điểm cược.',async()=>{const{r,b}=await coin('🎰 Cược điểm — Ngửa thắng · Sấp thua',[10,20]);if(r==='H'){log(`🪙 Ngửa: thắng cược ${b}`);G(M(),b)}else{log(`🪙 Sấp: thua cược ${b}`);lose(M(),b,null)}await fin()});
 D('K','n','r','Câu hỏi nhanh: Giáo viên đọc một câu hỏi, trả lời đúng +20 điểm, trả lời sai −10 điểm.',async()=>await dlg('<h3>Câu hỏi nhanh</h3><p>Học sinh trả lời thế nào?</p>',[['Sai',0],['Đúng',1,'g']])?G(M(),20):lose(M(),10,null));
+// ===== 10 phiếu mới =====
+D('G','g','a','Vé miễn tử: chặn hoàn toàn lần mất điểm kế tiếp của bạn (không bị phản đòn) hoặc 1 lần bị tráo điểm, sau đó vé biến mất. Khiên vẫn được xét trước.',()=>fe(M(),{k:'imm',l:99}));
+D('I','n','r','Đấu giá mù: chọn một bạn, cả hai cùng chọn một số từ 1 đến 5. Ai chọn số lớn hơn nhận 15 điểm; nếu trùng số, cả hai cùng nhận 5 điểm.',async()=>{const[p]=await pk(1,oth(),'Đấu giá mù — chọn đối thủ'),m=M();const v=await dlg(`<h3>🙈 Đấu giá mù</h3><p>Mỗi bạn chọn kín một số từ 1 đến 5 rồi nhập vào đây.</p><label>Số của ${esc(m.n)}<input id="bm" type="number" min="1" max="5"></label><label>Số của ${esc(p.n)}<input id="bp" type="number" min="1" max="5"></label>`,[['Hủy',0],['Công bố',()=>{const a=+$('#bm').value,b=+$('#bp').value,ok=x=>Number.isInteger(x)&&x>=1&&x<=5;return ok(a)&&ok(b)?{a,b}:false},'p']]);if(!v)throw'cancel';log(`🙈 ${m.n} chọn ${v.a} · ${p.n} chọn ${v.b}`);if(v.a>v.b)G(m,15);else if(v.b>v.a)G(p,15);else{G(m,5);G(p,5)}});
+D('I','n','r','Tài hay Xỉu: chọn Xỉu (1–3) hoặc Tài (4–6) rồi đổ xúc xắc. Đoán đúng nhận +20 điểm, đoán sai mất 10 điểm.',async()=>{const side=await dlg('<h3>🎲 Tài hay Xỉu</h3><p>Chọn phe của bạn trước khi đổ xúc xắc.</p>',[['Hủy',0],['Xỉu (1–3)','x','g'],['Tài (4–6)','t','p']]);if(!side)throw'cancel';const r=await dice('🎲 Tài hay Xỉu — đoán đúng +20 · sai −10','Xỉu = 1–3 · Tài = 4–6');const win=(r>=4)===(side==='t');log(`🎲 Chọn ${side==='t'?'Tài':'Xỉu'}, ra ${r}`);if(win)G(M(),20);else lose(M(),10,null);await fin()});
+D('A','g','t','Mưa điểm: chọn 3 bạn bất kỳ, mỗi bạn nhận ngẫu nhiên 5, 10, 15, 20, 25 hoặc 30 điểm (như đổ xúc xắc × 5).',async()=>(await pk(3,oth(),'Mưa điểm — chọn 3 bạn')).forEach(p=>{const r=rnd(6);log(`🌧️ ${p.n} hứng được ${r*5} điểm`);G(p,r*5)}));
+D('F','n','t','Tặng quà ngược: bạn mất 10 điểm, nhưng bạn đang đứng cuối bảng nhận 30 điểm. Khiên của bạn có thể chặn phần mất điểm.',async()=>{const l=await tp(-1);lose(M(),10,null);G(l,30)});
+D('G','g','t','Nhân bản hiệu ứng: chọn một bạn, sao chép toàn bộ khiên và các hiệu ứng có lợi (phản đòn, bỏ qua phạt, x3, miễn tử…) của bạn đó sang bạn; bạn đó vẫn giữ nguyên.',async()=>{const[p]=await pk(1,oth(),'Nhân bản hiệu ứng — chọn 1 bạn'),good=p.fx.filter(f=>FG[f.k]==='g');if(!p.sh&&!good.length)sk(`${p.n} chưa có khiên hoặc hiệu ứng có lợi để sao chép`);if(p.sh)addSh(M(),p.sh);good.forEach(f=>fe(M(),{k:f.k,l:f.l,d:f.d}))});
+D('J','n','t','Bẫy hẹn giờ: gài bẫy lên 1 bạn. Sau 3 lượt quay hợp lệ của chính bạn đó, bẫy sập và bạn đó bị trừ 25 điểm (khiên có thể chặn). Có thể gỡ bằng Giải trừ.',async()=>fe((await pk(1))[0],{k:'trap',l:999,c:0}));
+D('K','n','r','Thử thách đôi: chọn một bạn thi trả lời nhanh một câu hỏi của Giáo viên với bạn. Người thắng nhận 15 điểm từ người thua.',async()=>{const[p]=await pk(1,oth(),'Thử thách đôi — chọn đối thủ'),m=M(),W=P(await dlg('<h3>⚔️ Ai trả lời nhanh và đúng hơn?</h3>',[[esc(m.n),m.id],[esc(p.n),p.id]])),L=W===m?p:m;T(L,W,15)});
+D('D','n','a','Đảo ngược bảng xếp hạng: Top 1 đổi điểm với người cuối bảng, Top 2 đổi với người áp chót, Top 3 đổi với người thứ ba từ dưới lên (tối đa 3 cặp, tùy sĩ số lớp).',()=>{const r=rk(),n=Math.min(3,r.length>>1);if(!n)sk('Lớp cần ít nhất 2 học sinh');for(let i=0;i<n;i++)SW(r[i],r[r.length-1-i])});
+D('F','g','a','Chia lộc cả lớp: bạn nhận 10 điểm và mỗi bạn khác trong lớp nhận 2 điểm.',()=>{G(M(),10);oth().forEach(p=>G(p,2))});
+D('I','g','a','Nổ hũ: nhận toàn bộ hũ điểm chung (tối đa 100).',()=>{const n=Math.min(100,S.pot||0);if(!n)return log('🏺 Hũ đang trống');S.pot-=n;G(M(),n)});
+D('I','g','a','Nổ hũ lớn: nhận toàn bộ hũ điểm chung (tối đa 100).',()=>{const n=Math.min(100,S.pot||0);if(!n)return log('🏺 Hũ đang trống');S.pot-=n;G(M(),n)});
+
+// ===== 30 phiếu mới (xen ngẫu nhiên vào bộ phiếu) =====
+const n0=C.length;
+D('B','g','a','Nhận thêm 10 điểm và nhân đôi số điểm hiện có.',()=>{const m=M();G(m,10);m.p?setp(m,m.p*2):log('Điểm đang bằng 0: nhân đôi không có tác dụng')});
+D('A','g','a','Nếu có dưới 20 điểm, tăng tổng điểm lên 40. Nếu có từ 20 điểm trở lên, nhận thêm 20 điểm.',()=>M().p<20?GX(M(),40-M().p):G(M(),20));
+D('G','g','a','Chặn lần mất điểm thông thường tiếp theo. Không chặn các hiệu ứng hoán đổi hoặc đặt lại điểm.',()=>fe(M(),{k:'gd',l:99}));
+D('A','g','r','Nhận ngẫu nhiên 10, 15 hoặc 25 điểm.',async()=>{const v=[10,15,25],i=await roul('🎰 Quay điểm thưởng',v.map(n=>'+'+n));G(M(),v[i]);await fin()});
+D('A','g','a','Nếu đang đứng đầu bảng, nhận 10 điểm. Nếu không, nhận 20 điểm.',()=>G(M(),rankOf(rk(),M())===1?10:20));
+D('A','g','r','Nhận ngẫu nhiên 5, 15, 25 hoặc 40 điểm.',async()=>{const v=[5,15,25,40],i=await roul('🎰 Quay điểm thưởng',v.map(n=>'+'+n));G(M(),v[i]);await fin()});
+D('G','g','a','Nhận 15 điểm và một lớp bảo vệ trước lần trừ điểm tiếp theo.',()=>{G(M(),15);fe(M(),{k:'gd',l:99})});
+D('A','g','a','Nếu thuộc nửa dưới bảng xếp hạng, nhận 25 điểm; nếu thuộc nửa trên, nhận 10 điểm.',()=>{const r=rk();G(M(),r.indexOf(M())>=Math.ceil(r.length/2)?25:10)});
+D('K','g','r','Nhận 20 điểm. Nếu trả lời đúng câu hỏi do giáo viên đưa ra, nhận thêm 15 điểm.',async()=>{G(M(),20);const ok=await dlg('<h3>❓ Câu hỏi của giáo viên</h3><p>Học sinh trả lời đúng chưa?</p>',[['Chưa đúng',0],['Trả lời đúng +15',1,'g']]);ok?G(M(),15):log('Chưa trả lời đúng: không có thêm điểm')});
+D('I','g','r','Được rút thêm một phiếu khác và xử lý phiếu đó bình thường.',()=>drawAgain('🎴 Rút thêm phiếu'));C[C.length-1].rr=1;
+D('J','b','a','Trong 2 lượt hợp lệ tiếp theo, mỗi lần nhận điểm dương sẽ mất 50% số điểm vừa nhận.',()=>fe(M(),{k:'hlv',l:2,ct:'h'}));
+D('E','b','t','Người đứng đầu bảng mất 15 điểm. Nếu người rút phiếu chính là người đứng đầu, mất 25 điểm.',async()=>{const t=await tp(1,0);lose(t,t===M()?25:15,null)});
+D('J','b','a','Mất 5 điểm sau mỗi lượt hợp lệ trong 3 lượt tiếp theo.',()=>fe(M(),{k:'drp',l:3,ct:'h'}));
+D('F','b','t','Mất 15 điểm và chuyển số điểm thực sự bị trừ cho người đang đứng cuối bảng.',async()=>{const m=M(),R=rk(),lo=R[R.length-1].p;if(m.p===lo&&R.filter(q=>q.p===lo).length===1){log('Bạn đang đứng cuối bảng: điểm bị trừ nộp vào hũ');X.sink=1;return lose(m,15,null)}const l=await tp(-1),got=lose(m,15,null);if(got>0){log(`📦 ${l.n} nhận ${got} điểm bị trừ`);gain(l,got,'m')}});
+D('J','b','r','Hệ thống chọn ngẫu nhiên một học sinh khác. Khi người đó rút phiếu lần tiếp theo, người sở hữu phiếu mất 15 điểm.',async()=>{const l=oth();if(!l.length)sk('Cần ít nhất 2 học sinh');const p=await rpick('🎯 Gài lời nguyền',l,'Khi người này rút phiếu tiếp theo, bạn sẽ mất 15 điểm');fe(p,{k:'crs',l:99,ct:'h'});await fin('Lời nguyền đã được gài')});
+D('J','b','a','Lần mất điểm thông thường tiếp theo bị nhân đôi, tối đa 30 điểm.',()=>fe(M(),{k:'dbl',l:99}));
+D('F','b','t','Chuyển 10 điểm từ người rút sang người đứng đầu bảng. Nếu chính người rút đang đứng đầu, chuyển điểm cho người đứng thứ hai.',async()=>{const m=M(),t=rk()[0]===m?await tp(2):await tp(1);mv(m,t,10)});
+D('E','b','r','Tung đồng xu: 50% mất 20 điểm, 50% mất 5 điểm.',async()=>{const{r}=await coin('🪙 Tung đồng xu — Ngửa mất 5 · Sấp mất 20');if(r==='H'){log('🪙 Ngửa');lose(M(),5,null)}else{log('🪙 Sấp');lose(M(),20,null)}await fin()});
+D('K','n','r','Chọn một đối thủ và trả lời câu hỏi. Người trả lời đúng nhanh hơn nhận 20 điểm; người trả lời sai mất 10 điểm; hòa thì không đổi điểm.',async()=>{const[p]=await pk(1,oth(),'⚔️ Chọn đối thủ'),m=M(),o='<option value="w">Đúng nhanh hơn</option><option value="o">Đúng (hòa / không nhanh hơn)</option><option value="x">Sai</option>';const v=await dlg(`<h3>⚔️ Đối đầu trả lời nhanh</h3><p>Giáo viên đưa câu hỏi. Chọn kết quả của từng bạn.</p><label>${esc(m.n)}<select id="d1">${o}</select></label><label>${esc(p.n)}<select id="d2">${o}</select></label>`,[['Hủy',0],['Xác nhận',()=>[$('#d1').value,$('#d2').value],'p']]);if(!v)throw'cancel';const both=v[0]==='w'&&v[1]==='w';[[m,v[0]],[p,v[1]]].forEach(([q,r])=>{if(r==='w'&&!both)G(q,20);else if(r==='x')lose(q,10,null);else log(`${q.n}: không đổi điểm`)})});
+D('F','g','t','Chọn một học sinh. Cả hai cùng nhận 15 điểm.',async()=>{const[p]=await pk(1,oth(),'Chọn bạn cùng nhận điểm');G(M(),15);G(p,15)});
+D('I','n','r','Chọn một học sinh khác. Tung đồng xu: ngửa, cả hai cùng nhận 15 điểm; sấp, người rút mất 15 điểm và đối thủ nhận 15 điểm.',async()=>{const[p]=await pk(1,oth(),'Chọn đối thủ may rủi'),{r}=await coin(`🪙 Ngửa: cả hai +15 · Sấp: bạn −15, ${esc(p.n)} +15`);if(r==='H'){log('🪙 Ngửa');G(M(),15);G(p,15)}else{log('🪙 Sấp');lose(M(),15,null);G(p,15)}await fin()});
+D('B','g','t','Chọn một học sinh. Nếu đối thủ có nhiều điểm hơn, người rút nhận 20 điểm; nếu không, nhận 5 điểm.',async()=>{const[p]=await pk(1,oth(),'Chọn đối thủ');G(M(),p.p>M().p?20:5)});
+D('H','n','t','Chọn một học sinh và đổi một món quà ngẫu nhiên trong túi quà của hai người. Không đổi nếu một bên không có quà hợp lệ.',async()=>{const[p]=await pk(1,oth(),'Chọn bạn để đổi quà'),m=M(),a=BG(m),b=BG(p);if(!a.length||!b.length)return log('🎁 Một bên không có quà hợp lệ trong túi: không đổi');const i=Math.floor(Math.random()*a.length),j=Math.floor(Math.random()*b.length),x=a[i],y=b[j],nm=id=>txt(C.find(c=>c.id===id));a[i]=y;b[j]=x;log(`🎁 ${m.n} đổi “${nm(x)}” lấy “${nm(y)}” của ${p.n}`)});
+D('G','n','t','Chọn một đồng minh. Trong 2 lượt hợp lệ tiếp theo, nếu đồng minh bị trừ điểm, người sở hữu phiếu chịu thay tối đa 10 điểm mỗi lần.',async()=>fe((await pk(1,oth(),'Chọn đồng minh'))[0],{k:'aly',l:2,ct:'o'}));
+D('I','n','r','Ngẫu nhiên kích hoạt một trong 6 hiệu ứng: +30 điểm, −15 điểm, nhân đôi điểm hiện có, nhận khiên, đổi điểm với người ngẫu nhiên hoặc không có hiệu ứng.',async()=>{const L=['+30 điểm','−15 điểm','Nhân đôi điểm','Nhận khiên 🛡️3','Đổi điểm ngẫu nhiên','Không có gì'],i=await roul('📦 Hộp bí ẩn',L),m=M();if(i===0)G(m,30);else if(i===1)lose(m,15,null);else if(i===2)m.p?setp(m,m.p*2):log('Điểm đang bằng 0: nhân đôi không có tác dụng');else if(i===3)addSh(m,3);else if(i===4){const l=oth();if(!l.length)log('Không có ai để đổi điểm');else SW(m,await rpick('🔄 Chọn người để đổi điểm',l))}else log('Hộp trống!');await fin()});
+D('I','n','r','Chọn mức cược 5, 10, 15 hoặc 20 điểm. Tung đồng xu: thắng thì nhận thêm số điểm bằng tiền cược; thua thì mất số điểm bằng tiền cược.',async()=>{const{r,b}=await coin('🎰 Cược lớn — Ngửa thắng · Sấp thua',[5,10,15,20]);if(r==='H'){log(`🪙 Ngửa: thắng cược ${b}`);G(M(),b)}else{log(`🪙 Sấp: thua cược ${b}`);lose(M(),b,null)}await fin()});
+D('D','n','r','Đổi toàn bộ điểm với một học sinh ngẫu nhiên khác.',async()=>{const l=oth();if(!l.length)sk('Cần ít nhất 2 học sinh');SW(M(),await rpick('🔄 Hoán đổi ngẫu nhiên',l));await fin()});
+D('C','g','a','Mỗi học sinh có trên 30 điểm mất 5 điểm; người rút nhận tổng số điểm thực sự bị trừ, tối đa 25 điểm.',()=>{const m=M();let tot=0;oth().filter(q=>q.p>30).forEach(q=>{tot+=lose(q,5,m)});const g=Math.min(25,tot);if(!tot)return log('Không ai có trên 30 điểm hoặc tất cả đã được chặn');if(tot>g){S.pot=(S.pot||0)+tot-g;log(`🏺 ${tot-g} điểm vượt mức 25 được nộp vào hũ`)}gain(m,g,'c',1)});
+D('I','n','r','Quay một vòng quay phụ với các phần thưởng: +5, +10, +20, +30, +50 điểm hoặc một lớp bảo vệ.',async()=>{const v=[5,10,20,30,50],i=await roul('🎡 Vòng quay phụ',[...v.map(n=>'+'+n),'Lớp bảo vệ 🔰']);if(i<5)G(M(),v[i]);else fe(M(),{k:'gd',l:99});await fin()});
+D('I','g','r','Hủy hiệu ứng bất lợi vừa nhận, sau đó rút một phiếu thay thế. Nếu không thể hủy hiệu ứng, chỉ rút phiếu thay thế.',async()=>{const m=M(),i=m.fx.map(f=>FG[f.k]).lastIndexOf('b');if(i>=0){const f=m.fx.splice(i,1)[0];log(`✨ Đã hủy hiệu ứng bất lợi ${FI[f.k]}`)}else log('Không có hiệu ứng bất lợi để hủy: chỉ rút phiếu thay thế');await drawAgain('🔁 Rút phiếu thay thế')});C[C.length-1].rr=1;
+{const nw=C.splice(n0);nw.forEach(c=>C.splice(Math.floor(Math.random()*(C.length+1)),0,c))}
 // ===== Sắp xếp bộ phiếu: xen kẽ có lợi / bất lợi / trung tính, giãn cách phiếu Khiên =====
 (()=>{
  const isShield=c=>c.g==='H'||/khiên|shield/i.test(c.n);
@@ -326,8 +435,8 @@ async function spin(id){
   w.onclick=e=>{if(e.target===w&&outsideId){const el=$('#'+outsideId);if(el)el.click()}};
  });
  const closeNow=()=>{restoreRank();w.close();busy=0;CUR=null;render();ES=queued;if(ES){const q=ES;ES=0;queueMicrotask(()=>{if(!busy&&P(q))spin(q)})}};
- w.innerHTML=`<div class="wheel-head"><span class="wheel-kicker">🎡 QUIZ BATTLE · VÒNG QUAY PHIẾU</span><button class="wheel-close" id="wc" aria-label="Đóng vòng quay" title="Đóng vòng quay">✕ <span>Đóng</span></button></div><div class="stg"><div class="sm ctr"><h2 style="font-size:30px;margin:0">${esc(me.av)} ${esc(me.n)}</h2><p id="wh">Bấm nút QUAY để bắt đầu</p><div id="rv"><i class="mk"></i><div id="rs">${st.map(tileF).join('')}</div></div><div id="wo"><button class="p big" id="wg">🎡 QUAY</button> <button id="wk">Hủy</button></div></div><div class="lbw"><h3>🏆 Bảng xếp hạng</h3><ol id="rk" class="lbx"></ol></div></div>`;
- const rank=$('#rk');w.showModal();CUR=id;document.querySelector('main aside').classList.add('wheel-active');const rankPanel=w.querySelector('.lbw');rankPanel.querySelector('ol').replaceWith(rank);rank.dataset.home='1';lbRefresh();
+ w.innerHTML=`<div class="wheel-head"><span class="wheel-kicker">🎡 QUIZ BATTLE · VÒNG QUAY PHIẾU</span><button class="wheel-close" id="wc" aria-label="Đóng vòng quay" title="Đóng vòng quay">✕ <span>Đóng</span></button></div><div class="sm ctr"><h2 style="font-size:30px;margin:0">${esc(me.av)} ${esc(me.n)}</h2><p id="wh">Bấm nút QUAY để bắt đầu</p><div id="rv"><i class="mk"></i><div id="rs">${st.map(tileF).join('')}</div></div><div id="wo"><button class="p big" id="wg">🎡 QUAY</button> <button id="wk">Hủy</button></div></div>`;
+ w.show();document.body.classList.add('rkon');CUR=id;lbRefresh();$('#bk').onclick=()=>{if(!dg.open&&w.onclick)w.onclick({target:w})};
  // Trước khi quay chưa có quà: nút đóng và bấm ra ngoài đều đóng an toàn.
  $('#wc').onclick=()=>$('#wk').click();
  if(await choose(['wg','wk'],'wc')==='wk'){closeNow();return}
@@ -338,7 +447,8 @@ async function spin(id){
  await new Promise(r=>setTimeout(r,S.fo?350:5400));
  $('#wh').textContent='Trúng phiếu!';const info=`<h3 class="rt">${{g:'🟢',b:'🔴',n:'🟡'}[c.t]} ${esc(txt(c))}</h3><p>${KN[c.k]} · ${TN[c.t]}</p>`;
  let ok;
- const processPrize=async()=>txn(txt(c),()=>{X.pen=c.t==='b';return c.f()},P(id),turnSnap);
+ const processPrize=async()=>{if(c.t==='g'&&(me.bag||[]).length<3&&c.g!=='H'&&c.g!=='I'){const k=await dlg(`<h3>🎁 Giữ phiếu vào túi quà? (${(me.bag||[]).length}/3)</h3><p>${esc(txt(c))}</p>`,[['⚡ Dùng ngay',0],['📦 Giữ lại dùng sau',1,'g']]);if(k)return txn('Giữ phiếu: '+txt(c),()=>{(P(id).bag=P(id).bag||[]).push(c.id);log(`📦 ${me.n} giữ phiếu: ${txt(c)}`)},P(id),turnSnap)}
+  return txn(txt(c),async()=>{X.pen=c.t==='b';X.sink=c.g==='E';const n=S.t+1;if(n%10===0&&n%20){X.m=2;log('🌟 Giờ vàng: khoản cộng điểm đầu tiên ×2')}await c.f();if(n%20===0){log('🌪️ Thuế bão: ai trên 30 điểm nộp 10 vào hũ');X.sink=1;S.st.filter(q=>q.p>30).forEach(q=>lose(q,10,null))}},P(id),turnSnap)};
  const skipPrize=async()=>txn('Đã bỏ qua phiếu: '+txt(c),()=>{log(`⏭️ Đã bỏ qua phiếu “${txt(c)}”; không áp dụng hiệu ứng phiếu`)},P(id),turnSnap);
  for(;;){
   $('#wc').disabled=false;
@@ -360,44 +470,167 @@ async function spin(id){
  await choose(['wx'],'wc');closeNow();
 }
 // ===== Giao dịch, lượt, hoàn tác =====
-const snapshot=()=>JSON.stringify({st:S.st,t:S.t,sp:S.sp,ES});
-const load=x=>{const o=JSON.parse(x);S.st=o.st;S.t=o.t;S.sp=o.sp||[];if('ES'in o)ES=o.ES};
-function endTurn(me,pre){S.t++;S.sp=S.sp.includes(me.id)?[me.id]:[...S.sp,me.id];const b=me.fx.find(f=>f.k==='bomb'&&!f.fr);if(b&&++b.c%2===0){log('💣 Bom nổ!');X.pen=1;lose(me,40,null)}
- S.st.forEach(p=>{if(pre[p.id]&&p.sh>0)p.sh--;p.fx=p.fx.filter(f=>f.fr?(delete f.fr,1):f.k==='bomb'||--f.l>0)})}
-async function txn(label,fn,me,beforeSnap){const snap=beforeSnap||snapshot(),pre={};S.st.forEach(p=>pre[p.id]=p.sh>0);Lg=[];X={me,m:1};
- try{await fn();if(me)endTurn(me,pre);if(dg.open)dg.close()}catch(e){if(dg.open)dg.close();load(snap);Lg=[];X={me:null,m:1};if(e!=='skip'&&e!=='cancel')console.error('Giao dịch đã hoàn tác:',e);render();return false}
+const snapshot=()=>JSON.stringify({st:S.st,t:S.t,sp:S.sp,ES,pot:S.pot,rd:S.rd,r0:S.r0});
+const load=x=>{const o=JSON.parse(x);S.st=o.st;S.t=o.t;S.sp=o.sp||[];S.pot=o.pot||0;S.rd=o.rd||1;S.r0=o.r0||{};if('ES'in o)ES=o.ES};
+function endTurn(me,pre){S.t++;S.sp=S.sp.includes(me.id)?[me.id]:[...S.sp,me.id];const b=me.fx.find(f=>f.k==='bomb'&&!f.fr);if(b&&++b.c%2===0){log('💣 Bom nổ!');X.pen=1;X.sink=1;lose(me,40,null)}
+ const tr=me.fx.find(f=>f.k==='trap'&&!f.fr);if(tr&&++tr.c>=3){me.fx.splice(me.fx.indexOf(tr),1);log('🪤 Bẫy sập!');X.pen=1;X.sink=1;lose(me,25,null)}
+ S.st.forEach(q=>q.fx.slice().forEach(f=>{if(!f.ct||f.fr||(f.ct==='h'?q!==me:f.o!==me.id))return;const rmv=()=>{const i=q.fx.indexOf(f);if(i>=0)q.fx.splice(i,1)};if(f.k==='drp'){X.sink=1;log(`🩸 ${q.n} mất 5 điểm do hiệu ứng chảy máu`);lose(q,5,null)}if(f.k==='crs'){rmv();const o=P(f.o);if(o&&o!==q){X.sink=1;log(`🎯 ${q.n} đã rút phiếu: lời nguyền khiến ${o.n} mất 15 điểm`);lose(o,15,null)}return}if(--f.l<=0){rmv();log(`⌛ Hết hiệu ứng ${FI[f.k]} của ${q.n}`)}}));
+ S.st.forEach(p=>{if(pre[p.id]&&p.sh>0)p.sh--;p.fx=p.fx.filter(f=>f.fr?(delete f.fr,1):f.k==='bomb'||f.k==='trap'||f.ct||--f.l>0)})}
+async function txn(label,fn,me,beforeSnap,ne){const snap=beforeSnap||snapshot(),pre={};S.st.forEach(p=>pre[p.id]=p.sh>0);Lg=[];X={me,m:1};
+ try{await fn();if(me&&!ne)endTurn(me,pre);if(dg.open)dg.close()}catch(e){if(dg.open)dg.close();load(snap);Lg=[];X={me:null,m:1};if(e!=='skip'&&e!=='cancel')console.error('Giao dịch đã hoàn tác:',e);render();return false}
  S.h.unshift({tm:new Date().toLocaleString('vi-VN'),who:me?me.n:'Giáo viên',label,log:[...Lg],snap});S.h.length=Math.min(S.h.length,80);save();render();return [...Lg]}
 const undo=()=>{const h=S.h.shift();if(h){load(h.snap);save();render()}};
 // ===== Dữ liệu (lưu theo lớp) =====
-const act=Z=>{const c=Z.cls.find(c=>c.id===Z.cur);Z.st=c.st;Z.h=c.h;Z.t=c.t;Z.sp=c.sp},sync=()=>{const c=S.cls.find(c=>c.id===S.cur);if(c){c.st=S.st;c.h=S.h;c.t=S.t;c.sp=S.sp}};
+const act=Z=>{const c=Z.cls.find(c=>c.id===Z.cur);Z.st=c.st;Z.h=c.h;Z.t=c.t;Z.sp=c.sp;Z.pot=c.pot||0;Z.rd=c.rd||1;Z.r0=c.r0||{}},sync=()=>{const c=S.cls.find(c=>c.id===S.cur);if(c){c.st=S.st;c.h=S.h;c.t=S.t;c.sp=S.sp;c.pot=S.pot;c.rd=S.rd;c.r0=S.r0}};
 const norm=o=>{if(!o.cls){if(!Array.isArray(o.st))throw 0;o={...o,cls:[{id:'c1',n:'Lớp 1',st:o.st,h:o.h||[],t:o.t||0}],cur:'c1'}}
- const Z={cls:o.cls.map(c=>({sp:[],h:[],t:0,...c,st:c.st.map(p=>({sh:0,age:0,fx:[],av:'🙂',...p}))})),cur:o.cur,cf:o.cf||{},neg:!!o.neg,fo:!!o.fo,qa:o.qa!==false};if(!Z.cls.some(c=>c.id===Z.cur))Z.cur=Z.cls[0].id;act(Z);return Z};
-const ser=()=>{sync();return JSON.stringify({cls:S.cls,cur:S.cur,cf:S.cf,neg:S.neg,fo:S.fo,qa:S.qa})},save=()=>{try{localStorage.setItem('qb',ser())}catch{}};
+ const Z={cls:o.cls.map(c=>({sp:[],h:[],t:0,...c,st:c.st.map(p=>{const q={sh:0,age:0,fx:[],av:'🙂',bag:[],...p};if(q.hold){q.bag=[...q.bag,q.hold];delete q.hold}return q})})),cur:o.cur,cf:o.cf||{},neg:!!o.neg,fo:!!o.fo,qa:o.qa!==false,qb:o.qb||[],qs:o.qs||30};if(!Z.cls.some(c=>c.id===Z.cur))Z.cur=Z.cls[0].id;act(Z);return Z};
+const ser=()=>{sync();return JSON.stringify({cls:S.cls,cur:S.cur,cf:S.cf,neg:S.neg,fo:S.fo,qa:S.qa,qb:S.qb,qs:S.qs})},save=()=>{try{localStorage.setItem('qb',ser())}catch{}};
 try{S=norm(JSON.parse(localStorage.getItem('qb')))}catch{S=norm({st:AV.slice(0,6).map((a,i)=>({id:'s'+i,n:'Học sinh '+(i+1),av:a,p:0}))})}
 const swc=id=>{sync();S.cur=id;act(S);PV={};save();render()};
 async function cls(a){const cur=S.cls.find(c=>c.id===S.cur);
  if(a==='del'){if(S.cls.length<2)return dlg('<h3>Không thể xóa</h3><p>Cần giữ lại ít nhất một lớp.</p>',[['Đóng',1,'p']]);if(await dlg(`<h3>Xóa lớp “${esc(cur.n)}”?</h3><p>Toàn bộ học sinh, điểm và lịch sử của lớp sẽ bị xóa và không thể hoàn tác.</p>`,[['Giữ lại',0],['Xóa lớp',1,'p']])){S.cls=S.cls.filter(c=>c!==cur);swc(S.cls[0].id)}return}
  const add=a==='add',v=await dlg(`<h3>${add?'Thêm lớp mới':'Đổi tên lớp'}</h3><label>Tên lớp<input id="cn" value="${add?'':esc(cur.n)}"></label>${add?'<label>Danh sách học sinh (mỗi dòng một tên, có thể bỏ trống)<textarea id="cl" rows="6"></textarea></label>':''}`,[['Hủy',0],['Lưu',()=>$('#cn').value.trim()?{n:$('#cn').value.trim(),l:add?$('#cl').value.split('\n').map(x=>x.trim()).filter(Boolean):0}:false,'p']]);
  if(!v)return;if(!add){cur.n=v.n;save();return render()}sync();const id='c'+Date.now().toString(36);S.cls.push({id,n:v.n,t:0,h:[],sp:[],st:v.l.map((n,i)=>({id:uid(),n,av:AV[i%AV.length],p:0,sh:0,age:0,fx:[]}))});swc(id)}
+
+// ===== Màn hình chính → chọn lớp → vào chơi =====
+const CI=['🏫','📚','🚀','🌈','⚡','🔥','🌟','🎯','🦄','🏆'];
+function lobbyRender(step){
+ const lw=$('#lw');document.body.classList.add('lobby');
+ if(step==='classes'){
+  lw.innerHTML=`<h2 class="lh">🎓 Chọn lớp để chơi</h2><p class="ls">Bấm vào một thẻ lớp để bắt đầu trận đấu</p><div class="lcs">${S.cls.map((c,i)=>{const t=[...c.st].sort((a,b)=>b.p-a.p)[0];return `<button class="lc" data-a="pickc" data-i="${c.id}"><span class="ic">${CI[i%CI.length]}</span><span class="nm2">${esc(c.n)}</span><span class="info">👥 ${c.st.length} học sinh</span>${t&&t.p>0?`<span class="lead">👑 ${esc(t.av)} ${esc(t.n)} · ${t.p} điểm</span>`:'<span class="lead">Chưa có điểm</span>'}</button>`}).join('')}<button class="lc add" data-a="ladd"><span class="ic">＋</span><span class="nm2">Thêm lớp mới</span></button></div><button class="back" data-a="lback">← Quay lại</button>`;
+ }else{
+  lw.innerHTML=`<div class="logo">🎡</div><h1 class="lt">QUIZ BATTLE</h1><p class="ls">Quay vòng quay • Nhận phiếu • Đua top bảng xếp hạng</p><button class="play" data-a="play">▶ CHƠI</button>`;
+ }
+}
+function enterGame(){document.body.classList.remove('lobby');scrollTo(0,0);render()}
 // ===== Giao diện =====
-const bdg=p=>[...(p.sh>0?[['g','🛡️',p.sh,'Khiên bảo vệ: còn '+p.sh+' lượt']]:[]),...p.fx.map(f=>[FG[f.k],FI[f.k],f.k==='bomb'?f.c%2+'/2':['pdn','prx','skp'].includes(f.k)?'':f.l,FN[f.k]+(f.k==='drn'||f.k==='bomb'?' — đặt bởi '+(P(f.o)?.n||'?'):'')+(f.k==='prx'?' → '+(f.d==='top'?'Top 1':P(f.d)?.n||''):'')])].map(([t,i,n,ti])=>`<span class="fb ${t}" title="${esc(ti)}">${i}${n!==''?`<small>${n}</small>`:''}</span>`).join('');
+const fxList=p=>[...(p.sh>0?[{t:'g',ic:'🛡️',n:p.sh,d:'Khiên bảo vệ: còn '+p.sh+' lượt'}]:[]),...p.fx.map(f=>({t:FG[f.k],ic:FI[f.k],n:f.k==='bomb'?f.c%2+'/2':f.k==='trap'?f.c+'/3':['pdn','prx','skp','imm','gd','dbl','crs'].includes(f.k)?'':f.l,d:FN[f.k]+(['drn','bomb','crs','aly'].includes(f.k)?' — đặt bởi '+(P(f.o)?.n||'?'):'')+(f.k==='prx'?' → '+(f.d==='top'?'Top 1':P(f.d)?.n||''):'')})),...(p.bag||[]).map(id=>C.find(c=>c.id===id)).filter(Boolean).map(c=>({t:'g',ic:'🎁',n:'',d:'Túi quà: '+txt(c),use:c.id}))];
+const fxH=(x,p)=>x.use?`<button class="fb g" data-a="use" data-i="${p.id}" data-n="${x.use}" title="${esc(x.d)}. Bấm để dùng">🎁<small>Dùng</small></button>`:`<span class="fb ${x.t}" title="${esc(x.d)}">${x.ic}${x.n!==''?`<small>${x.n}</small>`:''}</span>`;
+const bdg=p=>{const L=fxList(p),N=L.length,over=N>9,vis=over?L.slice(0,8):L,sz=N>6?3:N>3?2:1;
+ return `<div class="fxs s${sz}">${vis.map(x=>fxH(x,p)).join('')}${over?`<button class="fb mo" data-a="fxm" data-i="${p.id}" title="Xem tất cả hiệu ứng và túi quà">＋${N-8}</button>`:''}</div>`+(p.tb||p.rw?`<div><span class="fb" style="background:#eee;font-size:13px;cursor:default" title="Bàn / Hàng">🪑${esc(p.tb||'-')}/${esc(p.rw||'-')}</span></div>`:'')};
+function fxm(id){const p=P(id);if(!p)return;const L=fxList(p),sec=(t,h)=>{const a=L.filter(x=>x.t===t);return a.length?`<h4>${h} (${a.length})</h4>`+a.map(x=>`<div class="mr"><span>${x.ic}${x.n!==''?` <b>${x.n}</b>`:''} ${esc(x.d)}</span>${x.use?`<button data-a="use" data-i="${p.id}" data-n="${x.use}">⚡ Dùng</button>`:''}</div>`).join(''):''};
+ dlg(`<h3>${esc(p.av)} ${esc(p.n)} — hiệu ứng & túi quà</h3><div class="tw">${sec('g','🟢 Có lợi')}${sec('b','🔴 Bất lợi')||''}</div>`,[['Đóng',1,'p']],0,'640px')}
 function anim(p,o){const c=$(`[data-id="${p.id}"]`);if(!c||S.fo)return;const i=c.querySelector('.sc'),d=p.p-o,up=d>0,t0=performance.now(),l=document.createElement('span');c.classList.add(up?'fu':'fd');i.classList.add('pop');l.className='dl '+(up?'up':'dn');l.textContent=(up?'+':'')+d;c.querySelector('.sw').append(l);
  (function f(t){const k=Math.min(1,(t-t0)/700);i.value=Math.round(o+d*k);if(k<1)requestAnimationFrame(f)})(t0);setTimeout(()=>{c.classList.remove('fu','fd');i.classList.remove('pop');l.remove()},1400)}
-function render(){const R=rk(),top=R[0]?.p;if(PV.c!==S.cur)PV={c:S.cur,m:null};const old=PV.m;
- $('#cs').innerHTML=S.cls.map(c=>`<option value="${c.id}" ${c.id===S.cur?'selected':''}>${esc(c.n)} (${c.st.length})</option>`).join('');$('#sp').textContent=`Đã quay ${S.sp.filter(i=>P(i)).length}/${S.st.length}`;
- $('#gr').innerHTML=S.st.map(p=>{const dn=S.sp.includes(p.id);return `<div class="c ${p.p>0&&rankOf(R,p)<4?'m'+rankOf(R,p):''} ${dn?'done':''}" data-id="${p.id}"><div class="hd"><span class="av" data-a="edit" data-i="${p.id}" title="Sửa">${esc(p.av)}</span><b class="nm">${esc(p.n)}</b>${dn?'<span class="ok">✓ Đã quay</span>':''}</div><div class="sw"><input class="sc" type="number" step="1" data-a2="sc" data-i="${p.id}" value="${p.p}" title="Bấm để nhập điểm trực tiếp, nhấn Enter để lưu" aria-label="Điểm của ${esc(p.n)}"></div><div class="fxs">${bdg(p)}</div><button class="p big" data-a="spin" data-i="${p.id}">🎡 QUAY VÒNG QUAY</button>${S.qa?`<div class="qa">${[1,2,3,4,5,6,7,8,9].map(n=>`<button data-a="add" data-n="${n}" data-i="${p.id}">+${n}</button>`).join('')}</div>`:''}<div class="tl"><button data-a="edit" data-i="${p.id}">✏️ Sửa</button><button data-a="del" data-i="${p.id}">🗑️ Xóa</button></div></div>`}).join('')||'<p>Lớp chưa có học sinh. Bấm “＋ Học sinh”.</p>';
+function render(){const R=rk(),top=R[0]?.p;{const n=S.t+1,ev=n%20===0?'🌪️ Lượt tới: Thuế bão':n%10===0?'🌟 Lượt tới: Giờ vàng':'';$('#pt').textContent=`Vòng ${S.rd||1} · 🏺 Hũ ${S.pot||0}`+(ev?' · '+ev:'')}if(PV.c!==S.cur)PV={c:S.cur,m:null};const old=PV.m;
+ $('#cs').innerHTML=S.cls.map(c=>`<option value="${c.id}" ${c.id===S.cur?'selected':''}>${esc(c.n)} (${c.st.length})</option>`).join('');{const dn=S.sp.filter(i=>P(i)).length,al=S.st.length;$('#sp').innerHTML=`<b>${dn}/${al}</b><small>Đã quay</small>`;$('#sp').classList.toggle('full',al>0&&dn>=al)}
+ $('#gr').innerHTML=S.st.map(p=>{const dn=S.sp.includes(p.id);return `<div class="c ${p.p>0&&rankOf(R,p)<4?'m'+rankOf(R,p):''} ${dn?'done':''}" data-id="${p.id}"><div class="hd"><span class="av">${esc(p.av)}</span><b class="nm">${esc(p.n)}</b>${dn?'<span class="ok">✓ Đã quay</span>':''}</div><div class="sw"><input class="sc" type="number" step="1" data-a2="sc" data-i="${p.id}" value="${p.p}" title="Bấm để nhập điểm trực tiếp, nhấn Enter để lưu" aria-label="Điểm của ${esc(p.n)}"></div>${bdg(p)}<button class="p big" data-a="spin" data-i="${p.id}" ${dn?'disabled title="Đã quay trong vòng này. Bấm Vòng mới để quay lại"':''}>${dn?'✓ ĐÃ QUAY':'🎡 QUAY VÒNG QUAY'}</button>${S.qa?`<div class="qa">${[1,2,3,4,5,6,7,8,9].map(n=>`<button data-a="add" data-n="${n}" data-i="${p.id}">+${n}</button>`).join('')}</div>`:''}</div>`}).join('')||'<p>Lớp chưa có học sinh. Bấm “👥 Quản lý lớp”.</p>';
  lbRefresh();
  if(!busy){if(old)S.st.forEach(p=>{if(old[p.id]!==undefined&&old[p.id]!==p.p)anim(p,old[p.id])});PV.m=Object.fromEntries(S.st.map(p=>[p.id,p.p]))}}
-async function edit(id){const p=id&&P(id),v=await dlg(`<h3>${p?'Sửa':'Thêm'} học sinh</h3><label>Tên<input id="en" value="${esc(p?.n||'')}"></label><label>Avatar (emoji)<input id="ea" value="${esc(p?.av||AV[S.st.length%AV.length])}" maxlength="4"></label><label>Điểm (thay thế điểm hiện tại)<input id="ep" type="number" value="${p?p.p:0}"></label><label>Tuổi (tùy chọn)<input id="eg" type="number" value="${p?.age||''}"></label>`,[['Hủy',0],['Lưu',()=>{const n=$('#en').value.trim(),s=$('#ep').value;return n&&s!==''&&(S.neg||+s>=0)?{n,av:$('#ea').value||'🙂',p:Math.floor(+s),age:+$('#eg').value||0}:false},'p']]);
- if(!v)return;txn(p?`Sửa ${v.n}`:`Thêm ${v.n}`,()=>{let q=p;if(!q)S.st.push(q={id:uid(),fx:[],sh:0});else{if(q.p!==v.p)log(`${q.n}: điểm ${q.p}→${v.p} (sửa tay)`)}Object.assign(q,v)})}
-async function del(id){const p=P(id);if(await dlg(`<h3>Xóa ${esc(p.n)}?</h3><p>Điểm, khiên và hiệu ứng của học sinh này sẽ bị xóa (có thể hoàn tác ngay sau đó).</p>`,[['Giữ lại',0],['Xóa',1,'p']]))txn('Xóa '+p.n,()=>{S.st=S.st.filter(q=>q.id!==id);S.sp=S.sp.filter(x=>x!==id);S.st.forEach(q=>q.fx=q.fx.filter(f=>f.o!==id&&f.d!==id))})}
+const pick1=()=>{let c=S.st.filter(p=>!S.sp.includes(p.id));if(!c.length)c=S.st;return c[Math.floor(Math.random()*c.length)]};
+async function rnx(){if(busy||!S.st.length)return;const p=pick1();const r=await dlg(`<div class="ctr"><div style="font-size:72px">${esc(p.av)}</div><h2>${esc(p.n)}</h2><p>Đến lượt bạn quay! (${S.st.filter(q=>!S.sp.includes(q.id)).length} bạn chưa quay)</p></div>`,[['Đóng',0],['🎲 Chọn lại',2],['🎡 Quay',1,'p']]);if(r===2)return rnx();if(r===1)spin(p.id)}
+async function qz(){if(busy)return;const Q=S.qb||[];
+ const m=await dlg(`<h3>❓ Câu hỏi</h3><p>${Q.length} câu trong ngân hàng · ${S.qs||30} giây/câu. Trả lời đúng được quay thưởng.</p>`,[['Đóng',0],['📋 Nhập câu hỏi',2],['▶ Hỏi câu mới',1,'p']]);
+ if(m===2){const v=await dlg(`<h3>Dán câu hỏi từ Excel</h3><p>Mỗi dòng: câu hỏi [Tab] đáp án (đáp án có thể bỏ trống)</p><textarea id="qt" rows="10">${esc(Q.map(x=>x.q+'\t'+x.a).join('\n'))}</textarea><label>Thời gian mỗi câu (giây)<input id="qs" type="number" min="5" max="300" value="${S.qs||30}"></label>`,[['Hủy',0],['Lưu',()=>({t:$('#qt').value,s:Math.max(5,+$('#qs').value||30)}),'p']]);if(v){S.qb=v.t.split('\n').map(l=>l.split('\t')).filter(a=>a[0].trim()).map(a=>({q:a[0].trim(),a:(a[1]||'').trim()}));S.qs=v.s;save()}return qz()}
+ if(m!==1)return;if(!Q.length)return dlg('<h3>Chưa có câu hỏi</h3><p>Bấm “Nhập câu hỏi” để dán danh sách.</p>',[['Đóng',1,'p']]);
+ const q=Q[Math.floor(Math.random()*Q.length)],p=pick1();let t=S.qs||30,iv;
+ const r=await dlg(`<h3>${esc(p.av)} ${esc(p.n)} trả lời</h3><div class="rn ctr" id="tm">${t}</div><h2 class="ctr">${esc(q.q)}</h2><p id="an" style="display:none" class="ctr">Đáp án: <b>${esc(q.a)}</b></p>`,[['Sai',0],['👁 Xem đáp án',()=>{$('#an').style.display='block';return false}],['✅ Đúng → được quay',1,'g']],()=>{iv=setInterval(()=>{const e=$('#tm');e?e.textContent=Math.max(0,--t):clearInterval(iv)},1000)});
+ clearInterval(iv);if(r)spin(p.id)}
+const BG=p=>p.bag||(p.bag=[]);
+async function useHold(id,cid){const p=P(id),c=p&&C.find(x=>x.id===cid);if(!c||busy||!BG(p).includes(cid))return;if(!await dlg(`<h3>${esc(p.av)} ${esc(p.n)} dùng phiếu trong túi quà</h3><p>${esc(txt(c))}</p>`,[['Hủy',0],['⚡ Dùng',1,'p']]))return;txn('Dùng phiếu trong túi: '+txt(c),()=>{const q=BG(P(id)),k=q.indexOf(cid);if(k>=0)q.splice(k,1);return c.f()},p,null,1)}
+async function endRound(){if(!S.st.length)return;const b=S.r0||{},d=S.st.map(p=>({p,d:p.p-(b[p.id]??0)})).sort((x,y)=>y.d-x.d),T3=rk().slice(0,3),m=d[0],w=d[d.length-1];
+ const ok=await dlg(`<h3>🏁 Tổng kết vòng ${S.rd||1}</h3><p>⭐ MVP (tăng nhiều nhất): <b>${esc(m.p.av)} ${esc(m.p.n)}</b> (${m.d>=0?'+':''}${m.d})</p><p>💔 Xui nhất: <b>${esc(w.p.av)} ${esc(w.p.n)}</b> (${w.d>=0?'+':''}${w.d})</p><p>🏆 Bục vinh danh</p><div>${T3.map((p,i)=>`<span class="ch">${['🥇','🥈','🥉'][i]} ${esc(p.av)} ${esc(p.n)} · ${p.p}</span>`).join('')}</div><p>🏺 Hũ điểm chung: ${S.pot||0}</p>`,[['Đóng',0],['↻ Bắt đầu vòng mới',1,'p']]);
+ if(ok)txn('Bắt đầu vòng mới',()=>{S.sp=[];S.rd=(S.rd||1)+1;S.r0=Object.fromEntries(S.st.map(p=>[p.id,p.p]));log(`Vòng ${S.rd}: đã đặt lại trạng thái đã quay`)})}
+async function mgr(){if(busy)return;for(;;){let act=null;
+ const r=await dlg(`<h3>👥 Quản lý lớp (${S.st.length} học sinh)</h3><div class="tw">${S.st.map(p=>`<div class="mr"><span>${esc(p.av)} <b>${esc(p.n)}</b> · ${p.p} điểm${p.tb||p.rw?` · 🪑 ${esc(p.tb||'-')}/${esc(p.rw||'-')}`:''}</span><button data-e="${p.id}">✏️ Sửa</button><button data-d="${p.id}">🗑️ Xóa</button></div>`).join('')||'<p>Lớp chưa có học sinh.</p>'}</div>`,[['Đóng',0],['＋ Thêm học sinh',['add'],'g'],['',()=>act,'hx']],()=>{dg.querySelectorAll('[data-e],[data-d]').forEach(b=>b.onclick=()=>{act=b.dataset.e?['e',b.dataset.e]:['d',b.dataset.d];dg.querySelector('.hx').click()})},'640px');
+ if(!r)return;if(r[0]==='add')await edit();else if(r[0]==='e')await edit(r[1]);else await del(r[1])}}
+async function edit(id){const p=id&&P(id),v=await dlg(`<h3>${p?'Sửa':'Thêm'} học sinh</h3><label>Tên<input id="en" value="${esc(p?.n||'')}"></label><label>Avatar (emoji)<input id="ea" value="${esc(p?.av||AV[S.st.length%AV.length])}" maxlength="4"></label><label>Điểm (thay thế điểm hiện tại)<input id="ep" type="number" value="${p?p.p:0}"></label><label>Tuổi (tùy chọn)<input id="eg" type="number" value="${p?.age||''}"></label><div class="fl"><label>Bàn<input id="et" value="${esc(p?.tb||'')}"></label><label>Hàng<input id="er" value="${esc(p?.rw||'')}"></label></div>`,[['Hủy',0],['Lưu',()=>{const n=$('#en').value.trim(),s=$('#ep').value;return n&&s!==''&&(S.neg||+s>=0)?{n,av:$('#ea').value||'🙂',p:Math.floor(+s),age:+$('#eg').value||0,tb:$('#et').value.trim(),rw:$('#er').value.trim()}:false},'p']]);
+ if(!v)return;await txn(p?`Sửa ${v.n}`:`Thêm ${v.n}`,()=>{let q=p;if(!q)S.st.push(q={id:uid(),fx:[],sh:0});else{if(q.p!==v.p)log(`${q.n}: điểm ${q.p}→${v.p} (sửa tay)`)}Object.assign(q,v)})}
+async function del(id){const p=P(id);if(await dlg(`<h3>Xóa ${esc(p.n)}?</h3><p>Điểm, khiên và hiệu ứng của học sinh này sẽ bị xóa (có thể hoàn tác ngay sau đó).</p>`,[['Giữ lại',0],['Xóa',1,'p']]))await txn('Xóa '+p.n,()=>{S.st=S.st.filter(q=>q.id!==id);S.sp=S.sp.filter(x=>x!==id);S.st.forEach(q=>q.fx=q.fx.filter(f=>f.o!==id&&f.d!==id))})}
 const hist=()=>dlg('<h3>Lịch sử giao dịch</h3><div class="tw">'+(S.h.length?S.h.map(h=>`<div class="hi"><b>${esc(h.tm)}</b> · ${esc(h.who)} · ${esc(h.label)}<ul>${h.log.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></div>`).join(''):'<p>Chưa có giao dịch.</p>')+'</div>',[['Đóng',1,'p']],0,'720px');
 function mng(){const rows=()=>{const q=$('#fq').value.toLowerCase(),g=$('#fg').value,t=$('#ft').value,s=pool().reduce((a,c)=>a+cf(c).w,0)||1;return C.filter(c=>(!g||c.g===g)&&(!t||c.t===t)&&txt(c).toLowerCase().includes(q)).map(c=>{const f=cf(c);return `<tr class="t${c.t}"><td>${c.id}</td><td class="tx"><textarea rows="2" data-i="${c.id}" data-f="x">${esc(txt(c))}</textarea></td><td>${TN[c.t]}<br><small>${KN[c.k]}</small></td><td><input type="checkbox" data-i="${c.id}" data-f="on" ${f.on?'checked':''}></td><td><input type="number" min="0" style="width:70px" data-i="${c.id}" data-f="w" value="${f.w}"><small>${f.on&&f.w>0?(f.w/s*100).toFixed(1):0}%</small></td></tr>`}).join('')};
  dlg(`<h3>Quản lý phiếu (${C.length})</h3><div class="fl"><input id="fq" placeholder="Tìm theo tên"><select id="fg"><option value="">Mọi nhóm</option>${Object.entries(GN).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select><select id="ft"><option value="">Tốt/xấu/trung tính</option>${Object.entries(TN).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select></div><div class="tw"><table id="rw"></table></div>`,[['Khôi phục mặc định',()=>{S.cf={};save();return 1}],['Đóng',1,'p']],()=>{const up=()=>$('#rw').innerHTML=rows();['fq','fg','ft'].forEach(i=>$('#'+i).oninput=up);$('#rw').onchange=e=>{const t=e.target,c=C.find(c=>c.id===t.dataset.i),f=cf(c);if(t.dataset.f==='on')f.on=t.checked?1:0;else if(t.dataset.f==='w')f.w=Math.max(0,+t.value||0);else f.x=t.value.trim()||undefined;save();up()};up()},'1250px')}
-document.onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;const{a,i,n}=b.dataset;({spin:()=>spin(i),add:()=>txn(`+${n} cho ${P(i).n}`,()=>gain(P(i),+n,'q')),edit:()=>edit(i),del:()=>del(i),undo,hist,mng,cadd:()=>cls('add'),cren:()=>cls('ren'),cdel:()=>cls('del'),nr:()=>txn('Bắt đầu vòng mới',()=>{S.sp=[];log('Đã đặt lại trạng thái đã quay của cả lớp')}),ex:()=>{const l=document.createElement('a');l.href=URL.createObjectURL(new Blob([ser()],{type:'application/json'}));l.download='quiz-battle-backup.json';l.click()}})[a]?.()};
+document.onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;const{a,i,n}=b.dataset;({spin:()=>spin(i),add:()=>txn(`+${n} cho ${P(i).n}`,()=>gain(P(i),+n,'q')),edit:()=>edit(i),del:()=>del(i),undo,hist,mng,cadd:()=>cls('add'),cren:()=>cls('ren'),cdel:()=>cls('del'),play:()=>lobbyRender('classes'),lback:()=>lobbyRender(),home:()=>{sync();save();lobbyRender('classes')},pickc:()=>{if(i!==S.cur)swc(i);enterGame()},ladd:async()=>{await cls('add');lobbyRender('classes')},nr:endRound,rnx,qz,use:()=>useHold(i,n),fxm:()=>fxm(i),mgr,ex:()=>{const l=document.createElement('a');l.href=URL.createObjectURL(new Blob([ser()],{type:'application/json'}));l.download='quiz-battle-backup.json';l.click()}})[a]?.()};
 
 $('#ng').checked=S.neg;$('#fo').checked=S.fo;$('#qa').checked=S.qa;document.body.classList.toggle('nofx',S.fo);$('#qa').onchange=e=>{S.qa=e.target.checked;save();render()};$('#ng').onchange=e=>{S.neg=e.target.checked;save()};$('#fo').onchange=e=>{S.fo=e.target.checked;document.body.classList.toggle('nofx',S.fo);save()};
 document.onchange=e=>{const t=e.target;if(t.id==='cs')return swc(t.value);if(t.dataset.a2!=='sc')return;const p=P(t.dataset.i),v=t.value.trim()===''?NaN:Math.floor(+t.value);if(!p||!Number.isFinite(v)||(!S.neg&&v<0)){render();return}if(v!==p.p)txn(`Nhập tay điểm ${p.n}`,()=>{log(`✏️ Giáo viên đặt điểm trực tiếp ${p.n}: ${p.p}→${v}; không kích hoạt khiên, phản đòn hoặc đóng băng`);p.p=v})};
 let ly=0;const hd=$('#hd'),sh=h=>{hd.classList.toggle('hid',h);document.body.classList.toggle('hh',h)};addEventListener('scroll',()=>{const y=scrollY;if(y>ly+6&&y>90)sh(true);else if(y<ly-6||y<90)sh(false);ly=y},{passive:true});
-render();
-</script></html>
+render();lobbyRender();
+</script><style>
+#fxl{position:fixed;inset:0;width:100vw;height:100vh;margin:0;padding:0;border:0;background:transparent;overflow:visible;pointer-events:none;z-index:99999}
+.fx{position:fixed;left:0;top:0;pointer-events:none;line-height:1;white-space:nowrap;will-change:transform,opacity;font-size:32px}
+.sp{display:inline-block;background:#fff;border:3px solid var(--pk);border-radius:16px;padding:4px 12px;font:800 24px 'Baloo 2',system-ui;color:var(--pri);box-shadow:0 8px 20px #0005}
+.crn{font-style:normal;display:inline-block;animation:crn 1.2s ease-in-out infinite}@keyframes crn{50%{transform:translateY(-4px) rotate(10deg) scale(1.2)}}
+.c.m1 .av{position:relative}.c.m1 .av::after{content:'👑';position:absolute;top:-17px;left:-4px;font-size:20px;animation:crn 1.3s ease-in-out infinite}
+.fb.b[title^="Bom"]{animation:bsh .45s infinite}.fb.b[title^="Bom"] small{color:#d11;animation:blk .8s steps(2) infinite}
+.fb.b[title^="Bẫy"]{animation:bsh .7s infinite}.fb.b[title^="Đóng băng"]{background:#d8f1ff}
+@keyframes bsh{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-3px) rotate(-9deg)}75%{transform:translateX(3px) rotate(9deg)}}
+@keyframes blk{50%{opacity:.15}}
+.c.frozen{position:relative}
+.c.frozen::after,.c.thaw::after{content:'❄️';position:absolute;inset:0;border-radius:17px;pointer-events:none;display:flex;justify-content:flex-end;align-items:flex-start;padding:6px 12px;font-size:26px;background:linear-gradient(135deg,#d8f3ffd9,#ffffff66 45%,#9fdcffaa),repeating-linear-gradient(60deg,#ffffff66 0 3px,transparent 3px 16px);box-shadow:inset 0 0 30px #6cc6ff,0 0 16px #6cc6ff88;backdrop-filter:blur(1.5px)}
+.c.frozen::after{animation:ice 3s ease-in-out infinite}.c.thaw::after{animation:melt 1.4s forwards}
+@keyframes ice{50%{opacity:.8}}@keyframes melt{to{opacity:0;transform:translateY(14px) scaleY(.5)}}
+.pod{display:flex;gap:10px;justify-content:center;align-items:flex-end;margin:10px 0 4px;min-height:240px}
+.pc{display:flex;flex-direction:column;align-items:center;width:30%;max-width:150px}.pa{font-size:46px;animation:pbob 1.4s ease-in-out infinite}@keyframes pbob{50%{transform:translateY(-6px)}}
+.pc small{font:700 14px 'Baloo 2';max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pb{width:100%;border-radius:12px 12px 0 0;display:flex;flex-direction:column;align-items:center;padding-top:6px;font-size:28px;transform-origin:bottom;color:#3b2a00}.pb b{font:800 22px 'Baloo 2'}
+.nofx .crn,.nofx .pa,.nofx .c.m1 .av::after,.nofx .c.frozen::after{animation:none!important}
+</style>
+<script>
+(()=>{
+const RM=matchMedia('(prefers-reduced-motion:reduce)'),on=()=>!(S&&S.fo)&&!RM.matches,sl=ms=>new Promise(r=>setTimeout(r,ms));
+const L=document.createElement('div');L.id='fxl';L.setAttribute('popover','manual');document.body.appendChild(L);
+const top=()=>{try{L.hidePopover()}catch{}try{L.showPopover()}catch{}};
+const T=(x,y,s=1,r=0)=>`translate(${x}px,${y}px) translate(-50%,-50%) rotate(${r}deg) scale(${s})`;
+const mk=(h,css)=>{const e=document.createElement('div');e.className='fx';e.innerHTML=h;Object.assign(e.style,css);L.appendChild(e);return e};
+const go=(e,kf,o)=>{const a=e.animate(kf,{fill:'both',easing:'ease-out',...o});a.onfinish=()=>e.remove();return a.finished.catch(()=>{})};
+const A=p=>p&&(document.body.classList.contains('rkon')&&document.querySelector(`aside .lbx li[data-id="${p.id}"]`)||document.querySelector(`#gr .c[data-id="${p.id}"]`));
+const ctr=e=>{if(!e)return{x:innerWidth/2,y:innerHeight/2};const r=e.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2}};
+const shake=e=>e&&e.animate([{transform:'none'},{transform:'translateX(-9px) rotate(-2deg)'},{transform:'translateX(9px) rotate(2deg)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'none'}],{duration:600});
+const fly=(h,a,b,o={})=>{const e=mk(h,o.css),s0=o.s0||1,s1=o.s1||1,m={x:(a.x+b.x)/2,y:(a.y+b.y)/2-(o.arc||0)};return go(e,[{transform:T(a.x,a.y,s0)},{transform:T(m.x,m.y,(s0+s1)/2+.4),offset:.5},{transform:T(b.x,b.y,s1),opacity:.9}],{duration:o.dur||800,delay:o.delay||0,easing:'ease-in-out'})};
+const burst=(p,ems,n=10,R=90,dur=800,g=0)=>{for(let i=0;i<n;i++){const e=mk(ems[i%ems.length],{fontSize:(16+Math.random()*18)+'px'}),an=Math.random()*6.28,d=R*(.4+Math.random()*.8);go(e,[{transform:T(p.x,p.y,.3),opacity:1},{transform:T(p.x+Math.cos(an)*d,p.y+Math.sin(an)*d+g,1,Math.random()*360),opacity:0}],{duration:dur*(.7+Math.random()*.6)})}};
+const word=(p,t,col,o={})=>go(mk(t,{font:`800 ${o.sz||44}px 'Baloo 2',system-ui`,color:col,textShadow:`0 3px 0 #fff,0 0 18px ${col}`}),[{transform:T(p.x,p.y,.2),opacity:0},{transform:T(p.x,p.y-10,1.35),opacity:1,offset:.3},{transform:T(p.x,p.y-30,1),opacity:1,offset:.7},{transform:T(p.x,p.y-70,1),opacity:0}],{duration:o.dur||1100});
+const pop=(p,em,col,t)=>{const c=ctr(A(p)),e=mk(em,{fontSize:'72px',filter:`drop-shadow(0 0 14px ${col})`});go(e,[{transform:T(c.x,c.y,.1),opacity:0},{transform:T(c.x,c.y,1.25),opacity:1,offset:.3},{transform:T(c.x,c.y,1),opacity:1,offset:.65},{transform:T(c.x,c.y,2),opacity:0}],{duration:1100});word({x:c.x,y:c.y+52},t,col,{sz:34});setTimeout(()=>burst(c,['✨','💠','🔹'],10,90),750)};
+const jar=()=>{const e=$('#pt');e&&e.animate([{transform:'scale(1)'},{transform:'scale(1.5) rotate(-6deg)'},{transform:'scale(1.35) rotate(6deg)'},{transform:'scale(1.5) rotate(-4deg)'},{transform:'scale(1)'}],{duration:1400})};
+const tw=(el,a,b,d=800)=>{const t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/d);el.textContent=Math.round(a+(b-a)*k);if(k<1)requestAnimationFrame(f)})(t0)};
+const conf=()=>{top();for(let i=0;i<90;i++){const x=Math.random()*innerWidth,e=mk(`<i style="display:block;width:${8+Math.random()*6}px;height:${12+Math.random()*8}px;background:hsl(${Math.random()*360},90%,60%);border-radius:2px"></i>`);go(e,[{transform:T(x,-30)},{transform:T(x+Math.random()*300-150,innerHeight+30,1,Math.random()*1080)}],{duration:2200+Math.random()*2000,delay:Math.random()*900,easing:'cubic-bezier(.3,.5,.6,1)'})}[.2,.8].forEach(f=>burst({x:innerWidth*f,y:innerHeight*.9},['🎉','🎊','⭐'],14,260,1400))};
+
+const E={
+steal:async(a,b,n)=>{const pa=ctr(A(a)),pb=ctr(A(b));for(let i=0;i<Math.min(5,Math.ceil(n/5));i++)fly('🪙',pa,pb,{arc:60+i*10,dur:750,delay:i*110,css:{fontSize:'30px'}});shake(A(a));word(pa,'-'+n,'#ee3f5c',{sz:34});setTimeout(()=>{burst(pb,['✨','🪙'],8,60);word(pb,'+'+n,'#14b870',{sz:34})},800);await sl(500)},
+swap:async(a,b,x,y)=>{const ca=ctr(A(a)),cb=ctr(A(b)),pl=(p,v)=>`<span class="sp">${esc(p.av)} <b>${v}</b></span>`;fly(pl(a,x),ca,cb,{arc:110,dur:1100});fly(pl(b,y),cb,ca,{arc:-110,dur:1100});shake(A(a));shake(A(b));setTimeout(()=>{burst(ca,['🔄','✨'],7,70);burst(cb,['🔄','✨'],7,70)},1050);await sl(1150)},
+boom:async(p,em,t)=>{const e=A(p),c=ctr(e);shake(e);go(mk('💥',{fontSize:'90px'}),[{transform:T(c.x,c.y,.2),opacity:1},{transform:T(c.x,c.y,2.2),opacity:1,offset:.35},{transform:T(c.x,c.y,2.8),opacity:0}],{duration:900});burst(c,['🔥','💥','✨','⚡'],16,150,900);for(let i=0;i<6;i++)go(mk('💨',{fontSize:'40px'}),[{transform:T(c.x+(i-3)*14,c.y,.6),opacity:.9},{transform:T(c.x+(i-3)*30,c.y-110-i*8,1.8),opacity:0}],{duration:1700,delay:500+i*90});word({x:c.x,y:c.y-40},em+' '+t,'#ee3f5c',{sz:40});await sl(700)},
+hit:async(p,n,z)=>{const e=A(p),c=ctr(e),big=z||n>=25;shake(e);word(c,'-'+n,'#ee3f5c',{sz:34});burst(c,['💥','✨'],big?10:5,big?90:50);await sl(250)},
+pot:async(p,n)=>{const a=ctr(A(p)),b=ctr($('#pt'));b.y=Math.max(b.y,30);b.x=Math.max(30,Math.min(b.x,innerWidth-30));shake(A(p));for(let i=0;i<3;i++)fly('🪙',a,b,{arc:80,dur:800,delay:i*120});word(a,'-'+n,'#ee3f5c',{sz:30});await sl(400)},
+blk:async(p,em,col)=>{pop(p,em,col,'CHẶN!');await sl(500)},
+refl:async(a,b,n)=>{const ca=ctr(A(a)),cb=ctr(A(b));pop(a,'🪞','#14b8c4','PHẢN ĐÒN!');await sl(650);fly('↩️',ca,cb,{arc:80,dur:700,s0:1.2,s1:1.2,css:{fontSize:'46px'}});setTimeout(()=>{burst(cb,['💥','✨'],8,80);shake(A(b));word(cb,'-'+n,'#ee3f5c',{sz:34})},700);await sl(500)},
+mult:async(p,k)=>{const c=ctr(A(p));word(c,'×'+k,'#ffb300',{sz:76,dur:1500});setTimeout(()=>burst(c,['✨','⭐'],10,80),500);await sl(350)},
+up:async(p,n)=>{if(n>=15)burst(ctr(A(p)),['✨','⭐'],6,60,700)},
+bag:async(p)=>{const c=ctr(A(p));fly('🎟️',{x:innerWidth/2,y:innerHeight/2},c,{arc:120,dur:900,s0:1.8,s1:.6,css:{fontSize:'40px'}});setTimeout(()=>{go(mk('🎁',{fontSize:'56px'}),[{transform:T(c.x,c.y,.3),opacity:0},{transform:T(c.x,c.y,1.5),opacity:1,offset:.4},{transform:T(c.x,c.y-20,1),opacity:0}],{duration:900});burst(c,['🎁','✨'],8,70)},850);await sl(700)},
+gold:async(t)=>{for(let i=0;i<46;i++){const x=Math.random()*innerWidth;go(mk(['🪙','🪙','✨','💰'][i%4],{fontSize:(22+Math.random()*22)+'px'}),[{transform:T(x,-40)},{transform:T(x+Math.random()*120-60,innerHeight+40,1,Math.random()*720)}],{duration:1400+Math.random()*900,delay:Math.random()*1200,easing:'ease-in'})}if(t)word({x:innerWidth/2,y:innerHeight*.3},t,'#ffb300',{sz:64,dur:1800});jar();await sl(300)},
+storm:async()=>{go(mk('',{width:'100vw',height:'100vh',background:'radial-gradient(circle at 50% 0,#394a8acc,#10163acc)',transform:'none'}),[{opacity:0},{opacity:1,offset:.15},{opacity:1,offset:.85},{opacity:0}],{duration:3600});for(let i=0;i<5;i++)go(mk('☁️',{fontSize:'110px'}),[{transform:T(-100,60+i*8),opacity:0},{transform:T(innerWidth*(.15+i*.2),50+(i%2)*40,1.1),opacity:.95,offset:.3},{transform:T(innerWidth*(.2+i*.2),55),opacity:.95,offset:.8},{transform:T(innerWidth*(.2+i*.2),55),opacity:0}],{duration:3400});for(let i=0;i<70;i++){const x=Math.random()*innerWidth;go(mk('💧',{fontSize:'20px'}),[{transform:T(x,-20,1,15)},{transform:T(x-80,innerHeight+20,1,15)}],{duration:700+Math.random()*400,delay:i*38,easing:'linear'})}go(mk('',{width:'100vw',height:'100vh',background:'#fff'}),[{opacity:0},{opacity:.85,offset:.05},{opacity:0,offset:.15},{opacity:.7,offset:.22},{opacity:0,offset:.4}],{duration:1800,delay:700});await sl(400)}
+};
+
+function parse(lines,label,me){const ev=[],pl=n=>S.st.find(p=>p.n===n);let sk=-1,m;
+if(/Nổ hũ/.test(label||'')&&!lines.some(l=>/Hũ đang trống/.test(l)))ev.push(['gold','🏺 NỔ HŨ!']);
+for(let i=0;i<lines.length;i++){const s=lines[i];
+if(m=s.match(/^🔄 (.+) \((-?\d+)\) ⇄ (.+) \((-?\d+)\)$/)){const a=pl(m[1]),b=pl(m[3]);a&&b&&ev.push(['swap',a,b,+m[2],+m[4]]);continue}
+if(/^💣 Bom nổ/.test(s)){me&&ev.push(['boom',me,'💣','BÙM!']);sk=i+1;continue}
+if(/^🪤 Bẫy sập/.test(s)){me&&ev.push(['boom',me,'🪤','SẬP BẪY!']);sk=i+1;continue}
+if(/^🌪️ Thuế bão/.test(s)){ev.push(['storm']);continue}
+if(/^🌟 Giờ vàng/.test(s)){ev.push(['gold','🌟 GIỜ VÀNG ×2']);continue}
+if(m=s.match(/^✖️(\d) Phiếu nhân/)){me&&ev.push(['mult',me,+m[1]]);continue}
+if(m=s.match(/^🛡️ Khiên của (.+) chặn/)){pl(m[1])&&ev.push(['blk',pl(m[1]),'🛡️','#4f46e5']);continue}
+if(m=s.match(/^🎫 (.+) dùng Vé miễn tử/)){pl(m[1])&&ev.push(['blk',pl(m[1]),'🎫','#ffb300']);continue}
+if(m=s.match(/^🔰 (.+) dùng Lớp bảo vệ/)){pl(m[1])&&ev.push(['blk',pl(m[1]),'🔰','#14b870']);continue}
+if(m=s.match(/^🪞 (.+) phản đòn khoản phạt (\d+) điểm về (.+) \(/)){const a=pl(m[1]),b=pl(m[3]);a&&b&&ev.push(['refl',a,b,+m[2]]);continue}
+if(m=s.match(/^📦 (.+) giữ phiếu/)){pl(m[1])&&ev.push(['bag',pl(m[1])]);continue}
+if(m=s.match(/^(.+): (-?\d+)→(-?\d+)$/)){const p=pl(m[1]),a=+m[2],b=+m[3];if(!p)continue;if(b===0&&a>0)ev.push(['boom',p,'💥','VỀ 0!']);else if(a>0&&b>a&&(b/a===2||b/a===3))ev.push(['mult',p,b/a]);else if(b>a)ev.push(['up',p,b-a]);continue}
+if(m=s.match(/^(.+): -(\d+) \((-?\d+)→(-?\d+)\)$/)){const p=pl(m[1]),n=+m[2],nx=lines[i+1]||'';if(!p)continue;if(sk===i)continue;let q;
+if((q=nx.match(/^(.+): \+(\d+) \(/))&&pl(q[1])&&pl(q[1])!==p){ev.push(['steal',p,pl(q[1]),n]);i++;continue}
+if(/^🏺/.test(nx)){ev.push(['pot',p,n]);i++;continue}
+ev.push(['hit',p,n,+m[4]===0]);continue}
+if(m=s.match(/^(.+): \+(\d+) \(/)){const p=pl(m[1]);p&&ev.push(['up',p,+m[2]])}}
+return ev}
+let Q=Promise.resolve();
+const play=(lines,label,me)=>{if(!on())return;const ev=parse(lines,label,me);if(!ev.length)return;top();Q=Q.then(async()=>{for(const e of ev.slice(0,14)){try{await E[e[0]](...e.slice(1))}catch(x){console.warn(x)}}})};
+const _t=txn;txn=async function(...a){const r=await _t(...a);if(r&&on())play(r,a[0]||'',a[2]);return r};
+
+lbHTML=function(){const R=rk();return R.map(p=>{const k=rankOf(R,p),o=lbPrev[p.id],ch=o!==undefined&&o!==p.p?(p.p>o?'up':'dn'):'';return `<li class="r ${p.p>0&&k<4?'rk'+k:''} ${p.id===CUR?'me':''} ${ch}" data-id="${p.id}"><i>${k}</i>${k===1&&p.p>0?'<em class="crn">👑</em>':''}${esc(p.av)}<span>${esc(p.n)}</span><b>${p.p}</b><small>${p.sh?'🛡️'+p.sh:''}${p.fx.map(f=>FI[f.k]).join('')}</small></li>`}).join('')};
+lbRefresh=function(){if(!S)return;const h=lbHTML(),fx=on();document.querySelectorAll('.lbx').forEach(o=>{if(o.dataset.h===h)return;const first={};if(fx)o.querySelectorAll('li[data-id]').forEach(li=>first[li.dataset.id]=li.getBoundingClientRect().top);o.innerHTML=h;o.dataset.h=h;if(!fx)return;o.querySelectorAll('li[data-id]').forEach(li=>{const f=first[li.dataset.id],id=li.dataset.id;if(f!==undefined){const dy=f-li.getBoundingClientRect().top;if(dy)li.animate([{transform:`translateY(${dy}px) scale(1.04)`,zIndex:3},{transform:'none',zIndex:3}],{duration:700,easing:'cubic-bezier(.2,.8,.2,1)'})}const o2=lbPrev[id],b=li.querySelector('b');if(o2!==undefined&&b&&o2!==+b.textContent)tw(b,o2,+b.textContent)})});lbPrev=Object.fromEntries(S.st.map(p=>[p.id,p.p]))};
+
+let FZ=new Set();const _r=render;render=function(){_r();const now=new Set();S.st.forEach(p=>{if(p.fx.some(f=>f.k==='frz')){now.add(p.id);const c=$(`#gr .c[data-id="${p.id}"]`);c&&c.classList.add('frozen')}});if(on())FZ.forEach(id=>{if(now.has(id)||!P(id))return;const c=$(`#gr .c[data-id="${id}"]`);if(c){c.classList.add('thaw');setTimeout(()=>c.classList.remove('thaw'),1500);top();burst(ctr(c),['💧','💧','✨'],8,70,1000,60)}});FZ=now};
+
+const _d=dlg;dlg=function(h,...r){const pr=_d(h,...r);if(on()&&typeof h==='string'&&h.includes('🏁 Tổng kết vòng'))setTimeout(()=>{const R=rk().slice(0,3),box=dg.querySelector('.ch')?.parentElement;if(!box||!R.length)return;const H=[150,115,85],C=['#ffe27a,#f0a800','#f4f6fb,#aeb7c8','#f2c39b,#c47a3d'];box.innerHTML=`<div class="pod">${[1,0,2].filter(i=>R[i]).map(i=>`<div class="pc"><div class="pa">${esc(R[i].av)}</div><small>${esc(R[i].n)}</small><div class="pb" style="height:${H[i]}px;background:linear-gradient(${C[i]})">${['🥇','🥈','🥉'][i]}<b>${R[i].p}</b></div></div>`).join('')}</div>`;box.querySelectorAll('.pb').forEach((e,k)=>e.animate([{transform:'scaleY(0)'},{transform:'scaleY(1)'}],{duration:900,delay:300+k*350,easing:'cubic-bezier(.2,1.3,.4,1)',fill:'backwards'}));setTimeout(conf,700)},50);return pr};
+})();
+</script>
+</html>
