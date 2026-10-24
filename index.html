@@ -1,0 +1,403 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Quiz Battle</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1f1b4d;--bg:#eef2ff;--pri:#4f46e5;--pk:#ff3d8b;--gold:#ffb300;--gr:#14b870;--rd:#ee3f5c;--ln:#dcd9f7;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 8% 0,#fff0c7 0,transparent 38%),radial-gradient(circle at 96% 8%,#ffd6ea 0,transparent 34%),var(--bg) fixed;color:var(--ink);font:500 16px 'Baloo 2',system-ui,sans-serif;min-height:100vh}
+header{position:sticky;top:0;z-index:5;display:flex;flex-wrap:nowrap;gap:5px;align-items:center;padding:6px 10px;background:#fffffff5;box-shadow:0 2px 14px #4f46e522;transition:transform .22s;overflow-x:auto;overflow-y:hidden;white-space:nowrap;scrollbar-width:thin}header.hid{transform:translateY(-115%)}header h1{font-size:22px;flex:0 0 auto}header button,header .b{font-size:13px;padding:5px 8px;border-radius:9px;flex:0 0 auto}header label{font-size:12px;flex:0 0 auto}header #sp{font-size:12px;padding:4px 8px;flex:0 0 auto}header #cs{font-size:13px;padding:5px 7px;margin:0 2px 0 0;flex:0 0 auto;max-width:150px}header input[type=checkbox]{margin-right:3px}
+h1{margin:0 auto 0 0;font-size:28px;color:var(--pri)}h2,h3{margin:.2em 0}
+button,.b{font:inherit;font-weight:700;border:0;border-radius:12px;padding:7px 13px;background:#e9e7ff;color:var(--pri);cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
+button:hover:not(:disabled),.b:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 6px 14px #4f46e533;background:#dcd8ff}button:active{transform:scale(.95)}:focus-visible{outline:3px solid var(--pk)}
+.p{background:var(--pk);color:#fff}.p:hover:not(:disabled){background:#ff5a9c}.g{background:var(--gold);color:#3b2a00}.g:hover:not(:disabled){background:#ffc733}label{cursor:pointer;font-size:14px}.tag{padding:6px 12px;border-radius:12px;background:#dcf8ea;color:#0b7a4b;font-weight:700}
+input,select,textarea{font:inherit;display:block;width:100%;padding:7px 10px;border-radius:10px;border:2px solid var(--ln);background:#fff;color:var(--ink);margin:2px 0 8px}input[type=checkbox]{display:inline;width:auto;margin:0 4px 0 0}#cs{width:auto;margin:0;font-weight:700}
+main{display:grid;grid-template-columns:1fr 290px;gap:14px;padding:14px}@media(max-width:900px){main{grid-template-columns:1fr}}
+#gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;align-content:start}
+.c{background:#fff;border-radius:20px;padding:12px;border:3px solid var(--ln);display:flex;flex-direction:column;gap:6px;box-shadow:0 4px 14px #4f46e514;transition:transform .2s,box-shadow .2s,border-color .5s}.c:hover{transform:translateY(-4px);box-shadow:0 14px 28px #4f46e533}
+.c.t1{border-color:var(--gold)}.c.t1 .nm::before{content:'👑 '}.c.done{border-color:#19b5a5;box-shadow:0 0 0 4px #19b5a52e,0 4px 14px #19b5a533}.ok{font-size:12px;background:#19b5a5;color:#fff;border-radius:99px;padding:1px 9px}
+.hd{display:flex;gap:8px;align-items:center}.av{font-size:36px;cursor:pointer;transition:transform .2s}.av:hover{transform:rotate(-12deg) scale(1.2)}.nm{flex:1;font-size:19px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sw{position:relative}input.sc{margin:0;padding:2px 10px;font:800 46px 'Baloo 2',system-ui,sans-serif;color:var(--pri);background:#f4f3ff;border:2px dashed var(--ln);border-radius:14px;line-height:1.2;transition:border-color .2s,background .2s}input.sc:hover{border-color:var(--pri);background:#fff}input.sc.pop{animation:pop .6s}
+@keyframes pop{40%{transform:scale(1.15);color:var(--pk)}}.dl{position:absolute;right:12px;top:-4px;font:800 32px 'Baloo 2';pointer-events:none;animation:fl 1.3s forwards}.dl.up{color:var(--gr)}.dl.dn{color:var(--rd)}@keyframes fl{to{transform:translateY(-34px);opacity:0}}
+.c.fu{animation:fu .9s}.c.fd{animation:fd .7s}@keyframes fu{30%{background:#d6fbe7}}@keyframes fd{20%,60%{transform:translateX(-6px);background:#ffe0e6}40%,80%{transform:translateX(6px)}}
+.fxs{min-height:56px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}.fb{font-size:36px;line-height:1;display:inline-flex;align-items:flex-end;gap:3px;padding:4px 9px;border-radius:14px;cursor:help;transition:transform .2s}.fb:hover{transform:scale(1.2)}.fb small{font:800 18px 'Baloo 2'}
+.fb.g{background:#dcf8ea;animation:glow 2s infinite}.fb.b{background:#ffe3e8;animation:wob 1.2s infinite}@keyframes glow{50%{box-shadow:0 0 0 7px #14b87033;transform:scale(1.08)}}@keyframes wob{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.nofx .fb,.nofx .sc,.nofx .dl{animation:none!important}@media(prefers-reduced-motion:reduce){.fb,.sc,.dl{animation:none!important}}
+.big{padding:10px 16px;font-size:17px;font-weight:800}.qa{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}.qa button{width:32px;height:32px;padding:0;border-radius:50%;font-size:13px}.tl{display:flex;gap:6px}.tl button{flex:1}
+aside{background:#fff;border-radius:20px;padding:12px;position:sticky;top:76px;align-self:start;max-height:calc(100vh - 90px);overflow:auto;box-shadow:0 4px 14px #4f46e514;transition:top .3s}body.hh aside{top:12px}
+ol{list-style:none;margin:0;padding:0}li.r{display:flex;gap:6px;align-items:center;padding:5px 8px;border-radius:12px;transition:transform .15s,background .15s}li.r:hover{transform:translateX(5px);background:#efedff}li.r span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}li.r i{font-style:normal;width:22px;color:#8a88b8}li.r0{background:#fff0bd}li.r1{background:#eceef6}li.r2{background:#ffe5d2}li.r b{color:var(--pri)}
+dialog{border:0;border-radius:22px;background:#fff;color:var(--ink);width:min(94vw,560px);padding:20px;max-height:94vh;box-shadow:0 20px 60px #1f1b4d55}dialog::backdrop{background:#1f1b4d88}
+.bt{display:flex;gap:8px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap}.pl{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}.pi{text-align:left;padding:7px 10px;font-size:14px;line-height:1.25}.pi.on{background:var(--gold);color:#3b2a00}
+#wl{width:min(96vw,1000px);padding:18px 22px;text-align:center;overflow:hidden;background:linear-gradient(#fff,#f1efff)}#rv{position:relative;overflow:hidden;border-radius:18px;background:#1f1b4d;padding:16px 0;margin:12px 0;box-shadow:inset 0 0 30px #000a}
+#rs{display:flex;gap:10px;width:max-content}.tl2{flex:0 0 190px;height:124px;border-radius:14px;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px;font-weight:700;font-size:15px;line-height:1.15}.tl2 i{font-style:normal;font-size:34px}.tl2 span{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tl2.g{background:linear-gradient(#22c985,#10a066)}.tl2.b{background:linear-gradient(#ff6a82,#d93757)}.tl2.n{background:linear-gradient(#ffc933,#f09a00);color:#3b2a00}
+.mk{position:absolute;left:50%;top:0;bottom:0;width:5px;background:var(--pk);transform:translateX(-50%);box-shadow:0 0 16px var(--pk);z-index:2}.rt{font-size:24px;margin:4px 0}.ch{display:inline-block;background:#efedff;border-radius:99px;padding:3px 12px;margin:3px;font-size:14px}
+.tw{max-height:74vh;overflow:auto}.hi{border-bottom:1px solid var(--ln);padding:6px 0}.hi ul{font-size:14px}.fl{display:flex;gap:8px}table{width:100%;border-collapse:collapse}td{padding:2px 4px;vertical-align:top}td input,td textarea{margin:0}td textarea{resize:vertical;font-size:15px;line-height:1.3}.tx{width:62%}.tg td:first-child{border-left:4px solid var(--gr)}.tb td:first-child{border-left:4px solid var(--rd)}.tn td:first-child{border-left:4px solid var(--gold)}
+
+button:disabled{opacity:.5;cursor:not-allowed}
+.c.m1{border-color:#e0a100;background:linear-gradient(160deg,#fff7d1,#ffe27a)}.c.m1 .nm::before{content:'🥇 '}
+.c.m2{border-color:#98a2b3;background:linear-gradient(160deg,#fcfdff,#d7dde8)}.c.m2 .nm::before{content:'🥈 '}
+.c.m3{border-color:#c47a3d;background:linear-gradient(160deg,#ffeadb,#e7b087)}.c.m3 .nm::before{content:'🥉 '}
+li.r.rk1{background:linear-gradient(90deg,#ffe58a,#fff3c2)}li.r.rk2{background:linear-gradient(90deg,#d5dbe6,#f1f4fa)}li.r.rk3{background:linear-gradient(90deg,#e8b089,#ffe5d2)}li.r.me{outline:2px solid var(--pk)}
+li.r.up{animation:lu .9s}li.r.dn{animation:ld .9s}@keyframes lu{30%{background:#bff5d8}}@keyframes ld{30%{background:#ffc9d2}}
+.stg{display:grid;grid-template-columns:1fr 250px;gap:16px}.stg .sm{min-width:0}.ctr{text-align:center}.lbw{background:#f4f3ff;border-radius:16px;padding:10px;text-align:left;max-height:72vh;overflow:auto}.lbw h3{font-size:18px;margin:0 0 6px}@media(max-width:760px){.stg{grid-template-columns:1fr}.lbw{max-height:30vh}}
+.rvx{position:relative;overflow:hidden;border-radius:18px;background:#1f1b4d;padding:16px 0;margin:12px 0;box-shadow:inset 0 0 30px #000a}.rsx{display:flex;gap:10px;width:max-content}
+.coinw{perspective:700px;height:170px;display:flex;align-items:center;justify-content:center}.coin{width:130px;height:130px;position:relative;transform-style:preserve-3d}
+.cfc{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;font:800 22px 'Baloo 2',system-ui,sans-serif;box-shadow:inset 0 0 0 7px #0002,0 6px 16px #0003}.cfc small{font-size:34px}
+.cfc.h{background:radial-gradient(circle at 35% 30%,#fff1a6,#f5b400);color:#5a3b00}.cfc.t{background:radial-gradient(circle at 35% 30%,#fff,#aab4c6);color:#2d3650;transform:rotateY(180deg)}
+.coinw.tossing{animation:toss var(--td,2.4s) ease-out}@keyframes toss{0%,100%{transform:translateY(0)}45%{transform:translateY(-70px)}}
+.die{width:120px;height:120px;margin:14px auto;border-radius:22px;background:#fff;border:4px solid var(--pri);display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);padding:14px;gap:4px;box-shadow:0 8px 20px #4f46e544}.die i{border-radius:50%}.die i.on{background:var(--pri)}.die.shake{animation:shk .18s infinite}@keyframes shk{25%{transform:rotate(-9deg) translateY(-4px)}75%{transform:rotate(9deg) translateY(2px)}}
+.rn{font:800 90px 'Baloo 2',system-ui,sans-serif;color:var(--pri);line-height:1.1;margin:8px 0}
+.opt{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0}.opt button{min-width:64px;font-size:20px}.opt button.on{background:var(--gold);color:#3b2a00}
+.nofx .coinw.tossing,.nofx .die.shake,.nofx li.r.up,.nofx li.r.dn{animation:none!important}
+
+#wl{width:min(98vw,1180px);max-width:1180px}
+#wl .stg{grid-template-columns:minmax(0,1fr) 280px;align-items:stretch;gap:14px}
+#wl .lbw{background:linear-gradient(160deg,#fff8d9,#fff 55%,#f0edff);border:3px solid #ffc83d;box-shadow:0 0 0 4px #ffc83d33,0 12px 32px #4f46e533;max-height:65vh}
+#wl .lbw h3{color:#4f46e5;font-size:22px}
+#wl .lbx{max-height:55vh;overflow:auto}
+aside.wheel-active{border:3px solid #ffc83d;box-shadow:0 0 0 5px #ffc83d44,0 0 30px #ffb30099;animation:rankGlow 1.8s ease-in-out infinite}
+@keyframes rankGlow{50%{box-shadow:0 0 0 8px #ffc83d33,0 0 38px #ffb300bb}}
+/* Bảng xếp hạng cạnh vòng quay: cao hơn, rộng vừa đủ và chỉ cuộn dọc */
+#wl .stg{grid-template-columns:minmax(0,1fr) 330px;min-width:0}
+#wl .stg>.sm{min-width:0}
+#wl .lbw{min-width:0;width:100%;height:min(72vh,760px);max-height:none;overflow-y:auto;overflow-x:hidden}
+#wl .lbx{width:100%;min-width:0;max-height:none;height:auto;overflow-y:visible;overflow-x:hidden}
+#wl .lbx li.r{min-width:0;width:100%;max-width:100%;overflow:hidden}
+#wl .lbx li.r span{min-width:0;flex:1 1 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#wl .lbx li.r small{flex:0 0 auto;max-width:30%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:760px){
+ #wl .stg{grid-template-columns:minmax(0,1fr)}
+ #wl .lbw{height:auto;max-height:48vh;overflow-y:auto;overflow-x:hidden}
+ #wl .lbx{height:auto;max-height:none;overflow:visible}
+}
+
+/* Đồng bộ nút đóng và thao tác đóng vòng quay với giao diện Quiz Battle */
+#wl{position:relative;border:3px solid #dcd9f7;border-radius:24px;box-shadow:0 22px 70px #1f1b4d66}
+#wl::backdrop{background:#1f1b4dcc;backdrop-filter:blur(5px)}
+#wl .wheel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 8px;text-align:left}
+#wl .wheel-kicker{font-size:12px;letter-spacing:.08em;font-weight:800;color:#7773c9}
+#wl .wheel-close{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;background:#fff0f3;color:#c0264d;border:1px solid #ffc7d4;border-radius:12px;box-shadow:0 3px 10px #ee3f5c1a}
+#wl .wheel-close:hover:not(:disabled){background:#ffe0e8;box-shadow:0 6px 14px #ee3f5c33}
+#wl .wheel-actions{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin:10px 0}
+#wl .wheel-hint{font-size:13px;color:#7773a6;margin:8px 0}
+#wl #rv{border:2px solid #393276;box-shadow:inset 0 0 30px #000a,0 8px 20px #4f46e522}
+#wl #wh{font-weight:800;color:#4f46e5}
+@media(max-width:600px){#wl{padding:12px!important}#wl .wheel-kicker{font-size:10px}#wl .wheel-close span{display:none}}
+</style>
+<header id="hd"><h1>🎡 Quiz Battle</h1><select id="cs" title="Chọn lớp"></select><button data-a="cadd">＋ Lớp</button><button data-a="cren">✏️ Tên lớp</button><button data-a="cdel">🗑 Xóa lớp</button><span id="sp" class="tag"></span><button data-a="nr">↻ Vòng mới</button><button class="g" data-a="edit">＋ Học sinh</button><button data-a="undo">↩ Hoàn tác</button><button data-a="hist">📜 Lịch sử</button><button data-a="mng">🎁 Quản lý phiếu</button><button data-a="ex">⬇ Xuất</button><label><input type="checkbox" id="ng">Điểm âm</label><label><input type="checkbox" id="fo">Tắt hiệu ứng</label><label><input type="checkbox" id="qa">Nút +điểm</label></header>
+<main><section id="gr"></section><aside><h2>🏆 Bảng xếp hạng</h2><ol id="rk" class="lbx"></ol></aside></main><dialog id="dg"></dialog><dialog id="wl"></dialog>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let S,X,Lg=[],busy=0,PV={},ES=0;
+const GN={A:'Tăng điểm trực tiếp',B:'Nhân đôi & điều kiện',C:'Cướp & hút điểm',D:'Tráo đổi điểm',E:'Trừ điểm',F:'Chia sẻ điểm',G:'Phòng thủ & phản đòn',H:'Khiên bảo vệ',I:'May mắn & bốc lại',J:'Hiệu ứng kéo dài',K:'Nhiệm vụ'},TN={g:'Có lợi',b:'Bất lợi',n:'Trung tính'},KN={a:'Tự động',t:'Chọn mục tiêu',r:'Tương tác'};
+const FI={bomb:'💣',frz:'🧊',drn:'💸',ref:'🪞',prx:'↪️',pdn:'🕊️',dis:'🚫',x3:'✖️3',skp:'⏭️'},FN={bomb:'Bom: nổ sau mỗi 2 lượt quay hợp lệ của người đang giữ; chuyển bom đặt lại bộ đếm',frz:'Đóng băng (không nhận điểm cộng)',drn:'Chuyển 50% điểm nhận được',ref:'Phản đòn',prx:'Chuyển hình phạt',pdn:'Bỏ qua 1 lần phạt',dis:'Khiên bị vô hiệu hóa',x3:'Vòng sau trả lời đúng x3 (GV áp dụng)',skp:'Mất lượt: lần bấm quay kế tiếp bị tiêu thụ, không rút phiếu và không tính lượt quay hợp lệ'};
+const FG={bomb:'b',frz:'b',drn:'b',dis:'b',ref:'g',prx:'g',pdn:'g',x3:'g',skp:'b'},GI={A:'💰',B:'✖️',C:'🏴‍☠️',D:'🔄',E:'💥',F:'🤝',G:'🛡️',H:'🛡️',I:'🎲',J:'⏳',K:'🎯'},AV=['🦊','🐼','🐯','🐸','🦄','🐙','🐰','🐵','🐱','🐶','🦁','🐧'];
+const P=id=>S.st.find(p=>p.id===id),log=s=>(qlb(),Lg.push(s)),M=()=>X.me,rk=()=>[...S.st].sort((a,b)=>b.p-a.p),oth=()=>S.st.filter(p=>p!==X.me),rnd=n=>1+Math.floor(Math.random()*n),fz=p=>p.fx.some(f=>f.k==='frz'),sk=m=>{log('⚠ '+m);throw'skip'};
+const uid=()=>{let i;do i='s'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);while(S&&P(i));return i};
+// ===== Lõi điểm: mọi thay đổi đều đi qua gain/lose/T/SW =====
+function gain(p,n,src='c',nb=0){n=Math.floor(n);if(n<=0)return 0;if(src!=='m'&&fz(p)){log(`🧊 ${p.n} bị đóng băng, không nhận +${n}`);return 0}if(!nb&&p===X.me&&X.m>1&&!X.bd){const base=n,b=base*X.m;log(`✖️${X.m} Phiếu nhân điểm: +${base} → +${b} (áp dụng một lần)`);n=b;X.bd=1}if(src!=='m'){const d=p.fx.find(f=>f.k==='drn'),o=d&&P(d.o);if(o&&o!==p){const h=Math.floor(n/2);if(h){o.p+=h;n-=h;log(`💸 ${o.n} nhận ${h} điểm từ hiệu ứng chuyển 50%`)}}}log(`${p.n}: +${n} (${p.p}→${p.p+n})`);p.p+=n;return n}
+function lose(p,n,att,blk=1,dp=0){n=Math.floor(S.neg?n:Math.min(n,Math.max(0,p.p)));if(n<=0)return 0;const f=k=>p.fx.find(x=>x.k===k),rm=x=>p.fx.splice(p.fx.indexOf(x),1),atk=att&&att!==p;let x;
+ // Shield protects ordinary eligible losses and theft. Direct score-setting passes dp=1 or blk=0 explicitly.
+ if(blk&&p.sh>0&&!f('dis')){log(`🛡️ Khiên của ${p.n} chặn ${n} điểm mất`);return 0}
+ if(!dp&&atk&&(x=f('ref'))){log(`🪞 ${p.n} phản đòn khoản phạt ${n} điểm về ${att.n} (chỉ phản một lần)`);lose(att,n,null,blk,1);return 0}
+ if(!dp&&!att&&p===X.me&&(x=f('prx'))){rm(x);const r=rk(),t=x.d==='top'?(r[0]!==p?r[0]:r[1]):P(x.d);if(t&&t!==p){log(`↪️ ${t.n} gánh phạt thay ${p.n}`);lose(t,n,null,blk,1);return 0}log(`↪️ Không có người gánh phạt hợp lệ: ${p.n} tự chịu`)}
+ if(!dp&&(x=f('pdn'))){rm(x);log(`🕊️ ${p.n} bỏ qua hình phạt ${n} điểm`);if(atk){const paid=lose(att,10,p,1,1);if(paid)gain(p,paid,'c',1)}return 0}
+ log(`${p.n}: -${n} (${p.p}→${p.p-n})`);p.p-=n;return n}
+
+const T=(f,t,n)=>{const taken=lose(f,n,t);if(taken>0)gain(t,taken,'c',1);return taken},G=(p,n)=>gain(p,n),GX=(p,n)=>gain(p,n,'c',1),setp=(p,v)=>{log(`${p.n}: ${p.p}→${v}`);p.p=v},addSh=(p,n)=>{log(`${p.n}: 🛡️ ${p.sh}→${p.sh+n}`);p.sh+=n};
+const mv=(f,t,n)=>{if(fz(t))return log('🧊 Người nhận bị đóng băng: hủy');gain(t,lose(f,n,null,0,1),'c',1)};
+function SW(a,b){if(!a||!b||a===b)sk('Cần hai người khác nhau');log(`🔄 ${a.n} (${a.p}) ⇄ ${b.n} (${b.p})`);[a.p,b.p]=[b.p,a.p]}
+function fe(p,o){p.fx=p.fx.filter(f=>f.k!==o.k);p.fx.push({...o,fr:1,o:X.me.id});log(`${FI[o.k]} ${FN[o.k]} → ${p.n}`)}
+// ===== Hộp thoại =====
+const dg=$('#dg');dg.oncancel=e=>e.preventDefault();$('#wl').oncancel=e=>e.preventDefault();
+function dlg(h,b,init,w){return new Promise(r=>{const wr=busy;dg.style.maxWidth=w||(wr?'900px':'');dg.style.width=(w||wr)?'96vw':'';const body=h+'<div class="bt">'+b.map((x,i)=>`<button data-i="${i}" class="${x[2]||''}">${x[0]}</button>`).join('')+'</div>';dg.innerHTML=wr?`<div class="stg"><div class="sm">${body}</div>${lbBox()}</div>`:body;dg.querySelectorAll('.bt button').forEach(k=>k.onclick=()=>{let v=b[k.dataset.i][1];if(typeof v==='function')v=v();if(v===false)return;dg.close();r(v)});dg.open||dg.showModal();lbRefresh();init&&init()})}
+async function pk(k,list,t='Chọn mục tiêu'){list=list||oth();const m=k==='m';if(!m&&list.length<k)sk('Không đủ mục tiêu hợp lệ');const R=rk(),sel=new Set(),up=()=>dg.querySelectorAll('.pi').forEach(x=>x.classList.toggle('on',sel.has(x.dataset.i)));
+ const r=await dlg(`<h3>${t}${m?'':` (chọn ${k})`}</h3><div class="pl">`+list.map(p=>`<button class="pi" data-i="${p.id}">${esc(p.av)} <b>${esc(p.n)}</b> · hạng ${R.indexOf(p)+1} · ${p.p} điểm${p.sh?` · 🛡️${p.sh}`:''}${p.fx.map(f=>FI[f.k]).join('')}</button>`).join('')+'</div>',[['Hủy',0],['Xác nhận',()=>(m||sel.size===k)?[...sel]:false,'p']],()=>dg.querySelectorAll('.pi').forEach(b=>b.onclick=()=>{const i=b.dataset.i;if(sel.has(i))sel.delete(i);else{if(!m&&sel.size>=k){if(k===1)sel.clear();else return}sel.add(i)}up()}),'1000px');
+ if(r===0)throw'cancel';return r.map(P)}
+async function tp(n,ex=1){const r=rk(),s=r[n<0?r.length-1:n-1],c=s?r.filter(q=>q.p===s.p&&!(ex&&q===X.me)):[];if(!c.length)sk('Không có mục tiêu hợp lệ');return c.length>1?(await pk(1,c,'Đồng hạng — chọn mục tiêu'))[0]:c[0]}
+async function num(t,a,b){const r=await dlg(`<h3>${esc(t)}</h3><input id="ni" type="number" min="${a}" max="${b}">`,[['Hủy',0],['OK',()=>{const v=+$('#ni').value;return Number.isInteger(v)&&v>=a&&v<=b?v:false},'p']]);if(!r)throw'cancel';return r}
+const age=async p=>p.age||(p.age=await num('Nhập tuổi của '+p.n,1,99));
+const rw=async n=>await dlg('<h3>Thử thách</h3><p>Học sinh đã hoàn thành chưa?</p>',[['Chưa',0],['Hoàn thành',1,'g']])?G(M(),n):log('Thử thách chưa hoàn thành: không cộng điểm');
+
+// ===== Giao diện tung xu / xúc xắc / quay số / bốc lại + bảng xếp hạng trực tiếp =====
+let CUR=null,lbT=0,lbPrev={};const IDX=58;
+const rankOf=(R,p)=>1+R.filter(q=>q.p>p.p).length,lbBox=()=>'<div class="lbw"><h3>🏆 Xếp hạng</h3><ol class="lbx"></ol></div>';
+const tileF=c=>`<div class="tl2 ${c.t}"><i>${GI[c.g]}</i><span>${esc(short(txt(c)))}</span></div>`;
+function lbHTML(){const R=rk();const h=R.map(p=>{const k=rankOf(R,p),o=lbPrev[p.id],ch=o!==undefined&&o!==p.p?(p.p>o?'up':'dn'):'';return `<li class="r ${p.p>0&&k<4?'rk'+k:''} ${p.id===CUR?'me':''} ${ch}"><i>${k}</i>${esc(p.av)}<span>${esc(p.n)}</span><b>${p.p}</b><small>${p.sh?'🛡️'+p.sh:''}${p.fx.map(f=>FI[f.k]).join('')}</small></li>`}).join('');return h}
+function lbRefresh(){if(!S)return;const h=lbHTML();document.querySelectorAll('.lbx').forEach(o=>{if(o.dataset.h!==h){o.innerHTML=h;o.dataset.h=h}});lbPrev=Object.fromEntries(S.st.map(p=>[p.id,p.p]))}
+function qlb(){clearTimeout(lbT);lbT=setTimeout(lbRefresh,0)}
+function restoreRank(){const rank=$('#rk'),aside=document.querySelector('main aside');if(rank&&rank.dataset.home){aside.appendChild(rank);delete rank.dataset.home}aside.classList.remove('wheel-active')}
+
+const sleep=ms=>new Promise(r=>setTimeout(r,ms)),clk=id=>new Promise((res,rej)=>{$('#'+id).onclick=()=>res(1);const x=$('#st_x');if(x)x.onclick=()=>rej('cancel')}),CB='<button id="st_x">Hủy</button>',CE='style="justify-content:center"';
+function stg(h,keep){if(!keep)X.mk=Lg.length;dg.style.maxWidth='900px';dg.style.width='96vw';dg.innerHTML=`<div class="stg"><div class="sm ctr">${h}</div>${lbBox()}</div>`;dg.open||dg.showModal();lbRefresh()}
+async function fin(t){const chips=Lg.slice(X.mk||0).slice(-8).map(x=>`<span class="ch">${esc(x)}</span>`).join('')||'<span class="ch">Không có thay đổi điểm</span>';
+ if(!dg.open||!dg.querySelector('.sm.ctr'))stg(`<h3>${t||'Kết quả'}</h3>`,1);
+ dg.querySelector('.sm').insertAdjacentHTML('beforeend',`<div>${chips}</div><div class="bt" ${CE}><button class="g big" id="fn_ok">Tiếp tục</button></div>`);
+ await clk('fn_ok');X.fs=2;dg.close()}
+async function coin(title,bets){const r=Math.random()<.5?'H':'T';let b=0;
+ stg(`<h3>${title}</h3>${bets?'<div class="opt" id="cn_b">'+bets.map(n=>`<button data-b="${n}">${n} điểm</button>`).join('')+'</div>':''}<p id="cn_h">${bets?'Chọn mức cược rồi tung đồng xu':'Bấm nút để tung đồng xu'}</p><div class="coinw" id="cn_w"><div class="coin" id="cn_c"><div class="cfc h"><small>🌞</small>NGỬA</div><div class="cfc t"><small>🌙</small>SẤP</div></div></div><div class="bt" ${CE}><button class="g big" id="cn_go" ${bets?'disabled':''}>🪙 TUNG ĐỒNG XU</button>${CB}</div>`);
+ if(bets)$('#cn_b').onclick=e=>{const k=e.target.closest('button');if(!k)return;b=+k.dataset.b;$('#cn_b').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===k));$('#cn_go').disabled=false;$('#cn_h').textContent=`Cược ${b} điểm — Ngửa thắng, Sấp thua`};
+ await clk('cn_go');$('#st_x').remove();$('#cn_go').disabled=true;if(bets)$('#cn_b').querySelectorAll('button').forEach(x=>x.disabled=true);
+ const c=$('#cn_c'),w=$('#cn_w'),t=S.fo?.3:2.4;$('#cn_h').textContent='Đang tung...';
+ c.style.transition=`transform ${t}s cubic-bezier(.2,.7,.2,1)`;w.style.setProperty('--td',t+'s');w.classList.add('tossing');c.style.transform=`rotateY(${360*6+(r==='T'?180:0)}deg)`;
+ await sleep(t*1000+150);$('#cn_h').innerHTML=r==='H'?'🌞 <b>NGỬA!</b>':'🌙 <b>SẤP!</b>';await sleep(S.fo?200:900);return{r,b}}
+const PIPS={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]},dieH=n=>Array.from({length:9},(_,i)=>`<i class="${PIPS[n].includes(i)?'on':''}"></i>`).join('');
+async function dice(title,desc){const r=rnd(6);
+ stg(`<h3>${title}</h3><p id="dc_h">${desc||'Bấm nút để đổ xúc xắc'}</p><div class="die" id="dc_d">${dieH(6)}</div><div class="bt" ${CE}><button class="g big" id="dc_go">🎲 ĐỔ XÚC XẮC</button>${CB}</div>`);
+ await clk('dc_go');$('#st_x').remove();$('#dc_go').disabled=true;const d=$('#dc_d');$('#dc_h').textContent='Đang đổ...';if(!S.fo)d.classList.add('shake');
+ const end=Date.now()+(S.fo?300:1700);let last=0,iv=60;while(Date.now()<end){let n;do n=rnd(6);while(n===last);last=n;d.innerHTML=dieH(n);await sleep(iv);iv*=1.1}
+ d.classList.remove('shake');d.innerHTML=dieH(r);$('#dc_h').innerHTML=`🎲 Ra mặt <b>${r}</b>!`;await sleep(S.fo?200:900);return r}
+async function guess(title){const r=rnd(5);let n=0;
+ stg(`<h3>${title}</h3><p id="gs_h">Học sinh chọn một số từ 1 đến 5</p><div class="opt" id="gs_o">${[1,2,3,4,5].map(i=>`<button data-n="${i}">${i}</button>`).join('')}</div><div class="rn" id="gs_r">?</div><div class="bt" ${CE}><button class="g big" id="gs_go" disabled>🔢 QUAY SỐ</button>${CB}</div>`);
+ $('#gs_o').onclick=e=>{const k=e.target.closest('button');if(!k)return;n=+k.dataset.n;$('#gs_o').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===k));$('#gs_go').disabled=false;$('#gs_h').textContent=`Đã chọn số ${n}`};
+ await clk('gs_go');$('#st_x').remove();$('#gs_go').disabled=true;$('#gs_o').querySelectorAll('button').forEach(x=>x.disabled=true);$('#gs_h').textContent='Đang quay số...';
+ const end=Date.now()+(S.fo?300:2000);let iv=60;while(Date.now()<end){$('#gs_r').textContent=rnd(5);await sleep(iv);iv*=1.1}
+ $('#gs_r').textContent=r;$('#gs_h').innerHTML=n===r?`🎉 Trúng! Chọn ${n}, quay ra <b>${r}</b>`:`Chọn ${n}, quay ra <b>${r}</b> — không trúng`;await sleep(S.fo?200:1000);return{n,r}}
+async function reroll(title,lab){const c=pickC(1);if(!c)sk('Không còn phiếu phù hợp để bốc lại; giao dịch được hủy an toàn');
+ let st=lay(pool());while(st.length<70)st=st.concat(lay(pool()));st=st.slice(0,70);st[IDX]=c;
+ stg(`<h3>${title}</h3><p id="rr_h">Đang quay phiếu mới...</p><div class="rvx" id="rr_v"><i class="mk"></i><div class="rsx" id="rr_s">${st.map(tileF).join('')}</div></div><div id="rr_o"></div>`);
+ await sleep(350);const rs=$('#rr_s'),vw=$('#rr_v').clientWidth;rs.style.transition=S.fo?'transform .3s':'transform 4.2s cubic-bezier(.08,.6,.08,1)';rs.style.transform=`translateX(${-(IDX*200+95-vw/2+(Math.random()-.5)*120)}px)`;
+ await sleep(S.fo?350:4400);$('#rr_h').textContent='Trúng phiếu mới!';
+ $('#rr_o').innerHTML=`<h3 class="rt">${{g:'🟢',b:'🔴',n:'🟡'}[c.t]} ${esc(txt(c))}</h3><p>${KN[c.k]} · ${TN[c.t]}</p><div class="bt" ${CE}><button class="g big" id="rr_ok">${lab(c)}</button></div>`;
+ await clk('rr_ok');return c}
+// ===== Danh sách 100 phiếu (g=có lợi, b=bất lợi, n=trung tính | a=tự động, t=chọn mục tiêu, r=tương tác) =====
+const NF=' (Không bị Đóng băng chặn.)',C=[],cn={},D=(g,t,k,n,f)=>C.push({id:g+(cn[g]=(cn[g]||0)+1),g,t,k,n:g==='D'?n+NF:n,f});
+[['Cộng ngay 30 điểm trực tiếp từ Giáo viên.',30],['Cộng ngay 10 điểm vào điểm của bạn.',10],['Nhận ngay 40 điểm vào điểm của bạn.',40],['Cộng ngay 35 điểm vào điểm của bạn.',35],['Cộng ngay 15 điểm vào quỹ điểm hiện tại.',15],['Nhận ngay 30 điểm từ Giáo viên.',30],['Cộng ngay 20 điểm vào tài khoản của bạn.',20],['Nhận ngay 50 điểm từ Giáo viên.',50],['Cộng 25 điểm vào điểm của bạn.',25]].forEach(([t,n])=>D('A','g','a',t,()=>G(M(),n)));
+D('A','g','a','Cộng số điểm bằng đúng sĩ số hiện tại của lớp học.',()=>G(M(),S.st.length));
+D('A','g','a','Cộng số điểm bằng đúng gấp đôi sĩ số hiện tại của lớp học.',()=>G(M(),2*S.st.length));
+D('A','g','t','Nhận ngay số điểm bằng đúng tuổi của bạn nhân với 2.',async()=>G(M(),2*await age(M())));
+D('A','g','t','Cộng 5 điểm cho bản thân và cộng 5 điểm cho người ngồi bên trái.',async()=>{const[l]=await pk(1,oth(),'Người ngồi bên trái');G(M(),5);G(l,5)});
+D('A','g','t','Chọn một bạn đồng hành. Cả hai cùng được cộng 5 điểm.',async()=>{const[l]=await pk(1,oth(),'Bạn đồng hành');G(M(),5);G(l,5)});
+D('A','g','t','Bạn và người đứng cuối bảng mỗi người được nhận thêm 20 điểm từ Giáo viên.',async()=>{const l=await tp(-1);G(M(),20);G(l,20)});
+D('A','g','a','Nếu điểm của bạn thấp hơn 20, lập tức được cộng thẳng lên 50 điểm.',()=>M().p<20?GX(M(),50-M().p):log('Không đủ điều kiện (cần dưới 20 điểm)'));
+D('A','g','a','Lập tức cộng đủ để điểm của bạn đạt mốc 50 điểm nếu đang dưới 50.',()=>M().p<50?GX(M(),50-M().p):log('Đã đạt từ 50 điểm: không cộng'));
+D('A','g','a','Nếu điểm của bạn hiện tại là số chẵn, bạn được cộng thêm 25 điểm.',()=>M().p%2?log('Điểm lẻ: không được cộng'):G(M(),25));
+D('A','g','r','Đổ một viên xúc xắc hoặc nhờ Giáo viên bấm số ngẫu nhiên từ 1–6. Số điểm bạn nhận được bằng số chấm nhân 5.',async()=>{const r=await dice('🎲 Đổ xúc xắc','Điểm nhận = số chấm × 5');log('🎲 Xúc xắc: '+r);G(M(),5*r);await fin()});
+D('A','g','r','Hát một câu/đoạn nhạc tiếng Anh bất kỳ để nhận 5 điểm.',()=>rw(5));
+D('B','g','a','Nếu điểm của bạn là số chẵn: đặt điểm trực tiếp thành gấp đôi (x2); nếu là số lẻ: cộng thêm 15 điểm.',()=>{const m=M(),base=m.p;if(base%2)G(m,15);else if(base)setp(m,base*2);else log('Điểm đang bằng 0: nhân không có tác dụng')});
+D('B','g','t','Đặt điểm của bạn thành gấp đôi (x2) điểm ban đầu; bạn đứng cuối bảng cũng được cộng đúng bằng điểm ban đầu đó.',async()=>{const l=await tp(-1),m=M(),a=m.p;setp(m,a*2);G(l,a)});
+D('B','g','a','Đặt điểm trực tiếp thành gấp đôi (x2) điểm ban đầu của bạn.',()=>{const m=M(),a=m.p;a?setp(m,a*2):log('Điểm đang bằng 0: nhân không có tác dụng')});
+D('B','g','a','Đặt điểm trực tiếp thành gấp ba (x3) điểm ban đầu của bạn.',()=>{const m=M(),a=m.p;a?setp(m,a*3):log('Điểm đang bằng 0: nhân không có tác dụng')});
+D('B','g','t','Nếu đang Top 1: đặt điểm trực tiếp thành gấp đôi (x2) điểm ban đầu; nếu không phải Top 1: cướp 10 điểm từ Top 1.',async()=>{const m=M(),top=rk()[0];if(!top)sk('Lớp chưa có học sinh');if(m===top)setp(m,m.p*2);else T(top,m,10)});
+D('B','g','t','Điểm của bạn được tăng lên bằng đúng số điểm của bạn đang đứng Top 3.',async()=>G(M(),(await tp(3)).p));
+D('B','g','t','Nhận thêm số điểm đúng bằng số điểm của bạn đang đứng thứ 2 trong lớp.',async()=>G(M(),(await tp(2)).p));
+D('B','g','a','Sao chép chính xác điểm hiện tại của Top 1 vào điểm của bạn, kể cả khi điểm của bạn đang bằng hoặc cao hơn.',()=>{const t=rk()[0];if(!t)sk('Lớp chưa có học sinh');setp(M(),t.p);log(`📋 Đồng bộ điểm theo Top 1 (${t.n}: ${t.p} điểm)`) });
+D('B','g','r','Trong vòng tiếp theo, bạn trả lời đúng câu hỏi sẽ được nhận gấp 3 lần số điểm.',()=>fe(M(),{k:'x3',l:1}));
+D('B','g','t','Lập tức cộng đủ điểm để bạn vượt qua người đang dẫn đầu 5 điểm.',async()=>{const t=await tp(1),n=t.p+5-M().p;n>0?GX(M(),n):log('Đã vượt Top 1 từ trước')});
+D('C','g','t','Hút 10 điểm từ 4 bạn khác nhau trong lớp (tổng cộng nhận +40 điểm).',async()=>(await pk(4)).forEach(p=>T(p,M(),10)));
+D('C','g','t','Cướp thẳng 25 điểm từ 1 bạn bất kỳ tự chọn trong lớp.',async()=>T((await pk(1))[0],M(),25));
+D('C','g','a','Hút 3 điểm từ TẤT CẢ các bạn còn lại trong lớp về cho mình (tối đa 8 bạn, chọn ngẫu nhiên nếu lớp đông hơn).',()=>shuffle(oth()).slice(0,8).forEach(p=>T(p,M(),3)));
+D('C','g','t','Cướp trọn gói 30 điểm từ bạn đang đứng Top 1.',async()=>T(await tp(1),M(),30));
+D('C','g','t','Cướp thẳng 15 điểm từ bạn đang đứng Top 1 lớp.',async()=>T(await tp(1),M(),15));
+D('C','g','a','Chọn 2 bạn bất kỳ có điểm cao nhất lớp và tịch thu mỗi người 20 điểm về cho mình.',()=>rk().filter(q=>q!==M()).slice(0,2).forEach(p=>T(p,M(),20)));
+D('C','g','t','Lấy 5 điểm từ 3 bạn bất kỳ bạn tự chọn trong lớp (tổng cộng +15 điểm).',async()=>(await pk(3)).forEach(p=>T(p,M(),5)));
+D('C','g','t','Lấy 5 điểm từ 1 bạn bất kỳ trong lớp.',async()=>T((await pk(1))[0],M(),5));
+D('C','g','a','Cướp 5 điểm từ tất cả những bạn có số điểm cao hơn bạn.',()=>oth().filter(q=>q.p>M().p).forEach(p=>T(p,M(),5)));
+D('C','g','t','Lấy 20 điểm từ bạn Top 1 và 15 điểm từ bạn Top 2 (tổng nhận +35 điểm).',async()=>{const a=await tp(1),b=await tp(2);T(a,M(),20);T(b,M(),15)});
+D('C','g','t','Lấy 1/3 số điểm hiện có của một bạn do bạn chọn chuyển sang cho mình.',async()=>{const[p]=await pk(1);T(p,M(),Math.floor(p.p/3))});
+D('C','n','t','Lấy tối đa 10 điểm từ Top 1 và chia đều số điểm thực sự lấy được cho đúng 2 bạn có điểm thấp nhất (nếu lẻ, người đầu tiên nhận dư 1 điểm). Khiên của Top 1 vẫn chặn được.',async()=>{const t=rk()[0];if(!t)sk('Lớp chưa có học sinh');const w=rk().filter(q=>q!==t&&!fz(q)).sort((a,b)=>a.p-b.p).slice(0,2);if(w.length!==2)sk('Cần Top 1 và ít nhất 2 người nhận hợp lệ không bị đóng băng; chưa thay đổi điểm');const before=t.p,actual=lose(t,10,M()),base=Math.floor(actual/2),rem=actual%2;log(`📦 Điểm thực sự lấy từ ${t.n}: ${actual} (trước ${before}, sau ${t.p})`);w.forEach((q,i)=>{const n=base+(i===0?rem:0);if(n) GX(q,n);else log(`${q.n}: nhận 0 điểm vì không có điểm được chuyển`)})});
+D('C','g','t','Lấy toàn bộ số điểm của bạn ít điểm nhất và cộng vào cho bạn.',async()=>{const l=await tp(-1);T(l,M(),l.p)});
+D('C','g','t','Cố cướp toàn bộ điểm của bạn ít điểm nhất rồi trả lại bạn đó 10 điểm. Khiên bảo vệ có thể chặn hoàn toàn việc cướp; nếu bị chặn thì không chuyển điểm và không trả lại 10 điểm.',async()=>{const l=await tp(-1);const before=l.p,stolen=T(l,M(),before);if(stolen>0){G(l,10);log(`🧾 Cướp thành công ${stolen} điểm; trả lại 10 điểm cho ${l.n}`)}else log(`🛡️ Không chuyển điểm: khiên/hiệu ứng đã chặn giao dịch của ${l.n}`)});
+D('C','g','t','Lấy 50% số điểm của bạn Top 1 và 50% số điểm của bạn Top 2 cho mình.',async()=>{const a=await tp(1),b=await tp(2);T(a,M(),a.p>>1);T(b,M(),b.p>>1)});
+D('C','g','t','Bắt buộc một bạn có điểm cao hơn phải cho bạn 20 điểm.',async()=>{const[p]=await pk(1,oth().filter(q=>q.p>M().p),'Bạn có điểm cao hơn');T(p,M(),20)});
+D('C','g','t','Chọn một bạn bất kỳ và buộc bạn đó phải chuyển cho bạn 15 điểm.',async()=>T((await pk(1))[0],M(),15));
+D('C','g','a','Lấy 1/2 số điểm của bạn đang đứng ngay phía trên bạn trên bảng xếp hạng.',()=>{const r=rk(),i=r.indexOf(M());if(!i)sk('Bạn đang đứng đầu, không có người phía trên');T(r[i-1],M(),r[i-1].p>>1)});
+D('C','g','a','Lấy 10 điểm từ bạn đứng ngay phía trước và 10 điểm từ bạn đứng ngay phía sau bạn.',()=>{const r=rk(),i=r.indexOf(M()),l=[r[i-1],r[i+1]].filter(Boolean);if(!l.length)sk('Không có người liền kề');l.forEach(q=>T(q,M(),10))});
+D('C','g','t','Yêu cầu 2 bạn bất kỳ trong lớp phải chuyển cho bạn mỗi người 3 điểm.',async()=>(await pk(2)).forEach(p=>T(p,M(),3)));
+D('C','g','t','Chọn một bạn bất kỳ phải chuyển cho bạn số điểm bằng đúng số tuổi của bạn đó.',async()=>{const[p]=await pk(1),a=await age(p);T(p,M(),a)});
+D('D','n','t','Tráo đổi trực tiếp toàn bộ điểm của bạn với một học sinh khác; khiên và đóng băng không chặn thao tác.',async()=>SW(M(),(await pk(1))[0]));
+D('D','n','t','Tráo đổi trực tiếp điểm giữa Top 2 và người ít điểm nhất; khiên và đóng băng không chặn thao tác.',async()=>{const a=await tp(2,0),b=await tp(-1,0);SW(a,b)});
+D('D','n','t','Chọn 2 học sinh khác nhau để tráo đổi trực tiếp điểm; khiên và đóng băng không chặn thao tác.',async()=>{const[a,b]=await pk(2,S.st);SW(a,b)});
+D('D','n','t','Cộng tổng điểm ban đầu của hai người rồi chia đều; nếu tổng lẻ, người đang có điểm thấp hơn nhận phần dư +1. Đây là đặt điểm trực tiếp, không bị khiên/đóng băng chặn.',async()=>{const[p]=await pk(1),m=M();if(!p||p===m)sk('Cần chọn một học sinh khác với người đang quay');const total=m.p+p.p,half=Math.floor(total/2),remainder=total%2,extra=m.p<=p.p?m:p,other=extra===m?p:m;log(`➗ Tổng điểm trước khi chia: ${m.p}+${p.p}=${total}; mỗi người nhận ${half}${remainder?' điểm, người điểm thấp hơn nhận dư 1':''}`);setp(extra,half+remainder);setp(other,half)});
+D('D','n','t','Đổi điểm của bạn với bạn đang đứng cuối bảng (ít điểm nhất).',async()=>SW(M(),await tp(-1)));
+D('D','n','t','Đổi toàn bộ điểm của bạn với bạn đang có số điểm cao nhất lớp.',async()=>SW(M(),await tp(1)));
+D('D','n','t','Bạn và người ngồi bên phải đổi toàn bộ số điểm cho nhau.',async()=>SW(M(),(await pk(1,oth(),'Người ngồi bên phải'))[0]));
+D('D','n','t','Chọn 2 bạn bất kỳ trong lớp (không bao gồm bạn) và bắt buộc họ tráo đổi toàn bộ điểm cho nhau.',async()=>{const[a,b]=await pk(2,oth());SW(a,b)});
+D('D','n','a','Cộng tổng điểm toàn bộ lớp lại rồi chia đều cho tất cả mọi người.',()=>{const n=S.st.length,s=S.st.reduce((a,p)=>a+p.p,0),h=Math.floor(s/n),r=s-h*n;rk().forEach((p,i)=>setp(p,h+(i<r?1:0)))});
+[['Mất 40 điểm ngay lập tức.',40],['Mất ngay 50 điểm vào ngân hàng Giáo viên.',50],['Bị trừ thẳng 30 điểm hiện có.',30],['Mất ngay 10 điểm vào ngân hàng của Giáo viên.',10],['Mất ngay 35 điểm hiện có.',35]].forEach(([t,n])=>D('E','b','a',t,()=>lose(M(),n,null)));
+D('E','b','a','Giảm 75% tổng số điểm hiện tại của bạn.',()=>lose(M(),Math.floor(M().p*.75),null));
+D('E','b','a','Giảm một nửa (50%) số điểm hiện có của bạn.',()=>lose(M(),Math.floor(M().p/2),null));
+D('E','b','a','Reset toàn bộ số điểm hiện tại về 0 điểm.',()=>lose(M(),M().p,null,0));
+D('E','b','a','Mất toàn bộ điểm hiện có nhưng được nhận lại 3 Lớp Khiên Bảo Vệ.',()=>{lose(M(),M().p,null,0);addSh(M(),3)});
+D('E','b','t','Bị trừ 2 điểm cho mỗi bạn đang ngồi cùng bàn với bạn.',async()=>{const l=await pk('m',oth(),'Chọn các bạn cùng bàn (0 hoặc nhiều bạn)');lose(M(),2*l.length,null)});
+D('E','b','t','Bạn và 2 bạn ngồi gần nhất mỗi người bị trừ 20 điểm.',async()=>{const l=await pk(2,oth(),'2 bạn ngồi gần nhất');lose(M(),20,null);l.forEach(p=>lose(p,20,null))});
+D('E','b','t','Bạn và bạn ngồi bên trái mỗi người bị trừ 25 điểm.',async()=>{const[l]=await pk(1,oth(),'Bạn ngồi bên trái');lose(M(),25,null);lose(l,25,null)});
+D('E','b','t','Tất cả những bạn ngồi cùng hàng ngang với bạn đều bị trừ 20 điểm.',async()=>(await pk('m',oth(),'Chọn các bạn cùng hàng ngang')).forEach(p=>lose(p,20,null)));
+D('E','b','a','Bão quét qua! Tất cả các bạn trong lớp (kể cả bạn) đều mất 3 điểm.',()=>S.st.forEach(p=>lose(p,3,null)));
+D('E','b','a','Tất cả những bạn đang có trên 50 điểm đều bị trừ 15 điểm nộp vào ngân hàng Giáo viên.',()=>S.st.filter(p=>p.p>50).forEach(p=>lose(p,15,null)));
+D('E','b','a','Điểm của bạn bị giảm xuống bằng đúng số điểm của bạn thấp nhất lớp (mất tối đa 50 điểm).',()=>lose(M(),Math.min(50,M().p-Math.min(...S.st.map(p=>p.p))),null));
+D('F','n','t','Chọn 2 bạn bất kỳ, mỗi bạn được cộng 5 điểm (điểm của bạn giữ nguyên).',async()=>(await pk(2)).forEach(p=>G(p,5)));
+D('F','g','a','Mỗi bạn trong lớp phải nộp cho bạn 5 điểm (tối đa 8 bạn, chọn ngẫu nhiên nếu lớp đông hơn).',()=>shuffle(oth()).slice(0,8).forEach(p=>T(p,M(),5)));
+D('F','g','t','Cộng 25 điểm cho bạn và 25 điểm cho bạn có điểm thấp nhất lớp.',async()=>{const l=await tp(-1);G(M(),25);G(l,25)});
+D('F','g','t','Cộng 20 điểm cho bạn và 20 điểm cho bạn ngồi đối diện.',async()=>{const[p]=await pk(1,oth(),'Bạn ngồi đối diện');G(M(),20);G(p,20)});
+D('F','b','t','Chuyển 5 điểm của mình cho bạn đang có ít điểm nhất lớp.',async()=>mv(M(),await tp(-1),5));
+D('F','n','a','Đặt trực tiếp điểm lẻ của mỗi học sinh lên hàng chục kế tiếp (ví dụ 13 → 20). Thao tác quản trị điểm trực tiếp này không bị đóng băng chặn.',()=>S.st.filter(p=>p.p%2).forEach(p=>{const before=p.p,after=Math.ceil(before/10)*10;setp(p,after);log(`🔢 Làm tròn trực tiếp ${p.n}: ${before}→${after}`)}));
+D('G','g','a','Bỏ qua 1 lần phạt và cướp lại 10 điểm từ người vừa phạt bạn.',()=>fe(M(),{k:'pdn',l:9}));
+D('G','g','t','Chọn 1 bạn và vô hiệu hóa toàn bộ Khiên bảo vệ của bạn đó trong 2 lượt quay tiếp theo.',async()=>fe((await pk(1))[0],{k:'dis',l:2}));
+D('G','g','a','Trong 1 lượt, mọi hiệu ứng xấu/cướp điểm nhắm vào bạn sẽ bị phản lại 100% cho người tung ra.',()=>fe(M(),{k:'ref',l:1}));
+D('G','g','t','Bắt 1 bạn bất kỳ chịu phạt thay bạn nếu bạn bốc phải phiếu trừ điểm ở lượt sau.',async()=>fe(M(),{k:'prx',l:9,d:(await pk(1))[0].id}));
+D('G','g','a','Chuyển toàn bộ điểm trừ mà bạn sắp nhận cho bạn đang đứng Top 1 gánh thay.',()=>fe(M(),{k:'prx',l:9,d:'top'}));
+D('G','g','t','Khi bốc phải phiếu trừ điểm, bạn được quyền chọn 1 bạn bất kỳ gánh toàn bộ số điểm trừ đó thay cho bạn.',async()=>fe(M(),{k:'prx',l:9,d:(await pk(1,oth(),'Chọn người sẽ gánh phạt thay'))[0].id}));
+D('G','g','a','Tịch thu toàn bộ Khiên bảo vệ của tất cả các bạn trong lớp về cho mình.',()=>oth().forEach(p=>{if(p.sh){addSh(M(),p.sh);log(`${p.n}: 🛡️ ${p.sh}→0`);p.sh=0}}));
+[1,2,3].forEach(n=>D('H','g','a',`Khiên Bảo Vệ ${n} 🛡️ (cộng thêm ${n} khiên vào kho)`,()=>addSh(M(),n)));
+D('I','n','r','Tung đồng xu: Mặt Ngửa nhận +60 điểm, mặt Sấp mất 30 điểm cho bạn cuối bảng.',async()=>{const{r}=await coin('🪙 Tung đồng xu — Ngửa +60 · Sấp chuyển 30 điểm cho người cuối bảng');if(r==='H'){log('🪙 Ngửa');G(M(),60)}else{log('🪙 Sấp');const l=await tp(-1);mv(M(),l,30)}await fin()});
+D('I','n','a','Bốc lại một phiếu khác: nếu phiếu tốt, hệ số x2 chỉ áp dụng một lần cho khoản cộng điểm đầu tiên; nếu phiếu xấu, bỏ qua hình phạt.',async()=>{const c=await reroll('🔁 Bốc lại — nhân đôi phiếu tốt',c=>c.t==='g'?'⚡ XỬ LÝ (điểm ×2)':c.t==='b'?'🕊️ Miễn trừ phiếu xấu':'⚡ XỬ LÝ');log('🔁 Bốc lại: '+txt(c));if(c.t==='b'){log('Phiếu xấu được bỏ qua theo hiệu ứng bốc lại');return fin('Phiếu xấu được miễn trừ')}X.m=c.t==='g'?2:1;X.bd=0;X.pen=0;X.fs=0;try{await c.f();if(X.m>1&&!X.bd)log('Phiếu bốc lại không có khoản cộng điểm đủ điều kiện để nhân đôi')}finally{X.m=1}if(X.fs!==2)await fin()});
+D('I','n','a','Bỏ hiệu lực phiếu bốc lại này và xử lý một phiếu khác trong bộ phiếu.',async()=>{const c=await reroll('🔁 Hủy phiếu — bốc phiếu khác',()=>'⚡ XỬ LÝ PHIẾU MỚI');log('🔁 Bốc lại: '+txt(c));X.pen=c.t==='b';X.fs=0;await c.f();if(X.fs!==2)await fin()});
+C.slice(-2).forEach(c=>c.rr=1);
+D('I','n','r','Chọn một số từ 1 đến 5. Giáo viên quay số ngẫu nhiên, nếu trúng số bạn chọn thì nhận 100 điểm.',async()=>{const{n,r}=await guess('🔢 Đoán số 1–5 — trúng +100 điểm');log(`🔢 Chọn ${n}, số quay được ${r}`);if(n===r)G(M(),100);else log('Không trúng số');await fin()});
+D('J','n','t','Đặt bom vào 1 bạn: bộ đếm chỉ tăng khi chính người đang giữ bom hoàn tất một lượt quay hợp lệ. Sau mỗi 2 lượt, bom gây phạt 40 điểm; khiên có thể chặn. Khi chuyển bom, bộ đếm đặt lại từ đầu.',async()=>fe((await pk(1))[0],{k:'bomb',l:999,c:0}));
+D('J','n','t','Chọn 1 bạn bất kỳ, trong 3 lượt tới, mọi điểm bạn đó nhận được sẽ chuyển 50% cho bạn.',async()=>fe((await pk(1))[0],{k:'drn',l:3}));
+D('J','n','t','Đóng băng 1 bạn bất kỳ, khiến bạn đó không được cộng điểm trong 2 lượt tiếp theo.',async()=>fe((await pk(1))[0],{k:'frz',l:2}));
+D('K','n','t','Bắt 2 bạn bất kỳ oẳn tù tì: người thua chuyển 20 điểm cho người thắng và 10 điểm cho bạn.',async()=>{const[a,b]=await pk(2,oth(),'Hai bạn oẳn tù tì'),W=P(await dlg('<h3>Ai là người thắng?</h3>',[[esc(a.n),a.id],[esc(b.n),b.id]])),L=W===a?b:a;T(L,W,20);T(L,M(),10)});
+D('H','g','a','Khiên Bảo Vệ 4 🛡️ (cộng thêm 4 khiên vào kho)',()=>addSh(M(),4));
+D('H','g','a','Khiên Bảo Vệ 5 🛡️ (cộng thêm 5 khiên vào kho)',()=>addSh(M(),5));
+[6,7,8,9,10].forEach(n=>D('H','g','a',`Khiên Bảo Vệ ${n} 🛡️ (cộng thêm ${n} khiên vào kho)`,()=>addSh(M(),n)));
+D('H','g','a','Mỗi lớp khiên bạn đang có cho +10 điểm (khiên vẫn giữ nguyên).',()=>M().sh?G(M(),10*M().sh):log('Bạn chưa có khiên nên không được cộng điểm'));
+D('H','b','a','Mất toàn bộ Khiên Bảo Vệ đang có.',()=>{if(M().sh){log(`${M().n}: 🛡️ ${M().sh}→0`);M().sh=0}else log('Bạn không có khiên nên không mất gì')});
+D('H','n','t','Đổi toàn bộ số khiên của bạn với một bạn tự chọn.',async()=>{const[p]=await pk(1);log(`🔄 Khiên: ${M().n} (${M().sh}) ⇄ ${p.n} (${p.sh})`);[M().sh,p.sh]=[p.sh,M().sh]});
+D('J','g','a','Tháo bom: gỡ quả bom đang đặt trên người bạn.',()=>{const b=M().fx.some(f=>f.k==='bomb');M().fx=M().fx.filter(f=>f.k!=='bomb');log(b?'💣 Đã gỡ bom':'Bạn không có bom nên không có tác dụng')});
+D('J','g','t','Chuyển quả bom đang có trên người bạn sang một bạn khác.',async()=>{if(!M().fx.some(f=>f.k==='bomb'))return log('Bạn không có bom nên không có tác dụng');const[p]=await pk(1);M().fx=M().fx.filter(f=>f.k!=='bomb');fe(p,{k:'bomb',l:999,c:0})});
+D('J','g','a','Giải trừ: xóa mọi hiệu ứng bất lợi đang có trên người bạn (bom, đóng băng, chuyển 50% điểm, mất lượt).',()=>{const n=M().fx.length;M().fx=M().fx.filter(f=>!['bomb','frz','drn','skp','dis'].includes(f.k));log(M().fx.length<n?'✨ Đã xóa các hiệu ứng bất lợi':'Không có hiệu ứng bất lợi nào để xóa')});
+D('J','g','a','Quay thêm: bạn được quay thêm ngay 1 lượt nữa.',()=>{ES=M().id;log('🎡 Được quay thêm 1 lượt')});
+D('J','b','a','Bạn nhận một quả bom: bộ đếm tăng khi bạn hoàn tất lượt quay hợp lệ. Sau mỗi 2 lượt, bom gây phạt 40 điểm; khiên có thể chặn. Có thể gỡ bằng Tháo bom hoặc Giải trừ.',()=>fe(M(),{k:'bomb',l:999,c:0}));
+D('J','b','a','Bạn bị đóng băng: không được cộng điểm trong 1 lượt quay tiếp theo.',()=>fe(M(),{k:'frz',l:1}));
+D('J','b','a','Mất lượt: lần bấm quay kế tiếp bị tiêu thụ; không rút phiếu, không xử lý quà và không tính là lượt quay hợp lệ.',()=>fe(M(),{k:'skp',l:99}));
+D('B','g','a','Hồi sức: nếu điểm của bạn thấp hơn điểm trung bình của lớp thì được cộng lên bằng điểm trung bình.',()=>{const a=Math.floor(S.st.reduce((x,p)=>x+p.p,0)/S.st.length);M().p<a?GX(M(),a-M().p):log(`Điểm đã đạt mức trung bình lớp (${a})`)});
+D('E','b','a','Nộp 15% số điểm hiện có vào ngân hàng Giáo viên.',()=>lose(M(),Math.floor(M().p*.15),null));
+D('E','b','a','Thuế đầu bảng: nếu bạn đang nằm trong Top 3 thì mất 20 điểm, nếu không thì không mất gì.',()=>rk().indexOf(M())<3&&M().p>0?lose(M(),20,null):log('Bạn không thuộc Top 3: không bị thuế'));
+D('E','b','r','Thử thách giải hạn: làm đủ một thử thách (hát, nhảy hoặc trả lời nhanh) để không mất điểm, nếu không làm được thì mất 10 điểm.',async()=>await dlg('<h3>Thử thách giải hạn</h3><p>Học sinh đã hoàn thành thử thách chưa?</p>',[['Chưa làm được',0],['Hoàn thành',1,'g']])?log('Hoàn thành thử thách: không bị trừ điểm'):lose(M(),10,null));
+D('I','n','r','Cược điểm: chọn cược 10 hoặc 20 điểm, tung đồng xu: Ngửa thắng +số điểm cược, Sấp thua −số điểm cược.',async()=>{const{r,b}=await coin('🎰 Cược điểm — Ngửa thắng · Sấp thua',[10,20]);if(r==='H'){log(`🪙 Ngửa: thắng cược ${b}`);G(M(),b)}else{log(`🪙 Sấp: thua cược ${b}`);lose(M(),b,null)}await fin()});
+D('K','n','r','Câu hỏi nhanh: Giáo viên đọc một câu hỏi, trả lời đúng +20 điểm, trả lời sai −10 điểm.',async()=>await dlg('<h3>Câu hỏi nhanh</h3><p>Học sinh trả lời thế nào?</p>',[['Sai',0],['Đúng',1,'g']])?G(M(),20):lose(M(),10,null));
+// ===== Sắp xếp bộ phiếu: xen kẽ có lợi / bất lợi / trung tính, giãn cách phiếu Khiên =====
+(()=>{
+ const isShield=c=>c.g==='H'||/khiên|shield/i.test(c.n);
+ const shields=C.filter(isShield),rest=C.filter(c=>!isShield(c));
+ const buckets={g:rest.filter(c=>c.t==='g'),b:rest.filter(c=>c.t==='b'),n:rest.filter(c=>c.t==='n')};
+ const ordered=[],pattern=['g','b','n','g','b','n','g','g','b','n'];let pi=0,guard=0;
+ while(ordered.length<rest.length&&guard++<rest.length*5){
+   let type=pattern[pi++%pattern.length];
+   if(!buckets[type].length) type=['g','b','n'].find(k=>buckets[k].length);
+   if(!type)break;
+   // Tránh ba phiếu cùng tính chất liên tiếp khi còn lựa chọn khác.
+   const last=ordered.slice(-2);
+   if(last.length===2&&last.every(c=>c.t===type)){
+     const alt=['g','b','n'].find(k=>buckets[k].length&&k!==type);
+     if(alt)type=alt;
+   }
+   ordered.push(buckets[type].shift());
+ }
+ // Rải các phiếu liên quan đến Khiên ra xa nhau, thay vì để thành một cụm.
+ const gap=Math.max(7,Math.floor((ordered.length+1)/(shields.length+1)));
+ shields.forEach((c,i)=>{
+   let at=Math.min(ordered.length,Math.round((i+1)*(ordered.length+1)/(shields.length+1))-1);
+   at=Math.max(0,at);
+   // Nếu vị trí dự kiến quá gần Khiên đã chèn, dịch đến vị trí hợp lệ gần nhất.
+   const occupied=()=>shields.slice(0,i).some((_,j)=>Math.abs((shields[j]._orderPos??-1000)-at)<gap);
+   let tries=0;
+   while(tries++<ordered.length&&!shields.slice(0,i).every((_,j)=>Math.abs((shields[j]._orderPos??-1000)-at)>=gap)){
+     at=at+1<=ordered.length?at+1:Math.max(0,at-2);
+   }
+   ordered.splice(at,0,c);c._orderPos=at;
+   // Cập nhật vị trí ghi nhớ của những Khiên đã đặt khi chèn làm dịch chuyển chúng.
+   shields.slice(0,i).forEach(sh=>{if(sh._orderPos>=at)sh._orderPos++});
+ });
+ shields.forEach(c=>delete c._orderPos);
+ C.splice(0,C.length,...ordered);
+})();
+
+// ===== Cấu hình phiếu, vòng quay =====
+const cf=c=>S.cf[c.id]||(S.cf[c.id]={on:1,w:10}),txt=c=>cf(c).x||c.n,pool=()=>C.filter(c=>cf(c).on&&cf(c).w>0);
+function pickC(ex){const p=pool().filter(c=>!(ex&&c.rr));if(!p.length)return null;let r=Math.random()*p.reduce((s,c)=>s+cf(c).w,0);for(const c of p){r-=cf(c).w;if(r<0)return c}return p.at(-1)}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function lay(p){const g={g:[],b:[],n:[]};p.forEach(c=>g[c.t].push(c));for(const k in g)shuffle(g[k]);const ks=Object.keys(g).filter(k=>g[k].length),n=p.length,u={g:0,b:0,n:0},o=[];for(let i=0;i<n;i++){let b,bd=-9;ks.forEach(k=>{const d=(i+1)*g[k].length/n-u[k];if(u[k]<g[k].length&&d>bd){bd=d;b=k}});o.push(g[b][u[b]++])}return o}
+const short=s=>s.length>46?s.slice(0,44).replace(/\s+\S*$/,'')+'…':s;
+async function spin(id){
+ if(busy)return;
+ const me=P(id);if(!me)return;
+ if(me.fx.some(f=>f.k==='skp')){
+  await txn('Mất lượt: '+me.n,()=>{const i=me.fx.findIndex(f=>f.k==='skp');if(i>=0)me.fx.splice(i,1);log(`⏭️ ${me.n} mất lượt: lần bấm này bị tiêu thụ; không rút phiếu và không tính lượt quay hợp lệ`)},null);
+  return dlg(`<h3>⏭️ ${esc(me.n)} bị mất lượt</h3><p>Hiệu ứng mất lượt đã được tiêu thụ. Không rút phiếu, không xử lý quà và không tính lượt quay hợp lệ.</p>`,[['Đóng',1,'p']])
+ }
+ const queued=ES,turnSnap=snapshot();ES=0;
+ if(!pool().length){ES=queued;return dlg('<h3>Không còn phiếu hợp lệ</h3><p>Hãy bật ít nhất một phiếu có trọng số lớn hơn 0 trong phần Quản lý phiếu.</p>',[['Đóng',1,'p']])}
+ busy=1;const w=$('#wl');let st=lay(pool());while(st.length<70)st=st.concat(lay(pool()));st=st.slice(0,70);
+ const choose=(ids,outsideId)=>new Promise(resolve=>{
+  let settled=false;
+  const done=v=>{if(settled)return;settled=true;w.onclick=null;ids.forEach(k=>{const el=$('#'+k);if(el)el.onclick=null});resolve(v)};
+  ids.forEach(k=>{const el=$('#'+k);if(el)el.onclick=()=>done(k)});
+  w.onclick=e=>{if(e.target===w&&outsideId){const el=$('#'+outsideId);if(el)el.click()}};
+ });
+ const closeNow=()=>{restoreRank();w.close();busy=0;CUR=null;render();ES=queued;if(ES){const q=ES;ES=0;queueMicrotask(()=>{if(!busy&&P(q))spin(q)})}};
+ w.innerHTML=`<div class="wheel-head"><span class="wheel-kicker">🎡 QUIZ BATTLE · VÒNG QUAY PHIẾU</span><button class="wheel-close" id="wc" aria-label="Đóng vòng quay" title="Đóng vòng quay">✕ <span>Đóng</span></button></div><div class="stg"><div class="sm ctr"><h2 style="font-size:30px;margin:0">${esc(me.av)} ${esc(me.n)}</h2><p id="wh">Bấm nút QUAY để bắt đầu</p><div id="rv"><i class="mk"></i><div id="rs">${st.map(tileF).join('')}</div></div><div id="wo"><button class="p big" id="wg">🎡 QUAY</button> <button id="wk">Hủy</button></div></div><div class="lbw"><h3>🏆 Bảng xếp hạng</h3><ol id="rk" class="lbx"></ol></div></div>`;
+ const rank=$('#rk');w.showModal();CUR=id;document.querySelector('main aside').classList.add('wheel-active');const rankPanel=w.querySelector('.lbw');rankPanel.querySelector('ol').replaceWith(rank);rank.dataset.home='1';lbRefresh();
+ // Trước khi quay chưa có quà: nút đóng và bấm ra ngoài đều đóng an toàn.
+ $('#wc').onclick=()=>$('#wk').click();
+ if(await choose(['wg','wk'],'wc')==='wk'){closeNow();return}
+ w.onclick=null;$('#wc').disabled=true;$('#wk').disabled=true;$('#wg').disabled=true;
+ const c=pickC();if(!c){closeNow();return dlg('<h3>Không có phiếu hợp lệ</h3><p>Giao dịch đã dừng an toàn; không có điểm hay lượt nào bị thay đổi.</p>',[['Đóng',1,'p']])}
+ $('#rs').children[IDX].outerHTML=tileF(c);$('#wo').innerHTML='<span class="ch">Đang quay…</span>';$('#wh').textContent='Đang quay...';
+ const rs=$('#rs'),vw=$('#rv').clientWidth;rs.style.transition=S.fo?'transform .3s':'transform 5.2s cubic-bezier(.08,.6,.08,1)';rs.style.transform=`translateX(${-(IDX*200+95-vw/2+(Math.random()-.5)*120)}px)`;
+ await new Promise(r=>setTimeout(r,S.fo?350:5400));
+ $('#wh').textContent='Trúng phiếu!';const info=`<h3 class="rt">${{g:'🟢',b:'🔴',n:'🟡'}[c.t]} ${esc(txt(c))}</h3><p>${KN[c.k]} · ${TN[c.t]}</p>`;
+ let ok;
+ const processPrize=async()=>txn(txt(c),()=>{X.pen=c.t==='b';return c.f()},P(id),turnSnap);
+ const skipPrize=async()=>txn('Đã bỏ qua phiếu: '+txt(c),()=>{log(`⏭️ Đã bỏ qua phiếu “${txt(c)}”; không áp dụng hiệu ứng phiếu`)},P(id),turnSnap);
+ for(;;){
+  $('#wc').disabled=false;
+  $('#wo').innerHTML=info+'<div class="wheel-actions"><button class="g big" id="wp">⚡ XỬ LÝ QUÀ</button><button id="wk2">Bỏ qua phiếu</button></div><p class="wheel-hint">Bạn có thể đóng vòng quay; hệ thống sẽ hỏi cách xử lý phiếu đang chờ.</p>';
+  const action=await choose(['wp','wk2','wc'],'wc');
+  let doIt=action==='wp';
+  if(action==='wc'){
+   const answer=await dlg('<h3>🎁 Phiếu đã nhận nhưng chưa xử lý</h3><p>Bạn muốn xử lý phiếu này trước khi đóng vòng quay không?</p>',[['⚡ Xử lý quà',0,'p'],['Bỏ qua phiếu',1],['Quay lại vòng quay',2]]);
+   if(answer===2)continue;
+   doIt=answer===0;
+  }
+  ok=doIt?await processPrize():await skipPrize();
+  if(ok)break;
+  ES=queued;$('#wh').textContent='Giao dịch chưa hoàn tất';$('#wo').innerHTML=info+'<p class="wheel-hint">Dữ liệu đã được khôi phục an toàn. Bạn có thể thử lại, bỏ qua phiếu hoặc đóng để chọn cách xử lý.</p>';
+ }
+ const ch=ok.slice(0,12).map(x=>`<span class="ch">${esc(x)}</span>`).join('')+(ok.length>12?`<span class="ch">… và ${ok.length-12} dòng nữa (xem Lịch sử)</span>`:'');
+ $('#wh').textContent='Đã xử lý xong';$('#wo').innerHTML=info+`<div>${ch||'<span class="ch">Không có thay đổi điểm</span>'}</div><div class="wheel-actions"><button class="g big" id="wx">Đóng vòng quay</button></div>`;
+ $('#wc').onclick=()=>$('#wx').click();$('#wc').disabled=false;
+ await choose(['wx'],'wc');closeNow();
+}
+// ===== Giao dịch, lượt, hoàn tác =====
+const snapshot=()=>JSON.stringify({st:S.st,t:S.t,sp:S.sp,ES});
+const load=x=>{const o=JSON.parse(x);S.st=o.st;S.t=o.t;S.sp=o.sp||[];if('ES'in o)ES=o.ES};
+function endTurn(me,pre){S.t++;S.sp=S.sp.includes(me.id)?[me.id]:[...S.sp,me.id];const b=me.fx.find(f=>f.k==='bomb'&&!f.fr);if(b&&++b.c%2===0){log('💣 Bom nổ!');X.pen=1;lose(me,40,null)}
+ S.st.forEach(p=>{if(pre[p.id]&&p.sh>0)p.sh--;p.fx=p.fx.filter(f=>f.fr?(delete f.fr,1):f.k==='bomb'||--f.l>0)})}
+async function txn(label,fn,me,beforeSnap){const snap=beforeSnap||snapshot(),pre={};S.st.forEach(p=>pre[p.id]=p.sh>0);Lg=[];X={me,m:1};
+ try{await fn();if(me)endTurn(me,pre);if(dg.open)dg.close()}catch(e){if(dg.open)dg.close();load(snap);Lg=[];X={me:null,m:1};if(e!=='skip'&&e!=='cancel')console.error('Giao dịch đã hoàn tác:',e);render();return false}
+ S.h.unshift({tm:new Date().toLocaleString('vi-VN'),who:me?me.n:'Giáo viên',label,log:[...Lg],snap});S.h.length=Math.min(S.h.length,80);save();render();return [...Lg]}
+const undo=()=>{const h=S.h.shift();if(h){load(h.snap);save();render()}};
+// ===== Dữ liệu (lưu theo lớp) =====
+const act=Z=>{const c=Z.cls.find(c=>c.id===Z.cur);Z.st=c.st;Z.h=c.h;Z.t=c.t;Z.sp=c.sp},sync=()=>{const c=S.cls.find(c=>c.id===S.cur);if(c){c.st=S.st;c.h=S.h;c.t=S.t;c.sp=S.sp}};
+const norm=o=>{if(!o.cls){if(!Array.isArray(o.st))throw 0;o={...o,cls:[{id:'c1',n:'Lớp 1',st:o.st,h:o.h||[],t:o.t||0}],cur:'c1'}}
+ const Z={cls:o.cls.map(c=>({sp:[],h:[],t:0,...c,st:c.st.map(p=>({sh:0,age:0,fx:[],av:'🙂',...p}))})),cur:o.cur,cf:o.cf||{},neg:!!o.neg,fo:!!o.fo,qa:o.qa!==false};if(!Z.cls.some(c=>c.id===Z.cur))Z.cur=Z.cls[0].id;act(Z);return Z};
+const ser=()=>{sync();return JSON.stringify({cls:S.cls,cur:S.cur,cf:S.cf,neg:S.neg,fo:S.fo,qa:S.qa})},save=()=>{try{localStorage.setItem('qb',ser())}catch{}};
+try{S=norm(JSON.parse(localStorage.getItem('qb')))}catch{S=norm({st:AV.slice(0,6).map((a,i)=>({id:'s'+i,n:'Học sinh '+(i+1),av:a,p:0}))})}
+const swc=id=>{sync();S.cur=id;act(S);PV={};save();render()};
+async function cls(a){const cur=S.cls.find(c=>c.id===S.cur);
+ if(a==='del'){if(S.cls.length<2)return dlg('<h3>Không thể xóa</h3><p>Cần giữ lại ít nhất một lớp.</p>',[['Đóng',1,'p']]);if(await dlg(`<h3>Xóa lớp “${esc(cur.n)}”?</h3><p>Toàn bộ học sinh, điểm và lịch sử của lớp sẽ bị xóa và không thể hoàn tác.</p>`,[['Giữ lại',0],['Xóa lớp',1,'p']])){S.cls=S.cls.filter(c=>c!==cur);swc(S.cls[0].id)}return}
+ const add=a==='add',v=await dlg(`<h3>${add?'Thêm lớp mới':'Đổi tên lớp'}</h3><label>Tên lớp<input id="cn" value="${add?'':esc(cur.n)}"></label>${add?'<label>Danh sách học sinh (mỗi dòng một tên, có thể bỏ trống)<textarea id="cl" rows="6"></textarea></label>':''}`,[['Hủy',0],['Lưu',()=>$('#cn').value.trim()?{n:$('#cn').value.trim(),l:add?$('#cl').value.split('\n').map(x=>x.trim()).filter(Boolean):0}:false,'p']]);
+ if(!v)return;if(!add){cur.n=v.n;save();return render()}sync();const id='c'+Date.now().toString(36);S.cls.push({id,n:v.n,t:0,h:[],sp:[],st:v.l.map((n,i)=>({id:uid(),n,av:AV[i%AV.length],p:0,sh:0,age:0,fx:[]}))});swc(id)}
+// ===== Giao diện =====
+const bdg=p=>[...(p.sh>0?[['g','🛡️',p.sh,'Khiên bảo vệ: còn '+p.sh+' lượt']]:[]),...p.fx.map(f=>[FG[f.k],FI[f.k],f.k==='bomb'?f.c%2+'/2':['pdn','prx','skp'].includes(f.k)?'':f.l,FN[f.k]+(f.k==='drn'||f.k==='bomb'?' — đặt bởi '+(P(f.o)?.n||'?'):'')+(f.k==='prx'?' → '+(f.d==='top'?'Top 1':P(f.d)?.n||''):'')])].map(([t,i,n,ti])=>`<span class="fb ${t}" title="${esc(ti)}">${i}${n!==''?`<small>${n}</small>`:''}</span>`).join('');
+function anim(p,o){const c=$(`[data-id="${p.id}"]`);if(!c||S.fo)return;const i=c.querySelector('.sc'),d=p.p-o,up=d>0,t0=performance.now(),l=document.createElement('span');c.classList.add(up?'fu':'fd');i.classList.add('pop');l.className='dl '+(up?'up':'dn');l.textContent=(up?'+':'')+d;c.querySelector('.sw').append(l);
+ (function f(t){const k=Math.min(1,(t-t0)/700);i.value=Math.round(o+d*k);if(k<1)requestAnimationFrame(f)})(t0);setTimeout(()=>{c.classList.remove('fu','fd');i.classList.remove('pop');l.remove()},1400)}
+function render(){const R=rk(),top=R[0]?.p;if(PV.c!==S.cur)PV={c:S.cur,m:null};const old=PV.m;
+ $('#cs').innerHTML=S.cls.map(c=>`<option value="${c.id}" ${c.id===S.cur?'selected':''}>${esc(c.n)} (${c.st.length})</option>`).join('');$('#sp').textContent=`Đã quay ${S.sp.filter(i=>P(i)).length}/${S.st.length}`;
+ $('#gr').innerHTML=S.st.map(p=>{const dn=S.sp.includes(p.id);return `<div class="c ${p.p>0&&rankOf(R,p)<4?'m'+rankOf(R,p):''} ${dn?'done':''}" data-id="${p.id}"><div class="hd"><span class="av" data-a="edit" data-i="${p.id}" title="Sửa">${esc(p.av)}</span><b class="nm">${esc(p.n)}</b>${dn?'<span class="ok">✓ Đã quay</span>':''}</div><div class="sw"><input class="sc" type="number" step="1" data-a2="sc" data-i="${p.id}" value="${p.p}" title="Bấm để nhập điểm trực tiếp, nhấn Enter để lưu" aria-label="Điểm của ${esc(p.n)}"></div><div class="fxs">${bdg(p)}</div><button class="p big" data-a="spin" data-i="${p.id}">🎡 QUAY VÒNG QUAY</button>${S.qa?`<div class="qa">${[1,2,3,4,5,6,7,8,9].map(n=>`<button data-a="add" data-n="${n}" data-i="${p.id}">+${n}</button>`).join('')}</div>`:''}<div class="tl"><button data-a="edit" data-i="${p.id}">✏️ Sửa</button><button data-a="del" data-i="${p.id}">🗑️ Xóa</button></div></div>`}).join('')||'<p>Lớp chưa có học sinh. Bấm “＋ Học sinh”.</p>';
+ lbRefresh();
+ if(!busy){if(old)S.st.forEach(p=>{if(old[p.id]!==undefined&&old[p.id]!==p.p)anim(p,old[p.id])});PV.m=Object.fromEntries(S.st.map(p=>[p.id,p.p]))}}
+async function edit(id){const p=id&&P(id),v=await dlg(`<h3>${p?'Sửa':'Thêm'} học sinh</h3><label>Tên<input id="en" value="${esc(p?.n||'')}"></label><label>Avatar (emoji)<input id="ea" value="${esc(p?.av||AV[S.st.length%AV.length])}" maxlength="4"></label><label>Điểm (thay thế điểm hiện tại)<input id="ep" type="number" value="${p?p.p:0}"></label><label>Tuổi (tùy chọn)<input id="eg" type="number" value="${p?.age||''}"></label>`,[['Hủy',0],['Lưu',()=>{const n=$('#en').value.trim(),s=$('#ep').value;return n&&s!==''&&(S.neg||+s>=0)?{n,av:$('#ea').value||'🙂',p:Math.floor(+s),age:+$('#eg').value||0}:false},'p']]);
+ if(!v)return;txn(p?`Sửa ${v.n}`:`Thêm ${v.n}`,()=>{let q=p;if(!q)S.st.push(q={id:uid(),fx:[],sh:0});else{if(q.p!==v.p)log(`${q.n}: điểm ${q.p}→${v.p} (sửa tay)`)}Object.assign(q,v)})}
+async function del(id){const p=P(id);if(await dlg(`<h3>Xóa ${esc(p.n)}?</h3><p>Điểm, khiên và hiệu ứng của học sinh này sẽ bị xóa (có thể hoàn tác ngay sau đó).</p>`,[['Giữ lại',0],['Xóa',1,'p']]))txn('Xóa '+p.n,()=>{S.st=S.st.filter(q=>q.id!==id);S.sp=S.sp.filter(x=>x!==id);S.st.forEach(q=>q.fx=q.fx.filter(f=>f.o!==id&&f.d!==id))})}
+const hist=()=>dlg('<h3>Lịch sử giao dịch</h3><div class="tw">'+(S.h.length?S.h.map(h=>`<div class="hi"><b>${esc(h.tm)}</b> · ${esc(h.who)} · ${esc(h.label)}<ul>${h.log.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></div>`).join(''):'<p>Chưa có giao dịch.</p>')+'</div>',[['Đóng',1,'p']],0,'720px');
+function mng(){const rows=()=>{const q=$('#fq').value.toLowerCase(),g=$('#fg').value,t=$('#ft').value,s=pool().reduce((a,c)=>a+cf(c).w,0)||1;return C.filter(c=>(!g||c.g===g)&&(!t||c.t===t)&&txt(c).toLowerCase().includes(q)).map(c=>{const f=cf(c);return `<tr class="t${c.t}"><td>${c.id}</td><td class="tx"><textarea rows="2" data-i="${c.id}" data-f="x">${esc(txt(c))}</textarea></td><td>${TN[c.t]}<br><small>${KN[c.k]}</small></td><td><input type="checkbox" data-i="${c.id}" data-f="on" ${f.on?'checked':''}></td><td><input type="number" min="0" style="width:70px" data-i="${c.id}" data-f="w" value="${f.w}"><small>${f.on&&f.w>0?(f.w/s*100).toFixed(1):0}%</small></td></tr>`}).join('')};
+ dlg(`<h3>Quản lý phiếu (${C.length})</h3><div class="fl"><input id="fq" placeholder="Tìm theo tên"><select id="fg"><option value="">Mọi nhóm</option>${Object.entries(GN).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select><select id="ft"><option value="">Tốt/xấu/trung tính</option>${Object.entries(TN).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select></div><div class="tw"><table id="rw"></table></div>`,[['Khôi phục mặc định',()=>{S.cf={};save();return 1}],['Đóng',1,'p']],()=>{const up=()=>$('#rw').innerHTML=rows();['fq','fg','ft'].forEach(i=>$('#'+i).oninput=up);$('#rw').onchange=e=>{const t=e.target,c=C.find(c=>c.id===t.dataset.i),f=cf(c);if(t.dataset.f==='on')f.on=t.checked?1:0;else if(t.dataset.f==='w')f.w=Math.max(0,+t.value||0);else f.x=t.value.trim()||undefined;save();up()};up()},'1250px')}
+document.onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;const{a,i,n}=b.dataset;({spin:()=>spin(i),add:()=>txn(`+${n} cho ${P(i).n}`,()=>gain(P(i),+n,'q')),edit:()=>edit(i),del:()=>del(i),undo,hist,mng,cadd:()=>cls('add'),cren:()=>cls('ren'),cdel:()=>cls('del'),nr:()=>txn('Bắt đầu vòng mới',()=>{S.sp=[];log('Đã đặt lại trạng thái đã quay của cả lớp')}),ex:()=>{const l=document.createElement('a');l.href=URL.createObjectURL(new Blob([ser()],{type:'application/json'}));l.download='quiz-battle-backup.json';l.click()}})[a]?.()};
+
+$('#ng').checked=S.neg;$('#fo').checked=S.fo;$('#qa').checked=S.qa;document.body.classList.toggle('nofx',S.fo);$('#qa').onchange=e=>{S.qa=e.target.checked;save();render()};$('#ng').onchange=e=>{S.neg=e.target.checked;save()};$('#fo').onchange=e=>{S.fo=e.target.checked;document.body.classList.toggle('nofx',S.fo);save()};
+document.onchange=e=>{const t=e.target;if(t.id==='cs')return swc(t.value);if(t.dataset.a2!=='sc')return;const p=P(t.dataset.i),v=t.value.trim()===''?NaN:Math.floor(+t.value);if(!p||!Number.isFinite(v)||(!S.neg&&v<0)){render();return}if(v!==p.p)txn(`Nhập tay điểm ${p.n}`,()=>{log(`✏️ Giáo viên đặt điểm trực tiếp ${p.n}: ${p.p}→${v}; không kích hoạt khiên, phản đòn hoặc đóng băng`);p.p=v})};
+let ly=0;const hd=$('#hd'),sh=h=>{hd.classList.toggle('hid',h);document.body.classList.toggle('hh',h)};addEventListener('scroll',()=>{const y=scrollY;if(y>ly+6&&y>90)sh(true);else if(y<ly-6||y<90)sh(false);ly=y},{passive:true});
+render();
+</script></html>
