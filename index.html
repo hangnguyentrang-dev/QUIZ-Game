@@ -820,17 +820,44 @@ ev.push(['hit',p,n,+m[4]===0]);continue}
 if(m=s.match(/^(.+): \+(\d+) \(/)){const p=pl(m[1]);p&&ev.push(['up',p,+m[2]])}}
 return ev}
 let Q=Promise.resolve();
-const run=ev=>{if(!ev.length)return;top();Q=Q.then(async()=>{for(const e of ev.slice(0,14)){try{await E[e[0]](...e.slice(1))}catch(x){console.warn(x)}}})};
+const lbRow=p=>p&&p.id&&document.querySelector(`aside .lbx li[data-id="${p.id}"]`);
+const lbf=(p,em,col,t,sk)=>{const el=lbRow(p);if(!el)return;col=/^#[0-9a-f]{6}$/i.test(col||'')?col:'#4f46e5';const c=ctr(el);el.animate([{background:col+'88',boxShadow:`0 0 0 3px ${col}`},{background:col+'44',boxShadow:`0 0 0 5px ${col}66`,offset:.5},{}],{duration:1200});if(sk)shake(el);word({x:c.x,y:c.y},(em+' '+(t||'')).trim(),col,{sz:20,dur:1300})};
+const RD='#ee3f5c',GR='#14b870',BL='#4f46e5',YL='#e08a00';
+const LBM={
+ steal:(a,b,n)=>{lbf(a,'🦹',RD,'−'+n,1);lbf(b,'💰',GR,'+'+n)},
+ swap:(a,b)=>{lbf(a,'🔄',BL);lbf(b,'🔄',BL)},
+ boom:(p,em)=>lbf(p,em||'💥',RD,'',1),
+ hit:(p,n)=>lbf(p,'💥',RD,'−'+n,1),
+ pot:(p,n)=>lbf(p,'🏺',RD,'−'+n,1),
+ blk:(p,em,col)=>lbf(p,em||'🛡️',col,'CHẶN'),
+ refl:(a,b,n)=>{lbf(a,'🪞',BL,'PHẢN');lbf(b,'💥',RD,'−'+n,1)},
+ mult:(p,k)=>lbf(p,'🌟',YL,'×'+k),
+ up:(p,n)=>lbf(p,'✨',GR,'+'+n),
+ bag:p=>lbf(p,'📦',BL),
+ shbreak:(p,k)=>lbf(p,'💥',BL,'−'+k+'🛡️',1),
+ shgive:(a,b)=>lbf(b,'🛡️',BL,'+1'),
+ thorn:(p,n)=>lbf(p,'🌵',RD,'−'+n,1),
+ mirror:(p,n)=>lbf(p,'🔮',RD,'−'+n,1),
+ shup:(p,k)=>lbf(p,'🛡️',BL,'+'+k),
+ bank:p=>lbf(p,'🏦',YL),
+ bankout:(p,n)=>lbf(p,'🏦',GR,'+'+n),
+ toll:a=>lbf(a,'🧲',GR,'+1'),
+ ins:(p,n)=>lbf(p,'🧯',BL,'+'+n),
+ fort:p=>lbf(p,'🏰',BL),
+ relief:p=>lbf(p,'🆘',GR,'+10')
+};
+const lbm=e=>{const f=LBM[e[0]];if(f)try{f(...e.slice(1))}catch(x){}};
+const run=ev=>{if(!ev.length)return;top();Q=Q.then(async()=>{for(const e of ev.slice(0,24)){try{lbm(e);await E[e[0]](...e.slice(1))}catch(x){console.warn(x)}}})};
 let PEND=[];
-const play=(lines,label,me)=>{if(!on())return;const ev=parse(lines,label,me);if(!ev.length)return;let now=ev;
- // Thuế bão (và các khoản nộp thuế đi kèm) chỉ chạy hiệu ứng sau khi vòng quay đã đóng
- if(busy){const k=ev.findIndex(e=>e[0]==='storm');if(k>=0){now=ev.slice(0,k);PEND.push(...ev.slice(k))}}
- run(now)};
+const play=(lines,label,me)=>{if(!on())return;const ev=parse(lines,label,me);if(!ev.length)return;
+ // Mọi hiệu ứng chỉ chạy sau khi vòng quay đã đóng (lên thẻ học sinh + bảng xếp hạng ngoài giao diện chính)
+ if(busy){PEND.push(...ev);return}
+ run(ev)};
 const _rr=restoreRank;restoreRank=function(){_rr();if(PEND.length){const e=PEND.splice(0);setTimeout(()=>{if(on())run(e)},350)}};
 const _t=txn;txn=async function(...a){const r=await _t(...a);if(r&&on())play(r,a[0]||'',a[2]);return r};
 
 lbHTML=function(){const R=rk();return R.map(p=>{const k=rankOf(R,p),o=lbPrev[p.id],ch=o!==undefined&&o!==p.p?(p.p>o?'up':'dn'):'';return `<li class="r ${p.p>0&&k<4?'rk'+k:''} ${p.id===CUR?'me':''} ${ch}" data-id="${p.id}"><i>${k}</i>${k===1&&p.p>0?'<em class="crn">👑</em>':''}${esc(p.av)}<span>${esc(p.n)}</span><b>${p.p}</b><small>${p.sh?'🛡️'+p.sh:''}${p.fx.map(f=>FI[f.k]).join('')}</small></li>`}).join('')};
-lbRefresh=function(){if(!S)return;const h=lbHTML(),fx=on();document.querySelectorAll('.lbx').forEach(o=>{if(o.dataset.h===h)return;const first={};if(fx)o.querySelectorAll('li[data-id]').forEach(li=>first[li.dataset.id]=li.getBoundingClientRect().top);o.innerHTML=h;o.dataset.h=h;if(!fx)return;o.querySelectorAll('li[data-id]').forEach(li=>{const f=first[li.dataset.id],id=li.dataset.id;if(f!==undefined){const dy=f-li.getBoundingClientRect().top;if(dy)li.animate([{transform:`translateY(${dy}px) scale(1.04)`,zIndex:3},{transform:'none',zIndex:3}],{duration:700,easing:'cubic-bezier(.2,.8,.2,1)'})}const o2=lbPrev[id],b=li.querySelector('b');if(o2!==undefined&&b&&o2!==+b.textContent)tw(b,o2,+b.textContent)})});lbPrev=Object.fromEntries(S.st.map(p=>[p.id,p.p]))};
+lbRefresh=function(){if(!S||busy)return;const h=lbHTML(),fx=on();document.querySelectorAll('.lbx').forEach(o=>{if(o.dataset.h===h)return;const first={};if(fx)o.querySelectorAll('li[data-id]').forEach(li=>first[li.dataset.id]=li.getBoundingClientRect().top);o.innerHTML=h;o.dataset.h=h;if(!fx)return;o.querySelectorAll('li[data-id]').forEach(li=>{const f=first[li.dataset.id],id=li.dataset.id;if(f!==undefined){const dy=f-li.getBoundingClientRect().top;if(dy)li.animate([{transform:`translateY(${dy}px) scale(1.04)`,zIndex:3},{transform:'none',zIndex:3}],{duration:700,easing:'cubic-bezier(.2,.8,.2,1)'})}const o2=lbPrev[id],b=li.querySelector('b');if(o2!==undefined&&b&&o2!==+b.textContent)tw(b,o2,+b.textContent)})});lbPrev=Object.fromEntries(S.st.map(p=>[p.id,p.p]))};
 
 const goldNow=()=>{const n=S.t+1;return S.st.length>0&&n%10===0&&n%20!==0};
 const fmtT=ms=>{const t=Math.max(0,Math.ceil(ms/1000));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0')};
