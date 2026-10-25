@@ -117,8 +117,68 @@ body.lobby{overflow:hidden}body.lobby #lobby{display:flex}
 #lobby .lc.add .ic{font-size:54px}
 #lobby .back{margin-top:6px}
 .nofx #lobby .logo,.nofx #lobby .play{animation:none!important}
+
+/* Thẻ lớp: nút sửa / xóa nhỏ ở góc */
+#lobby .lc{position:relative;text-align:center;font:inherit}
+#lobby .lc .ctl{position:absolute;top:10px;right:10px;display:flex;gap:6px}
+#lobby .lc .ctl button{width:30px;height:30px;padding:0;border-radius:50%;font-size:14px;line-height:1;display:inline-flex;align-items:center;justify-content:center;background:#f1efff;box-shadow:none;opacity:.7}
+#lobby .lc:hover .ctl button{opacity:1}
+#lobby .lc .ctl button:hover:not(:disabled){background:#dcd8ff;transform:scale(1.15)}
+#lobby .lc .ctl button.x:hover:not(:disabled){background:#ffe3e8}
+/* Popup thông tin hiệu ứng / hũ */
+.fb[data-a=fxi]{cursor:pointer}
+.fxr{background:#f4f3ff;border-radius:14px;padding:10px 14px;margin:8px 0;text-align:left;line-height:1.45}
+button#pt{cursor:pointer}
+
+/* Giờ vàng: nền vàng + chữ x2 nhảy ở góc, đi theo khi cuộn */
+body.gold{background:radial-gradient(circle at 8% 0,#fff0a0 0,transparent 45%),radial-gradient(circle at 96% 10%,#ffd24a 0,transparent 40%),linear-gradient(180deg,#fff4c2,#ffe28a) fixed}
+body.gold::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(115deg,transparent 38%,#ffffff99 50%,transparent 62%);background-size:260% 100%;animation:gshine 3.6s linear infinite}
+@keyframes gshine{from{background-position:130% 0}to{background-position:-130% 0}}
+#gx2{display:none;position:fixed;left:18px;bottom:16px;z-index:700;pointer-events:none;text-align:center;line-height:1}
+body.gold #gx2{display:block;animation:gbounce 1.1s ease-in-out infinite;transform-origin:50% 90%}
+body.lobby #gx2{display:none}
+#gx2 small{display:block;font:800 14px/1 'Baloo 2',system-ui,sans-serif;letter-spacing:.16em;color:#7a4b00;text-shadow:0 1px 0 #fff;margin-bottom:2px}
+#gx2 b{display:block;font:800 clamp(76px,11vw,132px)/.9 'Baloo 2',system-ui,sans-serif;background:linear-gradient(180deg,#fff7b0,#ffc400 55%,#e08a00);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:2px #a35f00;filter:drop-shadow(0 6px 0 #a35f0066) drop-shadow(0 0 22px #ffd24acc)}
+@keyframes gbounce{0%,100%{transform:translateY(0) rotate(-6deg) scale(1)}25%{transform:translateY(-26px) rotate(4deg) scale(1.1)}50%{transform:translateY(0) rotate(-3deg) scale(.96,1.06)}72%{transform:translateY(-12px) rotate(6deg) scale(1.05)}}
+.nofx #gx2,.nofx.gold::before{animation:none!important}
+@media(prefers-reduced-motion:reduce){#gx2,body.gold::before{animation:none!important}}
+
+#gx2 #gxt{margin:4px 0 0;font-size:24px;letter-spacing:.06em;color:#7a4b00}
+#gtoast{position:fixed;left:50%;top:78px;z-index:100000;transform:translate(-50%,-30px) scale(.9);opacity:0;pointer-events:none;background:linear-gradient(135deg,#fff7b0,#ffc400);color:#5a3600;border:3px solid #a35f00;border-radius:20px;padding:12px 22px;text-align:center;box-shadow:0 12px 30px #a35f0066;transition:transform .35s cubic-bezier(.2,1.4,.4,1),opacity .35s;display:flex;flex-direction:column;gap:2px;max-width:92vw}
+#gtoast b{font:800 clamp(20px,4vw,30px) 'Baloo 2',system-ui,sans-serif}#gtoast span{font-size:15px;font-weight:700}
+#gtoast.show{opacity:1;transform:translate(-50%,0) scale(1)}
+#gtoast.st{background:linear-gradient(135deg,#e4eaff,#8fa0e8);color:#10163a;border-color:#394a8a;box-shadow:0 12px 30px #394a8a88}
+.fb.g.shl-hi{background:#dcf8ea}.fb.g.shl-mid{background:#fff3c4}.fb.g.shl-lo{background:#ffe3e8;animation:wob 1.2s infinite}
+.fb.g[title^="Khiên gai"]{background:#e3f7d9}.fb.g[title^="Khiên phản chiếu"]{background:#efe3ff}
+.nofx .fb.shl-lo{animation:none!important}
+/* ===== Phiếu may rủi mới ===== */
+.chs{display:flex;gap:14px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+.chb{width:min(28vw,150px);aspect-ratio:1;border-radius:20px;background:linear-gradient(145deg,#ffe29a,#f0a800);border:4px solid #b9770e;font:800 24px 'Baloo 2',system-ui,sans-serif;color:#5a3600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;cursor:pointer;padding:0;transition:transform .2s,opacity .3s,box-shadow .2s}
+.chb .chl{font-size:clamp(44px,9vw,72px);line-height:1.05}
+.chb.on{outline:4px solid var(--pk);transform:translateY(-6px) scale(1.07);box-shadow:0 10px 24px #ff3d8b66}
+.chb.shk{animation:chshk .9s}
+.chb.open{animation:chpop .55s}
+.chb.good{background:linear-gradient(145deg,#d3fae4,#14b870);border-color:#0b7a4b;color:#06502f}
+.chb.bad{background:linear-gradient(145deg,#ffe0e6,#ee3f5c);border-color:#a8142d;color:#6f0a1c}
+.chb.dim{opacity:.5;filter:grayscale(.35)}
+@keyframes chshk{0%,100%{transform:rotate(0)}20%{transform:rotate(-10deg) scale(1.08)}40%{transform:rotate(10deg) scale(1.08)}60%{transform:rotate(-7deg)}80%{transform:rotate(7deg)}}
+@keyframes chpop{0%{transform:scale(.6) rotate(-8deg)}60%{transform:scale(1.2) rotate(4deg)}100%{transform:scale(1) rotate(0)}}
+.slots{display:flex;gap:10px;justify-content:center;margin:16px 0}
+.slot{width:clamp(70px,20vw,110px);height:clamp(84px,24vw,128px);border-radius:16px;background:#fff;border:4px solid var(--pri);font-size:clamp(44px,12vw,72px);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 14px #4f46e533;transition:box-shadow .3s,border-color .3s}
+.slot.spin{filter:blur(1.2px)}
+.slot.stop{animation:chpop .4s}
+.slot.win{border-color:var(--gold);box-shadow:0 0 24px var(--gold),inset 0 0 14px #ffb30055;animation:glow 1s infinite}
+.dice2{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}.dice2 .die{margin:14px 0}
+.gift{font-size:clamp(80px,20vw,130px);margin:10px 0;line-height:1.1;display:inline-block}
+.gift.shk{animation:chshk .5s infinite}
+.anx{text-align:center;padding:4px 0}.anx .ani{font-size:clamp(70px,16vw,120px);line-height:1.1;display:inline-block;animation:anp 1.1s ease-in-out infinite}
+@keyframes anp{50%{transform:scale(1.18) rotate(6deg)}}
+.fb.g[title^="Gửi tiết kiệm"]{background:#fff3c4}.fb.g[title^="Thu phí"]{background:#ffe9d2}.fb.g[title^="Bảo hiểm"]{background:#d8f1ff}
+.nofx .ani,.nofx .chb.shk,.nofx .gift.shk,.nofx .slot.win{animation:none!important}
+@media(prefers-reduced-motion:reduce){.ani,.chb.shk,.gift.shk,.slot.win{animation:none!important}}
 </style>
-<header id="hd"><button data-a="home" class="hm" title="Về màn hình chọn lớp">🏠</button><h1>🎡 Quiz Battle</h1><span id="sp" class="rb" title="Số học sinh đã quay trong vòng này"></span><button data-a="nr" class="rb nr" title="Bắt đầu vòng mới (đặt lại trạng thái đã quay)"><b>↻</b><small>Vòng mới</small></button><select id="cs" title="Chọn lớp"></select><button data-a="cadd">＋ Lớp</button><button data-a="cren">✏️ Tên lớp</button><button data-a="cdel">🗑 Xóa lớp</button><button class="g" data-a="mgr">👥 Quản lý lớp</button><button data-a="undo">↩ Hoàn tác</button><button data-a="hist">📜 Lịch sử</button><button data-a="mng">🎁 Quản lý phiếu</button><button data-a="rnx">🎲 Ai quay tiếp?</button><button data-a="qz">❓ Câu hỏi</button><span class="tag" id="pt"></span><button data-a="ex">⬇ Xuất</button><label><input type="checkbox" id="ng">Điểm âm</label><label><input type="checkbox" id="fo">Tắt hiệu ứng</label><label><input type="checkbox" id="qa">Nút +điểm</label></header>
+<header id="hd"><button data-a="home" class="hm" title="Về màn hình chọn lớp">🏠</button><h1>🎡 Quiz Battle</h1><span id="sp" class="rb" title="Số học sinh đã quay trong vòng này"></span><button data-a="nr" class="rb nr" title="Bắt đầu vòng mới (đặt lại trạng thái đã quay)"><b>↻</b><small>Vòng mới</small></button><button class="g" data-a="mgr">👥 Quản lý lớp</button><button data-a="undo">↩ Hoàn tác</button><button data-a="hist">📜 Lịch sử</button><button data-a="mng">🎁 Quản lý phiếu</button><button data-a="rnx">🎲 Ai quay tiếp?</button><button data-a="qz">❓ Câu hỏi</button><button class="tag" id="pt" data-a="pot" title="Bấm để xem thông tin hũ"></button><button data-a="ex">⬇ Xuất</button><label><input type="checkbox" id="ng">Điểm âm</label><label><input type="checkbox" id="fo">Tắt hiệu ứng</label><label><input type="checkbox" id="qa">Nút +điểm</label></header>
+<div id="gx2" aria-hidden="true"><small>GIỜ VÀNG</small><b>x2</b><small id="gxt">5:00</small></div>
 <div id="lobby"><div class="lw" id="lw"></div></div>
 <main><section id="gr"></section><aside><h2>🏆 Bảng xếp hạng</h2><ol id="rk" class="lbx"></ol></aside></main><div id="bk"></div><dialog id="dg"></dialog><dialog id="wl"></dialog>
 <script>
@@ -130,13 +190,21 @@ const FG={imm:'g',trap:'b',bomb:'b',frz:'b',drn:'b',dis:'b',ref:'g',prx:'g',pdn:
 Object.assign(FI,{gd:'🔰',hlv:'🥀',drp:'🩸',crs:'🎯',dbl:'⚡',aly:'🤝'});
 Object.assign(FG,{gd:'g',hlv:'b',drp:'b',crs:'b',dbl:'b',aly:'g'});
 Object.assign(FN,{gd:'Lớp bảo vệ: chặn lần mất điểm thông thường kế tiếp (không chặn hoán đổi/đặt lại điểm)',hlv:'Rỉ điểm: mỗi lần nhận điểm dương mất 50% số điểm vừa nhận (đếm theo lượt hợp lệ của chính bạn)',drp:'Chảy máu: mất 5 điểm sau mỗi lượt hợp lệ của chính bạn',crs:'Lời nguyền: khi bạn rút phiếu tiếp theo, người đặt lời nguyền mất 15 điểm',dbl:'Nhân đôi hình phạt: lần mất điểm thông thường kế tiếp bị nhân đôi (tối đa 30)',aly:'Đồng minh: nếu bạn bị trừ điểm, người đặt chịu thay tối đa 10 điểm mỗi lần (đếm theo lượt của người đặt)'});
+const goldActive=()=>!!(S&&S.ge&&S.ge>Date.now());
+Object.assign(FI,{sav:'🏦',toll:'🧲',ins:'🧯',thn:'🌵',rsh:'🔮'});
+Object.assign(FG,{sav:'g',toll:'g',ins:'g',thn:'g',rsh:'g'});
+Object.assign(FN,{sav:'Gửi tiết kiệm: sau 3 lượt hợp lệ của chính bạn sẽ nhận lại khoản tiết kiệm (huy hiệu đếm lượt)',toll:'Thu phí qua đường: mỗi lần bạn khác nhận điểm dương, chủ hiệu ứng thu thêm +1 (đếm theo lượt hợp lệ của chủ)',ins:'Bảo hiểm: mỗi lần bị mất điểm, được hoàn lại 50% (đếm theo lượt hợp lệ của chủ)',thn:'Khiên gai: mỗi lần khiên chặn một đòn mất điểm, kẻ tấn công mất 5 điểm (đếm theo lượt hợp lệ của chủ)',rsh:'Khiên phản chiếu: lần khiên chặn kế tiếp, kẻ tấn công mất đúng số điểm bị chặn (một lần)'});
 const P=id=>S.st.find(p=>p.id===id),log=s=>(qlb(),Lg.push(s)),M=()=>X.me,rk=()=>[...S.st].sort((a,b)=>b.p-a.p),oth=()=>S.st.filter(p=>p!==X.me),rnd=n=>1+Math.floor(Math.random()*n),fz=p=>p.fx.some(f=>f.k==='frz'),sk=m=>{log('⚠ '+m);throw'skip'};
 const uid=()=>{let i;do i='s'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);while(S&&P(i));return i};
 // ===== Lõi điểm: mọi thay đổi đều đi qua gain/lose/T/SW =====
-function gain(p,n,src='c',nb=0){n=Math.floor(n);if(n<=0)return 0;if(src!=='m'&&fz(p)){log(`🧊 ${p.n} bị đóng băng, không nhận +${n}`);return 0}if(!nb&&p===X.me&&X.m>1&&!X.bd){const base=n,b=base*X.m;log(`✖️${X.m} Phiếu nhân điểm: +${base} → +${b} (áp dụng một lần)`);n=b;X.bd=1}if(src!=='m'){const d=p.fx.find(f=>f.k==='drn'),o=d&&P(d.o);if(o&&o!==p){const h=Math.floor(n/2);if(h){o.p+=h;n-=h;log(`💸 ${o.n} nhận ${h} điểm từ hiệu ứng chuyển 50%`)}}}if(src!=='m'&&p.fx.some(f=>f.k==='hlv')){const h=Math.floor(n/2);if(h){n-=h;S.pot=(S.pot||0)+h;log(`🥀 ${p.n} mất ${h} điểm (50%) do hiệu ứng rỉ điểm → vào hũ`)}}log(`${p.n}: +${n} (${p.p}→${p.p+n})`);p.p+=n;return n}
+function gain(p,n,src='c',nb=0){n=Math.floor(n);if(n<=0)return 0;if(src!=='m'&&fz(p)){log(`🧊 ${p.n} bị đóng băng, không nhận +${n}`);return 0}if(!nb&&p===X.me&&X.m>1&&!X.bd){const base=n,b=base*X.m;log(`✖️${X.m} Phiếu nhân điểm: +${base} → +${b} (áp dụng một lần)`);n=b;X.bd=1}if(src!=='m'){const d=p.fx.find(f=>f.k==='drn'),o=d&&P(d.o);if(o&&o!==p){const h=Math.floor(n/2);if(h){o.p+=h;n-=h;log(`💸 ${o.n} nhận ${h} điểm từ hiệu ứng chuyển 50%`)}}}if(src!=='m'&&p.fx.some(f=>f.k==='hlv')){const h=Math.floor(n/2);if(h){n-=h;S.pot=(S.pot||0)+h;log(`🥀 ${p.n} mất ${h} điểm (50%) do hiệu ứng rỉ điểm → vào hũ`)}}log(`${p.n}: +${n} (${p.p}→${p.p+n})`);p.p+=n;S.st.forEach(q=>{if(q!==p&&q.fx.some(f=>f.k==='toll'&&!f.fr)){q.p+=1;log(`🧲 ${q.n} thu phí qua đường +1 từ ${p.n}`)}});return n}
 function lose(p,n,att,blk=1,dp=0){n=Math.floor(S.neg?n:Math.min(n,Math.max(0,p.p)));if(n<=0)return 0;const f=k=>p.fx.find(x=>x.k===k),rm=x=>p.fx.splice(p.fx.indexOf(x),1),atk=att&&att!==p;let x;
  // Shield protects ordinary eligible losses and theft. Direct score-setting passes dp=1 or blk=0 explicitly.
- if(blk&&p.sh>0&&!f('dis')){log(`🛡️ Khiên của ${p.n} chặn ${n} điểm mất`);return 0}
+ if(blk&&p.sh>0&&!f('dis')){log(`🛡️ Khiên của ${p.n} chặn ${n} điểm mất`);const bk=Math.min(p.sh,n>=30?2:1),a0=p.sh;p.sh-=bk;if(bk>1)log(`💥 Khiên vỡ: ${p.n} mất ${bk} khiên (${a0}→${p.sh})`);
+  const th=p.fx.find(q=>q.k==='thn'),rs=p.fx.find(q=>q.k==='rsh');
+  if(atk&&th){const q=lose(att,5,null,0,1);if(q)log(`🌵 Khiên gai: ${att.n} bị đâm −${q}`)}
+  if(atk&&rs){rm(rs);log(`🔮 Khiên phản chiếu: trả đòn ${n} điểm về ${att.n}`);lose(att,n,null,0,1)}
+  return 0}
  if(!dp&&(x=f('imm'))){rm(x);log(`🎫 ${p.n} dùng Vé miễn tử: chặn ${n} điểm mất`);return 0}
  if(blk&&!dp&&(x=f('gd'))){rm(x);log(`🔰 ${p.n} dùng Lớp bảo vệ: chặn ${n} điểm mất`);return 0}
  if(!dp&&atk&&(x=f('ref'))){log(`🪞 ${p.n} phản đòn khoản phạt ${n} điểm về ${att.n} (chỉ phản một lần)`);lose(att,n,null,blk,1);return 0}
@@ -145,9 +213,9 @@ function lose(p,n,att,blk=1,dp=0){n=Math.floor(S.neg?n:Math.min(n,Math.max(0,p.p
  if(blk&&!dp&&(x=f('dbl'))){rm(x);const m2=Math.max(n,Math.min(2*n,30));n=S.neg?m2:Math.min(m2,Math.max(0,p.p));log(`⚡ Hình phạt bị nhân đôi: mất ${n} điểm`)}
  {const al=p.fx.find(f=>f.k==='aly'),ao=al&&P(al.o);if(ao&&ao!==p){const pd=lose(ao,Math.min(10,n),null,1,1);if(pd){n-=pd;log(`🤝 ${ao.n} chịu thay ${pd} điểm cho ${p.n}`)}}}
  if(n<=0)return 0;
- log(`${p.n}: -${n} (${p.p}→${p.p-n})`);p.p-=n;if(X.sink&&!att){S.pot=(S.pot||0)+n;log(`🏺 +${n} vào hũ điểm chung`)}return n}
+ log(`${p.n}: -${n} (${p.p}→${p.p-n})`);p.p-=n;const ih=p.fx.some(f=>f.k==='ins'&&!f.fr)?Math.floor(n/2):0;if(ih){p.p+=ih;log(`🧯 ${p.n} được bảo hiểm hoàn ${ih} điểm`)}if(X.sink&&!att&&n-ih>0){S.pot=(S.pot||0)+n-ih;log(`🏺 +${n-ih} vào hũ điểm chung`)}return n}
 
-const T=(f,t,n)=>{const taken=lose(f,n,t);if(taken>0)gain(t,taken,'c',1);return taken},G=(p,n)=>gain(p,n),GX=(p,n)=>gain(p,n,'c',1),setp=(p,v)=>{log(`${p.n}: ${p.p}→${v}`);p.p=v},addSh=(p,n)=>{log(`${p.n}: 🛡️ ${p.sh}→${p.sh+n}`);p.sh+=n};
+const T=(f,t,n)=>{const taken=lose(f,n,t);if(taken>0)gain(t,taken,'c',1);return taken},G=(p,n)=>gain(p,n),GX=(p,n)=>gain(p,n,'c',1),setp=(p,v)=>{log(`${p.n}: ${p.p}→${v}`);p.p=v},addSh=(p,n)=>{const v=Math.min(10,p.sh+n);if(v<p.sh+n)log('🛡️ Tối đa 10 khiên: phần dư bị bỏ');log(`${p.n}: 🛡️ ${p.sh}→${v}`);p.sh=v};
 const mv=(f,t,n)=>{if(fz(t))return log('🧊 Người nhận bị đóng băng: hủy');gain(t,lose(f,n,null,0,1),'c',1)};
 function SW(a,b){if(!a||!b||a===b)sk('Cần hai người khác nhau');const iv=[a,b].find(q=>q.fx.some(f=>f.k==='imm'));if(iv){iv.fx.splice(iv.fx.findIndex(f=>f.k==='imm'),1);return log(`🎫 ${iv.n} dùng Vé miễn tử: hủy lần tráo điểm ${a.n} ⇄ ${b.n}`)}log(`🔄 ${a.n} (${a.p}) ⇄ ${b.n} (${b.p})`);[a.p,b.p]=[b.p,a.p]}
 function fe(p,o){p.fx=p.fx.filter(f=>f.k!==o.k);p.fx.push({...o,fr:1,o:X.me.id});log(`${FI[o.k]} ${FN[o.k]} → ${p.n}`)}
@@ -374,6 +442,79 @@ D('D','n','r','Đổi toàn bộ điểm với một học sinh ngẫu nhiên kh
 D('C','g','a','Mỗi học sinh có trên 30 điểm mất 5 điểm; người rút nhận tổng số điểm thực sự bị trừ, tối đa 25 điểm.',()=>{const m=M();let tot=0;oth().filter(q=>q.p>30).forEach(q=>{tot+=lose(q,5,m)});const g=Math.min(25,tot);if(!tot)return log('Không ai có trên 30 điểm hoặc tất cả đã được chặn');if(tot>g){S.pot=(S.pot||0)+tot-g;log(`🏺 ${tot-g} điểm vượt mức 25 được nộp vào hũ`)}gain(m,g,'c',1)});
 D('I','n','r','Quay một vòng quay phụ với các phần thưởng: +5, +10, +20, +30, +50 điểm hoặc một lớp bảo vệ.',async()=>{const v=[5,10,20,30,50],i=await roul('🎡 Vòng quay phụ',[...v.map(n=>'+'+n),'Lớp bảo vệ 🔰']);if(i<5)G(M(),v[i]);else fe(M(),{k:'gd',l:99});await fin()});
 D('I','g','r','Hủy hiệu ứng bất lợi vừa nhận, sau đó rút một phiếu thay thế. Nếu không thể hủy hiệu ứng, chỉ rút phiếu thay thế.',async()=>{const m=M(),i=m.fx.map(f=>FG[f.k]).lastIndexOf('b');if(i>=0){const f=m.fx.splice(i,1)[0];log(`✨ Đã hủy hiệu ứng bất lợi ${FI[f.k]}`)}else log('Không có hiệu ứng bất lợi để hủy: chỉ rút phiếu thay thế');await drawAgain('🔁 Rút phiếu thay thế')});C[C.length-1].rr=1;
+
+// ===== 11 phiếu may rủi / hiệu ứng trễ mới (có màn hình riêng) =====
+const SYM=['🍒','🍋','🔔','⭐','💎','7️⃣'];
+const fee=(p,n)=>{const k=S.neg?n:Math.min(n,Math.max(0,p.p));if(k<=0)return 0;log(`${p.n}: -${k} (${p.p}→${p.p-k})`);p.p-=k;S.pot=(S.pot||0)+k;log(`🏺 +${k} vào hũ điểm chung`);return k};
+const ann=(ic,t,d)=>stg(`<div class="anx"><div class="ani">${ic}</div><h3>${t}</h3><p>${d}</p></div>`);
+async function dice2(){const a=rnd(6),b=rnd(6);
+ stg(`<h3>🎲 Xúc xắc đôi</h3><p id="d2_h">Ra đôi +50 · không ra đôi: tổng 2 viên × 2</p><div class="dice2"><div class="die" id="d2_a">${dieH(6)}</div><div class="die" id="d2_b">${dieH(6)}</div></div><div class="bt" ${CE}><button class="g big" id="d2_go">🎲 ĐỔ 2 XÚC XẮC</button>${CB}</div>`);
+ await clk('d2_go');$('#st_x').remove();$('#d2_go').disabled=true;const A1=$('#d2_a'),B1=$('#d2_b');$('#d2_h').textContent='Đang đổ...';if(!S.fo){A1.classList.add('shake');B1.classList.add('shake')}
+ const end=Date.now()+(S.fo?300:1700);let iv=60;while(Date.now()<end){A1.innerHTML=dieH(rnd(6));B1.innerHTML=dieH(rnd(6));await sleep(iv);iv*=1.1}
+ A1.classList.remove('shake');B1.classList.remove('shake');A1.innerHTML=dieH(a);B1.innerHTML=dieH(b);
+ $('#d2_h').innerHTML=a===b?`🎉 <b>ĐÔI ${a}-${b}!</b> +50 điểm`:`Ra <b>${a}</b> + <b>${b}</b> = ${a+b} → ×2 = <b>${(a+b)*2}</b> điểm`;await sleep(S.fo?200:1000);return[a,b]}
+D('I','n','r','🧰 Ba rương: chọn 1 (+40 / +10 / −10)',async()=>{
+ const v=shuffle([40,10,-10]);let sel=-1;
+ stg(`<h3>🧰 Chọn 1 trong 3 rương</h3><p id="ch_h">Chọn một rương rồi bấm MỞ RƯƠNG (chưa mở thì chưa biết bên trong!)</p><div class="chs" id="ch_w">${v.map((_,i)=>`<button class="chb" data-i="${i}"><span class="chl">🧰</span><b>?</b></button>`).join('')}</div><div class="bt" ${CE}><button class="g big" id="ch_go" disabled>🔓 MỞ RƯƠNG</button>${CB}</div>`);
+ const bs=[...$('#ch_w').children];
+ $('#ch_w').onclick=e=>{const k=e.target.closest('.chb');if(!k||k.disabled)return;sel=+k.dataset.i;bs.forEach(x=>x.classList.toggle('on',x===k));$('#ch_go').disabled=false;$('#ch_h').textContent=`Đã chọn rương số ${sel+1} — chưa mở!`};
+ await clk('ch_go');$('#st_x').remove();$('#ch_go').disabled=true;bs.forEach(x=>x.disabled=true);$('#ch_h').textContent='Đang mở rương...';
+ bs[sel].classList.add('shk');await sleep(S.fo?150:1000);
+ const sh=(b,x)=>{b.classList.remove('shk');b.classList.add(x>0?'good':'bad','open');b.innerHTML=`<span class="chl">${x>0?'💰':'💣'}</span><b>${x>0?'+':'−'}${Math.abs(x)}</b>`};
+ sh(bs[sel],v[sel]);$('#ch_h').innerHTML=v[sel]>0?`🎉 Mở ra <b>+${v[sel]}</b>!`:'😬 Mở ra <b>−10</b>...';await sleep(S.fo?200:1200);
+ bs.forEach((b,i)=>{if(i!==sel){sh(b,v[i]);b.classList.add('dim')}});await sleep(S.fo?150:900);
+ const x=v[sel];log(`🧰 Rương số ${sel+1}: ${x>0?'+':'−'}${Math.abs(x)}`);if(x>0)G(M(),x);else lose(M(),10,null);await fin()});
+D('I','n','r','🎰 Máy xèng: 3 giống +60, 2 giống +15',async()=>{
+ const r=[0,0,0].map(()=>rnd(6)-1);
+ stg(`<h3>🎰 Máy xèng 3 ô</h3><p id="sl_h">3 ô giống +60 · 2 ô giống +15 · còn lại không có gì</p><div class="slots" id="sl_w">${r.map(()=>'<div class="slot">❔</div>').join('')}</div><div class="bt" ${CE}><button class="g big" id="sl_go">🎰 KÉO CẦN</button>${CB}</div>`);
+ await clk('sl_go');$('#st_x').remove();$('#sl_go').disabled=true;$('#sl_h').textContent='Đang quay...';
+ const el=[...$('#sl_w').children],t0=Date.now(),stops=S.fo?[120,240,360]:[1200,1900,2600],dn=[0,0,0];
+ el.forEach(e=>e.classList.add('spin'));
+ while(dn.some(x=>!x)){el.forEach((e,i)=>{if(dn[i])return;if(Date.now()-t0>=stops[i]){dn[i]=1;e.textContent=SYM[r[i]];e.classList.remove('spin');e.classList.add('stop')}else e.textContent=SYM[rnd(6)-1]});await sleep(70)}
+ const same=r[0]===r[1]&&r[1]===r[2],two=!same&&(r[0]===r[1]||r[1]===r[2]||r[0]===r[2]),n=same?60:two?15:0;
+ if(n)el.forEach((e,i)=>{if(same||r.filter(x=>x===r[i]).length>1)e.classList.add('win')});
+ $('#sl_h').innerHTML=same?'🎉 <b>JACKPOT! 3 ô giống nhau +60</b>':two?'✨ <b>2 ô giống nhau +15</b>':'😅 Không trúng';
+ await sleep(S.fo?200:1100);log(`🎰 Máy xèng: ${r.map(i=>SYM[i]).join(' ')}`);if(same)log('🎰 JACKPOT!');
+ if(n)G(M(),n);else log('🎰 Không trúng: không có điểm');await fin()});
+D('I','n','r','🎲 Xúc xắc đôi: ra đôi +50, không thì tổng×2',async()=>{const[a,b]=await dice2();log(`🎲 Xúc xắc đôi: ${a} & ${b}`);G(M(),a===b?50:(a+b)*2);await fin()});
+D('J','n','r','🏦 Gửi tiết kiệm: −20 ngay, 3 lượt sau +35',async()=>{const m=M();
+ ann('🏦','Gửi tiết kiệm','Gửi ngay <b>20 điểm</b>. Sau <b>3 lượt hợp lệ</b> của bạn sẽ nhận lại <b>35 điểm</b>. Huy hiệu 🏦 trên thẻ đếm số lượt.');
+ if(m.fx.some(f=>f.k==='sav'))log('🏦 Bạn đang có một khoản tiết kiệm: không gửi thêm');
+ else{const paid=S.neg?20:Math.min(20,Math.max(0,m.p));if(paid<=0)log('🏦 Không có điểm để gửi: không có tác dụng');else{log(`🏦 ${m.n} gửi ${paid} điểm tiết kiệm (${m.p}→${m.p-paid})`);m.p-=paid;fe(m,{k:'sav',l:999,c:0,v:Math.round(paid*35/20)})}}
+ await fin()});
+D('J','g','r','🧲 Thu phí 3 lượt: bạn khác nhận điểm, bạn +1',async()=>{ann('🧲','Thu phí qua đường','Trong <b>3 lượt hợp lệ</b> của bạn, mỗi lần bạn khác nhận điểm dương, bạn thu thêm <b>+1</b>.');fe(M(),{k:'toll',l:3,ct:'h'});await fin()});
+D('G','n','r','🧯 Bảo hiểm: nộp 10, 3 lượt hoàn 50% điểm mất',async()=>{const m=M();
+ ann('🧯','Bảo hiểm','Nộp phí <b>10 điểm</b>. Trong <b>3 lượt</b>, mỗi lần bị mất điểm bạn được hoàn lại <b>50%</b>.');
+ if(!fee(m,10))log('🧯 Không có điểm để nộp phí: vẫn được bảo hiểm');fe(m,{k:'ins',l:3,ct:'h'});await fin()});
+D('I','g','r','🎁 Hộp quà bí ẩn: 1 phiếu tốt vào túi quà',async()=>{const m=M();
+ if(BG(m).length>=3)sk('Túi quà đã đầy (3/3): chưa nhận được quà');
+ const L=C.filter(c=>c.t==='g'&&c.g!=='H'&&c.g!=='I'&&!c.rr&&cf(c).on&&cf(c).w>0);if(!L.length)sk('Không còn phiếu có lợi phù hợp');
+ const c=L[Math.floor(Math.random()*L.length)];
+ stg(`<h3>🎁 Hộp quà bí ẩn</h3><p id="gf_h">Mở hộp để nhận ngẫu nhiên 1 phiếu có lợi, cất thẳng vào túi quà (${BG(m).length}/3)</p><div class="gift" id="gf_b">🎁</div><div class="bt" ${CE}><button class="g big" id="gf_go">🎁 MỞ HỘP QUÀ</button>${CB}</div>`);
+ await clk('gf_go');$('#st_x').remove();$('#gf_go').disabled=true;const b=$('#gf_b');$('#gf_h').textContent='Đang mở...';b.classList.add('shk');
+ const ics=Object.values(GI),end=Date.now()+(S.fo?250:1600);while(Date.now()<end){b.textContent=ics[rnd(ics.length)-1];await sleep(90)}
+ b.classList.remove('shk');b.textContent=GI[c.g];$('#gf_h').innerHTML=`🎉 Trúng: <b>${esc(short(txt(c)))}</b>`;await sleep(S.fo?200:1300);
+ BG(m).push(c.id);log(`📦 ${m.n} giữ phiếu: ${txt(c)}`);await fin()});
+D('H','n','r','🏰 Pháo đài: +3 khiên, đóng băng 1 lượt',async()=>{ann('🏰','Pháo đài','Nhận <b>3 khiên 🛡️</b> nhưng bị <b>đóng băng 1 lượt</b> (không nhận điểm cộng).');log(`🏰 ${M().n} dựng Pháo đài`);addSh(M(),3);fe(M(),{k:'frz',l:1});await fin()});
+D('I','n','r','🛒 Cửa hàng chớp nhoáng: chọn 1 trong 3 món',async()=>{const m=M(),it=[['🛡️ 3 khiên',10],['🎫 Vé miễn tử',15],['🎡 Quay thêm 1 lượt',20]];
+ const v=await dlg(`<h3>🛒 Cửa hàng chớp nhoáng</h3><p>Bạn có <b>${m.p}</b> điểm. Chọn 1 món (món không đủ điểm sẽ bị khóa):</p>`,[...it.map(([n,c],i)=>[`${n} — ${c} điểm`,i+1,'g']),['Không mua',0]],()=>dg.querySelectorAll('.bt button').forEach((k,i)=>{if(i<3&&m.p<it[i][1])k.disabled=true}));
+ if(!v){log('🛒 Không mua món nào');await fin();return}
+ fee(m,it[v-1][1]);if(v===1)addSh(m,3);else if(v===2)fe(m,{k:'imm',l:99});else{ES=m.id;log('🎡 Được quay thêm 1 lượt')}await fin()});
+D('I','n','r','🧭 Hai lựa chọn: +20 ngay hoặc rút thêm phiếu',async()=>{
+ const v=await dlg('<h3>🧭 Hai lựa chọn</h3><p>Nhận chắc <b>+20 điểm</b>, hay bỏ điểm đó để <b>rút thêm 1 phiếu</b> (phiếu xấu vẫn chịu như thường)?</p>',[['Hủy',0],['💰 Nhận ngay +20',1,'g'],['🎴 Bỏ +20, rút thêm 1 phiếu',2,'p']]);
+ if(!v)throw'cancel';
+ if(v===1){log('🧭 Chọn nhận ngay +20');G(M(),20);await fin()}else{log('🧭 Bỏ +20 để rút thêm phiếu');await drawAgain('🧭 Rút thêm 1 phiếu')}});C[C.length-1].rr=1;
+D('F','n','r','🆘 Cứu trợ: ai đang 0 điểm được +10',async()=>{ann('🆘','Cứu trợ','Mọi bạn đang có <b>0 điểm</b> được cộng <b>+10</b>.');
+ const z=S.st.filter(q=>q.p===0);if(!z.length)log('🆘 Không ai đang có 0 điểm');z.forEach(q=>{log(`🆘 Cứu trợ ${q.n}`);G(q,10)});await fin()});
+
+// ===== 5 phiếu Khiên mới =====
+D('H','g','r','🌵 Khiên gai: 3 lượt, chặn được thì kẻ tấn công −5',async()=>{ann('🌵','Khiên gai','Trong <b>3 lượt hợp lệ</b> của bạn, mỗi lần khiên chặn một đòn mất điểm, <b>kẻ tấn công mất 5 điểm</b>.');fe(M(),{k:'thn',l:3,ct:'h'});await fin()});
+D('C','g','t','🔨 Phá khiên: phá 2 khiên 1 bạn, không có thì +10',async()=>{const[p]=await pk(1,oth(),'🔨 Phá khiên — chọn mục tiêu'),m=M();
+ if(p.sh>0){const k=Math.min(2,p.sh);log(`🔨 ${m.n} phá ${k} khiên của ${p.n} (${p.sh}→${p.sh-k})`);p.sh-=k}else{log(`🔨 ${p.n} không có khiên: ${m.n} nhận thưởng`);G(m,10)}});
+D('H','g','a','🤝 Chia khiên: tặng 1 khiên cho bạn cuối bảng, bạn +10',async()=>{const l=await tp(-1),m=M();log(`🤝 ${m.n} tặng 1 khiên cho ${l.n}`);addSh(l,1);G(m,10)});
+D('H','n','r','🔋 Nạp khiên: nộp 15 → 2 khiên (≥5 khiên: +15)',async()=>{const m=M();ann('🔋','Nạp khiên','Nộp <b>15 điểm</b> để nhận <b>2 khiên</b>. Nếu bạn đã có <b>từ 5 khiên</b>, không nạp mà được <b>hoàn 15 điểm</b>.');
+ if(m.sh>=5){log('🔋 Đã đủ 5 khiên: hoàn 15 điểm');G(m,15)}else if(S.neg||m.p>=15){fee(m,15);addSh(m,2)}else log('🔋 Không đủ 15 điểm để nạp khiên');await fin()});
+D('G','g','r','🔮 Khiên phản chiếu: khiên chặn kế tiếp trả đòn',async()=>{ann('🔮','Khiên phản chiếu','Lần <b>khiên chặn</b> kế tiếp, <b>kẻ tấn công mất đúng số điểm bị chặn</b> (một lần, cần có khiên).');fe(M(),{k:'rsh',l:999});await fin()});
 {const nw=C.splice(n0);nw.forEach(c=>C.splice(Math.floor(Math.random()*(C.length+1)),0,c))}
 // ===== Sắp xếp bộ phiếu: xen kẽ có lợi / bất lợi / trung tính, giãn cách phiếu Khiên =====
 (()=>{
@@ -448,7 +589,7 @@ async function spin(id){
  $('#wh').textContent='Trúng phiếu!';const info=`<h3 class="rt">${{g:'🟢',b:'🔴',n:'🟡'}[c.t]} ${esc(txt(c))}</h3><p>${KN[c.k]} · ${TN[c.t]}</p>`;
  let ok;
  const processPrize=async()=>{if(c.t==='g'&&(me.bag||[]).length<3&&c.g!=='H'&&c.g!=='I'){const k=await dlg(`<h3>🎁 Giữ phiếu vào túi quà? (${(me.bag||[]).length}/3)</h3><p>${esc(txt(c))}</p>`,[['⚡ Dùng ngay',0],['📦 Giữ lại dùng sau',1,'g']]);if(k)return txn('Giữ phiếu: '+txt(c),()=>{(P(id).bag=P(id).bag||[]).push(c.id);log(`📦 ${me.n} giữ phiếu: ${txt(c)}`)},P(id),turnSnap)}
-  return txn(txt(c),async()=>{X.pen=c.t==='b';X.sink=c.g==='E';const n=S.t+1;if(n%10===0&&n%20){X.m=2;log('🌟 Giờ vàng: khoản cộng điểm đầu tiên ×2')}await c.f();if(n%20===0){log('🌪️ Thuế bão: ai trên 30 điểm nộp 10 vào hũ');X.sink=1;S.st.filter(q=>q.p>30).forEach(q=>lose(q,10,null))}},P(id),turnSnap)};
+  return txn(txt(c),async()=>{X.pen=c.t==='b';X.sink=c.g==='E';const n=S.t+1;if(goldActive()){X.m=2;log('🌟 Giờ vàng (còn '+Math.ceil((S.ge-Date.now())/1000)+' giây): khoản cộng điểm đầu tiên ×2')}await c.f();if(n%20===0){log('🌪️ Thuế bão: ai trên 30 điểm nộp 10 vào hũ');X.sink=1;S.st.filter(q=>q.p>30).forEach(q=>lose(q,10,null))}},P(id),turnSnap)};
  const skipPrize=async()=>txn('Đã bỏ qua phiếu: '+txt(c),()=>{log(`⏭️ Đã bỏ qua phiếu “${txt(c)}”; không áp dụng hiệu ứng phiếu`)},P(id),turnSnap);
  for(;;){
   $('#wc').disabled=false;
@@ -473,9 +614,10 @@ async function spin(id){
 const snapshot=()=>JSON.stringify({st:S.st,t:S.t,sp:S.sp,ES,pot:S.pot,rd:S.rd,r0:S.r0});
 const load=x=>{const o=JSON.parse(x);S.st=o.st;S.t=o.t;S.sp=o.sp||[];S.pot=o.pot||0;S.rd=o.rd||1;S.r0=o.r0||{};if('ES'in o)ES=o.ES};
 function endTurn(me,pre){S.t++;S.sp=S.sp.includes(me.id)?[me.id]:[...S.sp,me.id];const b=me.fx.find(f=>f.k==='bomb'&&!f.fr);if(b&&++b.c%2===0){log('💣 Bom nổ!');X.pen=1;X.sink=1;lose(me,40,null)}
+ const sv=me.fx.find(f=>f.k==='sav'&&!f.fr);if(sv&&++sv.c>=3){me.fx.splice(me.fx.indexOf(sv),1);log(`🏦 ${me.n} nhận lại ${sv.v} điểm tiết kiệm`);gain(me,sv.v,'m',1)}
  const tr=me.fx.find(f=>f.k==='trap'&&!f.fr);if(tr&&++tr.c>=3){me.fx.splice(me.fx.indexOf(tr),1);log('🪤 Bẫy sập!');X.pen=1;X.sink=1;lose(me,25,null)}
  S.st.forEach(q=>q.fx.slice().forEach(f=>{if(!f.ct||f.fr||(f.ct==='h'?q!==me:f.o!==me.id))return;const rmv=()=>{const i=q.fx.indexOf(f);if(i>=0)q.fx.splice(i,1)};if(f.k==='drp'){X.sink=1;log(`🩸 ${q.n} mất 5 điểm do hiệu ứng chảy máu`);lose(q,5,null)}if(f.k==='crs'){rmv();const o=P(f.o);if(o&&o!==q){X.sink=1;log(`🎯 ${q.n} đã rút phiếu: lời nguyền khiến ${o.n} mất 15 điểm`);lose(o,15,null)}return}if(--f.l<=0){rmv();log(`⌛ Hết hiệu ứng ${FI[f.k]} của ${q.n}`)}}));
- S.st.forEach(p=>{if(pre[p.id]&&p.sh>0)p.sh--;p.fx=p.fx.filter(f=>f.fr?(delete f.fr,1):f.k==='bomb'||f.k==='trap'||f.ct||--f.l>0)})}
+ S.st.forEach(p=>{p.fx=p.fx.filter(f=>f.fr?(delete f.fr,1):f.k==='bomb'||f.k==='trap'||f.ct||--f.l>0)})}
 async function txn(label,fn,me,beforeSnap,ne){const snap=beforeSnap||snapshot(),pre={};S.st.forEach(p=>pre[p.id]=p.sh>0);Lg=[];X={me,m:1};
  try{await fn();if(me&&!ne)endTurn(me,pre);if(dg.open)dg.close()}catch(e){if(dg.open)dg.close();load(snap);Lg=[];X={me:null,m:1};if(e!=='skip'&&e!=='cancel')console.error('Giao dịch đã hoàn tác:',e);render();return false}
  S.h.unshift({tm:new Date().toLocaleString('vi-VN'),who:me?me.n:'Giáo viên',label,log:[...Lg],snap});S.h.length=Math.min(S.h.length,80);save();render();return [...Lg]}
@@ -497,23 +639,53 @@ const CI=['🏫','📚','🚀','🌈','⚡','🔥','🌟','🎯','🦄','🏆'];
 function lobbyRender(step){
  const lw=$('#lw');document.body.classList.add('lobby');
  if(step==='classes'){
-  lw.innerHTML=`<h2 class="lh">🎓 Chọn lớp để chơi</h2><p class="ls">Bấm vào một thẻ lớp để bắt đầu trận đấu</p><div class="lcs">${S.cls.map((c,i)=>{const t=[...c.st].sort((a,b)=>b.p-a.p)[0];return `<button class="lc" data-a="pickc" data-i="${c.id}"><span class="ic">${CI[i%CI.length]}</span><span class="nm2">${esc(c.n)}</span><span class="info">👥 ${c.st.length} học sinh</span>${t&&t.p>0?`<span class="lead">👑 ${esc(t.av)} ${esc(t.n)} · ${t.p} điểm</span>`:'<span class="lead">Chưa có điểm</span>'}</button>`}).join('')}<button class="lc add" data-a="ladd"><span class="ic">＋</span><span class="nm2">Thêm lớp mới</span></button></div><button class="back" data-a="lback">← Quay lại</button>`;
+  lw.innerHTML=`<h2 class="lh">🎓 Chọn lớp để chơi</h2><p class="ls">Bấm vào một thẻ lớp để bắt đầu trận đấu</p><div class="lcs">${S.cls.map((c,i)=>{const t=[...c.st].sort((a,b)=>b.p-a.p)[0];return `<div class="lc" role="button" tabindex="0" data-a="pickc" data-i="${c.id}"><span class="ctl"><button class="e" data-a="lren" data-i="${c.id}" title="Sửa tên lớp" aria-label="Sửa tên lớp">✏️</button><button class="x" data-a="ldel" data-i="${c.id}" title="Xóa lớp" aria-label="Xóa lớp">🗑</button></span><span class="ic">${CI[i%CI.length]}</span><span class="nm2">${esc(c.n)}</span><span class="info">👥 ${c.st.length} học sinh</span>${t&&t.p>0?`<span class="lead">👑 ${esc(t.av)} ${esc(t.n)} · ${t.p} điểm</span>`:'<span class="lead">Chưa có điểm</span>'}</div>`}).join('')}<button class="lc add" data-a="ladd"><span class="ic">＋</span><span class="nm2">Thêm lớp mới</span></button></div><button class="back" data-a="lback">← Quay lại</button>`;
  }else{
   lw.innerHTML=`<div class="logo">🎡</div><h1 class="lt">QUIZ BATTLE</h1><p class="ls">Quay vòng quay • Nhận phiếu • Đua top bảng xếp hạng</p><button class="play" data-a="play">▶ CHƠI</button>`;
  }
 }
 function enterGame(){document.body.classList.remove('lobby');scrollTo(0,0);render()}
 // ===== Giao diện =====
-const fxList=p=>[...(p.sh>0?[{t:'g',ic:'🛡️',n:p.sh,d:'Khiên bảo vệ: còn '+p.sh+' lượt'}]:[]),...p.fx.map(f=>({t:FG[f.k],ic:FI[f.k],n:f.k==='bomb'?f.c%2+'/2':f.k==='trap'?f.c+'/3':['pdn','prx','skp','imm','gd','dbl','crs'].includes(f.k)?'':f.l,d:FN[f.k]+(['drn','bomb','crs','aly'].includes(f.k)?' — đặt bởi '+(P(f.o)?.n||'?'):'')+(f.k==='prx'?' → '+(f.d==='top'?'Top 1':P(f.d)?.n||''):'')})),...(p.bag||[]).map(id=>C.find(c=>c.id===id)).filter(Boolean).map(c=>({t:'g',ic:'🎁',n:'',d:'Túi quà: '+txt(c),use:c.id}))];
-const fxH=(x,p)=>x.use?`<button class="fb g" data-a="use" data-i="${p.id}" data-n="${x.use}" title="${esc(x.d)}. Bấm để dùng">🎁<small>Dùng</small></button>`:`<span class="fb ${x.t}" title="${esc(x.d)}">${x.ic}${x.n!==''?`<small>${x.n}</small>`:''}</span>`;
+const fxList=p=>[...(p.sh>0?[{t:'g',c:'shl-'+(p.sh>=5?'hi':p.sh>=2?'mid':'lo'),ic:'🛡️',n:p.sh,d:'Khiên bảo vệ: còn '+p.sh+' lần chặn (tối đa 10)'}]:[]),...p.fx.map(f=>({t:FG[f.k],ic:FI[f.k],n:f.k==='bomb'?f.c%2+'/2':(f.k==='trap'||f.k==='sav')?f.c+'/3':['pdn','prx','skp','imm','gd','dbl','crs','rsh'].includes(f.k)?'':f.l,d:FN[f.k]+(['drn','bomb','crs','aly'].includes(f.k)?' — đặt bởi '+(P(f.o)?.n||'?'):'')+(f.k==='prx'?' → '+(f.d==='top'?'Top 1':P(f.d)?.n||''):'')})),...(p.bag||[]).map(id=>C.find(c=>c.id===id)).filter(Boolean).map(c=>({t:'g',ic:'🎁',n:'',d:'Túi quà: '+txt(c),use:c.id}))];
+const fxH=(x,p,j)=>x.use?`<button class="fb g" data-a="use" data-i="${p.id}" data-n="${x.use}" title="${esc(x.d)}. Bấm để dùng">🎁<small>Dùng</small></button>`:`<span class="fb ${x.t} ${x.c||''}" data-a="fxi" data-i="${p.id}" data-x="${j}" role="button" tabindex="0" title="${esc(x.d)} (bấm để xem chi tiết)">${x.ic}${x.n!==''?`<small>${x.n}</small>`:''}</span>`;
 const bdg=p=>{const L=fxList(p),N=L.length,over=N>9,vis=over?L.slice(0,8):L,sz=N>6?3:N>3?2:1;
- return `<div class="fxs s${sz}">${vis.map(x=>fxH(x,p)).join('')}${over?`<button class="fb mo" data-a="fxm" data-i="${p.id}" title="Xem tất cả hiệu ứng và túi quà">＋${N-8}</button>`:''}</div>`+(p.tb||p.rw?`<div><span class="fb" style="background:#eee;font-size:13px;cursor:default" title="Bàn / Hàng">🪑${esc(p.tb||'-')}/${esc(p.rw||'-')}</span></div>`:'')};
+ return `<div class="fxs s${sz}">${vis.map((x,j)=>fxH(x,p,j)).join('')}${over?`<button class="fb mo" data-a="fxm" data-i="${p.id}" title="Xem tất cả hiệu ứng và túi quà">＋${N-8}</button>`:''}</div>`+(p.tb||p.rw?`<div><span class="fb" style="background:#eee;font-size:13px;cursor:default" title="Bàn / Hàng">🪑${esc(p.tb||'-')}/${esc(p.rw||'-')}</span></div>`:'')};
 function fxm(id){const p=P(id);if(!p)return;const L=fxList(p),sec=(t,h)=>{const a=L.filter(x=>x.t===t);return a.length?`<h4>${h} (${a.length})</h4>`+a.map(x=>`<div class="mr"><span>${x.ic}${x.n!==''?` <b>${x.n}</b>`:''} ${esc(x.d)}</span>${x.use?`<button data-a="use" data-i="${p.id}" data-n="${x.use}">⚡ Dùng</button>`:''}</div>`).join(''):''};
  dlg(`<h3>${esc(p.av)} ${esc(p.n)} — hiệu ứng & túi quà</h3><div class="tw">${sec('g','🟢 Có lợi')}${sec('b','🔴 Bất lợi')||''}</div>`,[['Đóng',1,'p']],0,'640px')}
+
+// ===== Popup thông tin: hiệu ứng / khiên và hũ điểm chung =====
+const NM={imm:'Vé miễn tử',trap:'Bẫy hẹn giờ',bomb:'Bom',frz:'Đóng băng',drn:'Hút 50% điểm',ref:'Phản đòn',prx:'Chuyển hình phạt',pdn:'Bỏ qua hình phạt',dis:'Vô hiệu khiên',x3:'Nhân ba điểm',skp:'Mất lượt',gd:'Lớp bảo vệ',hlv:'Rỉ điểm',drp:'Chảy máu',crs:'Lời nguyền',dbl:'Nhân đôi hình phạt',aly:'Đồng minh',sav:'Gửi tiết kiệm',toll:'Thu phí qua đường',ins:'Bảo hiểm',thn:'Khiên gai',rsh:'Khiên phản chiếu'};
+const ONCE=['pdn','prx','imm','gd','dbl','crs','ref','skp','x3','rsh'];
+function fxi(id,j){
+ const p=P(id);if(!p)return;j=+j;const hs=p.sh>0;let ic,nm,good,desc,left,by='',extra='';
+ if(hs&&j===0){ic='🛡️';nm='Khiên bảo vệ';good=1;desc='Chặn mọi lần mất điểm thông thường (kể cả bị cướp điểm) khi khiên còn hiệu lực. Không chặn hoán đổi hoặc đặt lại điểm trực tiếp.';left=`Còn <b>${p.sh}</b> lần chặn — chỉ giảm khi khiên chặn một khoản mất điểm (đòn từ 30 điểm trở lên làm vỡ 2 khiên). Tối đa 10 khiên.`}
+ else{const f=p.fx[j-(hs?1:0)];if(!f)return;ic=FI[f.k];nm=NM[f.k]||f.k;good=FG[f.k]==='g';
+  const t=FN[f.k]||'',q=t.indexOf(':');desc=q>0&&q<26?t.slice(q+1).trim():t;desc=desc.charAt(0).toUpperCase()+desc.slice(1);
+  if(f.k==='bomb'){const c=f.c%2;left=`Bộ đếm <b>${c}/2</b> — còn <b>${2-c}</b> lượt quay hợp lệ của ${esc(p.n)} thì bom nổ (−40 điểm). Tồn tại đến khi được gỡ hoặc chuyển đi.`}
+  else if(f.k==='trap'){left=`Bộ đếm <b>${f.c}/3</b> — còn <b>${3-f.c}</b> lượt quay hợp lệ của ${esc(p.n)} thì bẫy sập (−25 điểm). Tồn tại đến khi sập hoặc được gỡ.`}
+  else if(f.k==='sav'){left=`Bộ đếm <b>${f.c}/3</b> — còn <b>${3-f.c}</b> lượt hợp lệ của ${esc(p.n)} thì nhận lại <b>${f.v}</b> điểm.`}
+  else if(f.l>=99)left='Không giới hạn số lượt — tồn tại đến khi được kích hoạt hoặc gỡ bỏ.';
+  else{const who=f.ct==='h'?`lượt hợp lệ của chính ${esc(p.n)}`:f.ct==='o'?`lượt hợp lệ của ${esc(P(f.o)?.n||'người sở hữu phiếu')}`:'lượt quay (tính theo mọi lượt của cả lớp)';left=`Còn <b>${f.l}</b> ${who}${ONCE.includes(f.k)?', hoặc đến khi được kích hoạt':''}.`}
+  if(f.fr)left+=' <small>(mới gắn: bắt đầu đếm từ lượt sau)</small>';
+  const o=P(f.o);if(o)by=`<div class="fxr"><b>👤 Đặt bởi</b><br>${esc(o.av)} ${esc(o.n)}${o===p?' (chính bạn)':''}</div>`;
+  if(f.k==='prx')extra=`<div class="fxr"><b>↪️ Hình phạt chuyển sang</b><br>${f.d==='top'?'Top 1 bảng xếp hạng':esc(P(f.d)?.n||'?')}</div>`}
+ dlg(`<div class="ctr"><div style="font-size:64px;line-height:1.1">${ic}</div><h2 style="margin:6px 0 4px">${esc(nm)}</h2><span class="tag" style="${good?'':'background:#ffe3e8;color:#c0243f'}">${good?'🟢 Có lợi':'🔴 Bất lợi'}</span><p style="margin:8px 0 0;color:#6b66b8;font-weight:700">${esc(p.av)} ${esc(p.n)}</p></div><div class="fxr"><b>📖 Công dụng</b><br>${esc(desc)}</div><div class="fxr"><b>⏳ Số lượt còn lại</b><br>${left}</div>${by}${extra}`,[['Đóng',1,'p']],0,'460px')
+}
+const jarSvg=pot=>{const f=Math.min(1,pot/100),h=Math.round(150*f),y=214-h,co=[[60,200],[100,205],[140,200],[80,186],[120,188],[100,170],[66,172],[134,170],[100,150]].filter(c=>c[1]>y+6).map(c=>`<circle cx="${c[0]}" cy="${c[1]}" r="12" fill="#ffd54a" stroke="#e09a00" stroke-width="2.5"/><text x="${c[0]}" y="${c[1]+5}" text-anchor="middle" font-size="14" font-weight="800" fill="#a96a00">$</text>`).join('');
+ return `<svg viewBox="0 0 200 240" width="132" height="158" role="img" aria-label="Hũ điểm chung"><defs><clipPath id="jc"><path d="M70 58H130V72C162 84 182 108 182 146C182 190 156 214 100 214C44 214 18 190 18 146C18 108 38 84 70 72Z"/></clipPath><linearGradient id="jg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe27a"/><stop offset="1" stop-color="#ffb300"/></linearGradient></defs><ellipse cx="100" cy="226" rx="70" ry="9" fill="#4f46e522"/><path d="M70 58H130V72C162 84 182 108 182 146C182 190 156 214 100 214C44 214 18 190 18 146C18 108 38 84 70 72Z" fill="#fff8e6"/><g clip-path="url(#jc)"><rect x="0" y="${y}" width="200" height="${h+4}" fill="url(#jg)"/>${f>0?`<ellipse cx="100" cy="${y}" rx="90" ry="6" fill="#fff0a8"/>`:''}${co}</g><path d="M70 58H130V72C162 84 182 108 182 146C182 190 156 214 100 214C44 214 18 190 18 146C18 108 38 84 70 72Z" fill="none" stroke="#9b6a2f" stroke-width="5" stroke-linejoin="round"/><rect x="60" y="40" width="80" height="20" rx="8" fill="#b4691f" stroke="#7a4410" stroke-width="3"/><rect x="88" y="30" width="24" height="14" rx="6" fill="#d58a3a" stroke="#7a4410" stroke-width="3"/><path d="M42 110C34 124 32 140 34 156" stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none" opacity=".75"/></svg>`};
+function potInfo(){
+ const pot=S.pot||0,n=S.t+1,storm=n%20===0?n:(Math.floor(n/20)+1)*20;let gold=n;while(!(gold%10===0&&gold%20))gold++;
+ const w=m=>m===n?'ngay lượt tới':`còn ${m-n} lượt nữa`;
+ dlg(`<div class="ctr">${jarSvg(pot)}<h2 style="margin:2px 0">🏺 Hũ điểm chung</h2><div style="font-size:40px;font-weight:800;color:#b45f06;line-height:1.1">${pot} <small style="font-size:18px">điểm</small></div><p style="margin:2px 0 8px;color:#6b66b8;font-weight:700">${pot?`Hũ đã đầy ${Math.min(100,pot)}% so với mức Nổ hũ tối đa (100)`:'Hũ đang trống'} · Vòng ${S.rd||1}</p></div>
+<div class="fxr"><b>📥 Hũ đầy lên bằng cách nào?</b><br>Mọi điểm bị mất mà không chuyển cho ai đều rơi vào hũ: phiếu Trừ điểm, bom nổ, bẫy sập, chảy máu, lời nguyền, người đứng cuối bị phạt và Thuế bão.</div>
+<div class="fxr"><b>📤 Lấy điểm trong hũ</b><br>Rút trúng phiếu <b>Nổ hũ</b> hoặc <b>Nổ hũ lớn</b> để nhận toàn bộ hũ (tối đa 100 điểm mỗi lần, phần dư ở lại hũ).</div>
+<div class="fxr"><b>📅 Sự kiện sắp tới</b><br>🌪️ Thuế bão ở lượt ${storm} (${w(storm)}): ai trên 30 điểm nộp 10 điểm vào hũ.<br>🌟 Giờ vàng ở lượt ${gold} (${w(gold)}): kéo dài 5 phút kể từ lúc bắt đầu, mỗi lượt quay khoản cộng điểm đầu tiên ×2.</div>`,[['Đóng',1,'p']],0,'500px')
+}
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('[role=button]')){e.preventDefault();e.target.click()}});
 function anim(p,o){const c=$(`[data-id="${p.id}"]`);if(!c||S.fo)return;const i=c.querySelector('.sc'),d=p.p-o,up=d>0,t0=performance.now(),l=document.createElement('span');c.classList.add(up?'fu':'fd');i.classList.add('pop');l.className='dl '+(up?'up':'dn');l.textContent=(up?'+':'')+d;c.querySelector('.sw').append(l);
  (function f(t){const k=Math.min(1,(t-t0)/700);i.value=Math.round(o+d*k);if(k<1)requestAnimationFrame(f)})(t0);setTimeout(()=>{c.classList.remove('fu','fd');i.classList.remove('pop');l.remove()},1400)}
 function render(){const R=rk(),top=R[0]?.p;{const n=S.t+1,ev=n%20===0?'🌪️ Lượt tới: Thuế bão':n%10===0?'🌟 Lượt tới: Giờ vàng':'';$('#pt').textContent=`Vòng ${S.rd||1} · 🏺 Hũ ${S.pot||0}`+(ev?' · '+ev:'')}if(PV.c!==S.cur)PV={c:S.cur,m:null};const old=PV.m;
- $('#cs').innerHTML=S.cls.map(c=>`<option value="${c.id}" ${c.id===S.cur?'selected':''}>${esc(c.n)} (${c.st.length})</option>`).join('');{const dn=S.sp.filter(i=>P(i)).length,al=S.st.length;$('#sp').innerHTML=`<b>${dn}/${al}</b><small>Đã quay</small>`;$('#sp').classList.toggle('full',al>0&&dn>=al)}
+ {const hm=$('#hd .hm'),cc=S.cls.find(c=>c.id===S.cur);if(hm&&cc)hm.title='Lớp hiện tại: '+cc.n+' — bấm để về màn hình chọn lớp'}{const dn=S.sp.filter(i=>P(i)).length,al=S.st.length;$('#sp').innerHTML=`<b>${dn}/${al}</b><small>Đã quay</small>`;$('#sp').classList.toggle('full',al>0&&dn>=al)}
  $('#gr').innerHTML=S.st.map(p=>{const dn=S.sp.includes(p.id);return `<div class="c ${p.p>0&&rankOf(R,p)<4?'m'+rankOf(R,p):''} ${dn?'done':''}" data-id="${p.id}"><div class="hd"><span class="av">${esc(p.av)}</span><b class="nm">${esc(p.n)}</b>${dn?'<span class="ok">✓ Đã quay</span>':''}</div><div class="sw"><input class="sc" type="number" step="1" data-a2="sc" data-i="${p.id}" value="${p.p}" title="Bấm để nhập điểm trực tiếp, nhấn Enter để lưu" aria-label="Điểm của ${esc(p.n)}"></div>${bdg(p)}<button class="p big" data-a="spin" data-i="${p.id}" ${dn?'disabled title="Đã quay trong vòng này. Bấm Vòng mới để quay lại"':''}>${dn?'✓ ĐÃ QUAY':'🎡 QUAY VÒNG QUAY'}</button>${S.qa?`<div class="qa">${[1,2,3,4,5,6,7,8,9].map(n=>`<button data-a="add" data-n="${n}" data-i="${p.id}">+${n}</button>`).join('')}</div>`:''}</div>`}).join('')||'<p>Lớp chưa có học sinh. Bấm “👥 Quản lý lớp”.</p>';
  lbRefresh();
  if(!busy){if(old)S.st.forEach(p=>{if(old[p.id]!==undefined&&old[p.id]!==p.p)anim(p,old[p.id])});PV.m=Object.fromEntries(S.st.map(p=>[p.id,p.p]))}}
@@ -540,10 +712,10 @@ async function del(id){const p=P(id);if(await dlg(`<h3>Xóa ${esc(p.n)}?</h3><p>
 const hist=()=>dlg('<h3>Lịch sử giao dịch</h3><div class="tw">'+(S.h.length?S.h.map(h=>`<div class="hi"><b>${esc(h.tm)}</b> · ${esc(h.who)} · ${esc(h.label)}<ul>${h.log.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></div>`).join(''):'<p>Chưa có giao dịch.</p>')+'</div>',[['Đóng',1,'p']],0,'720px');
 function mng(){const rows=()=>{const q=$('#fq').value.toLowerCase(),g=$('#fg').value,t=$('#ft').value,s=pool().reduce((a,c)=>a+cf(c).w,0)||1;return C.filter(c=>(!g||c.g===g)&&(!t||c.t===t)&&txt(c).toLowerCase().includes(q)).map(c=>{const f=cf(c);return `<tr class="t${c.t}"><td>${c.id}</td><td class="tx"><textarea rows="2" data-i="${c.id}" data-f="x">${esc(txt(c))}</textarea></td><td>${TN[c.t]}<br><small>${KN[c.k]}</small></td><td><input type="checkbox" data-i="${c.id}" data-f="on" ${f.on?'checked':''}></td><td><input type="number" min="0" style="width:70px" data-i="${c.id}" data-f="w" value="${f.w}"><small>${f.on&&f.w>0?(f.w/s*100).toFixed(1):0}%</small></td></tr>`}).join('')};
  dlg(`<h3>Quản lý phiếu (${C.length})</h3><div class="fl"><input id="fq" placeholder="Tìm theo tên"><select id="fg"><option value="">Mọi nhóm</option>${Object.entries(GN).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select><select id="ft"><option value="">Tốt/xấu/trung tính</option>${Object.entries(TN).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select></div><div class="tw"><table id="rw"></table></div>`,[['Khôi phục mặc định',()=>{S.cf={};save();return 1}],['Đóng',1,'p']],()=>{const up=()=>$('#rw').innerHTML=rows();['fq','fg','ft'].forEach(i=>$('#'+i).oninput=up);$('#rw').onchange=e=>{const t=e.target,c=C.find(c=>c.id===t.dataset.i),f=cf(c);if(t.dataset.f==='on')f.on=t.checked?1:0;else if(t.dataset.f==='w')f.w=Math.max(0,+t.value||0);else f.x=t.value.trim()||undefined;save();up()};up()},'1250px')}
-document.onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;const{a,i,n}=b.dataset;({spin:()=>spin(i),add:()=>txn(`+${n} cho ${P(i).n}`,()=>gain(P(i),+n,'q')),edit:()=>edit(i),del:()=>del(i),undo,hist,mng,cadd:()=>cls('add'),cren:()=>cls('ren'),cdel:()=>cls('del'),play:()=>lobbyRender('classes'),lback:()=>lobbyRender(),home:()=>{sync();save();lobbyRender('classes')},pickc:()=>{if(i!==S.cur)swc(i);enterGame()},ladd:async()=>{await cls('add');lobbyRender('classes')},nr:endRound,rnx,qz,use:()=>useHold(i,n),fxm:()=>fxm(i),mgr,ex:()=>{const l=document.createElement('a');l.href=URL.createObjectURL(new Blob([ser()],{type:'application/json'}));l.download='quiz-battle-backup.json';l.click()}})[a]?.()};
+document.onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;const{a,i,n}=b.dataset;({spin:()=>spin(i),add:()=>txn(`+${n} cho ${P(i).n}`,()=>gain(P(i),+n,'q')),edit:()=>edit(i),del:()=>del(i),undo,hist,mng,cadd:()=>cls('add'),cren:()=>cls('ren'),cdel:()=>cls('del'),play:()=>lobbyRender('classes'),lback:()=>lobbyRender(),home:()=>{sync();save();lobbyRender('classes')},pickc:()=>{if(i!==S.cur)swc(i);enterGame()},ladd:async()=>{await cls('add');lobbyRender('classes')},lren:async()=>{swc(i);await cls('ren');lobbyRender('classes')},ldel:async()=>{swc(i);await cls('del');lobbyRender('classes')},pot:potInfo,fxi:()=>fxi(i,b.dataset.x),nr:endRound,rnx,qz,use:()=>useHold(i,n),fxm:()=>fxm(i),mgr,ex:()=>{const l=document.createElement('a');l.href=URL.createObjectURL(new Blob([ser()],{type:'application/json'}));l.download='quiz-battle-backup.json';l.click()}})[a]?.()};
 
 $('#ng').checked=S.neg;$('#fo').checked=S.fo;$('#qa').checked=S.qa;document.body.classList.toggle('nofx',S.fo);$('#qa').onchange=e=>{S.qa=e.target.checked;save();render()};$('#ng').onchange=e=>{S.neg=e.target.checked;save()};$('#fo').onchange=e=>{S.fo=e.target.checked;document.body.classList.toggle('nofx',S.fo);save()};
-document.onchange=e=>{const t=e.target;if(t.id==='cs')return swc(t.value);if(t.dataset.a2!=='sc')return;const p=P(t.dataset.i),v=t.value.trim()===''?NaN:Math.floor(+t.value);if(!p||!Number.isFinite(v)||(!S.neg&&v<0)){render();return}if(v!==p.p)txn(`Nhập tay điểm ${p.n}`,()=>{log(`✏️ Giáo viên đặt điểm trực tiếp ${p.n}: ${p.p}→${v}; không kích hoạt khiên, phản đòn hoặc đóng băng`);p.p=v})};
+document.onchange=e=>{const t=e.target;if(t.dataset.a2!=='sc')return;const p=P(t.dataset.i),v=t.value.trim()===''?NaN:Math.floor(+t.value);if(!p||!Number.isFinite(v)||(!S.neg&&v<0)){render();return}if(v!==p.p)txn(`Nhập tay điểm ${p.n}`,()=>{log(`✏️ Giáo viên đặt điểm trực tiếp ${p.n}: ${p.p}→${v}; không kích hoạt khiên, phản đòn hoặc đóng băng`);p.p=v})};
 let ly=0;const hd=$('#hd'),sh=h=>{hd.classList.toggle('hid',h);document.body.classList.toggle('hh',h)};addEventListener('scroll',()=>{const y=scrollY;if(y>ly+6&&y>90)sh(true);else if(y<ly-6||y<90)sh(false);ly=y},{passive:true});
 render();lobbyRender();
 </script><style>
@@ -597,9 +769,22 @@ mult:async(p,k)=>{const c=ctr(A(p));word(c,'×'+k,'#ffb300',{sz:76,dur:1500});se
 up:async(p,n)=>{if(n>=15)burst(ctr(A(p)),['✨','⭐'],6,60,700)},
 bag:async(p)=>{const c=ctr(A(p));fly('🎟️',{x:innerWidth/2,y:innerHeight/2},c,{arc:120,dur:900,s0:1.8,s1:.6,css:{fontSize:'40px'}});setTimeout(()=>{go(mk('🎁',{fontSize:'56px'}),[{transform:T(c.x,c.y,.3),opacity:0},{transform:T(c.x,c.y,1.5),opacity:1,offset:.4},{transform:T(c.x,c.y-20,1),opacity:0}],{duration:900});burst(c,['🎁','✨'],8,70)},850);await sl(700)},
 gold:async(t)=>{for(let i=0;i<46;i++){const x=Math.random()*innerWidth;go(mk(['🪙','🪙','✨','💰'][i%4],{fontSize:(22+Math.random()*22)+'px'}),[{transform:T(x,-40)},{transform:T(x+Math.random()*120-60,innerHeight+40,1,Math.random()*720)}],{duration:1400+Math.random()*900,delay:Math.random()*1200,easing:'ease-in'})}if(t)word({x:innerWidth/2,y:innerHeight*.3},t,'#ffb300',{sz:64,dur:1800});jar();await sl(300)},
-storm:async()=>{go(mk('',{width:'100vw',height:'100vh',background:'radial-gradient(circle at 50% 0,#394a8acc,#10163acc)',transform:'none'}),[{opacity:0},{opacity:1,offset:.15},{opacity:1,offset:.85},{opacity:0}],{duration:3600});for(let i=0;i<5;i++)go(mk('☁️',{fontSize:'110px'}),[{transform:T(-100,60+i*8),opacity:0},{transform:T(innerWidth*(.15+i*.2),50+(i%2)*40,1.1),opacity:.95,offset:.3},{transform:T(innerWidth*(.2+i*.2),55),opacity:.95,offset:.8},{transform:T(innerWidth*(.2+i*.2),55),opacity:0}],{duration:3400});for(let i=0;i<70;i++){const x=Math.random()*innerWidth;go(mk('💧',{fontSize:'20px'}),[{transform:T(x,-20,1,15)},{transform:T(x-80,innerHeight+20,1,15)}],{duration:700+Math.random()*400,delay:i*38,easing:'linear'})}go(mk('',{width:'100vw',height:'100vh',background:'#fff'}),[{opacity:0},{opacity:.85,offset:.05},{opacity:0,offset:.15},{opacity:.7,offset:.22},{opacity:0,offset:.4}],{duration:1800,delay:700});await sl(400)}
+storm:async()=>{goldToast('🌪️ THUẾ BÃO!','Ai trên 30 điểm nộp 10 điểm vào hũ chung','st');go(mk('',{width:'100vw',height:'100vh',background:'radial-gradient(circle at 50% 0,#394a8a99,#10163a70)',transform:'none'}),[{opacity:0},{opacity:1,offset:.15},{opacity:1,offset:.85},{opacity:0}],{duration:3600});for(let i=0;i<5;i++)go(mk('☁️',{fontSize:'110px'}),[{transform:T(-100,60+i*8),opacity:0},{transform:T(innerWidth*(.15+i*.2),50+(i%2)*40,1.1),opacity:.9,offset:.3},{transform:T(innerWidth*(.2+i*.2),55),opacity:.9,offset:.8},{transform:T(innerWidth*(.2+i*.2),55),opacity:0}],{duration:3400});for(let i=0;i<45;i++){const x=Math.random()*innerWidth;go(mk('💧',{fontSize:'18px',opacity:.7}),[{transform:T(x,-20,1,15)},{transform:T(x-70,innerHeight+20,1,15)}],{duration:750+Math.random()*400,delay:i*55,easing:'linear'})}for(let i=0;i<3;i++){const x=innerWidth*(.2+Math.random()*.6);go(mk('⚡',{fontSize:'130px',filter:'drop-shadow(0 0 8px #ffe27a)'}),[{transform:T(x,40,.7),opacity:0},{transform:T(x,innerHeight*.3,1.3),opacity:1,offset:.25},{transform:T(x,innerHeight*.34,1.3),opacity:1,offset:.65},{transform:T(x,innerHeight*.37,1.3),opacity:0}],{duration:1000,delay:900+i*850,easing:'ease-out'})}await sl(400)}
 };
 
+Object.assign(E,{
+ shbreak:async(p,k)=>{const c=ctr(A(p));shake(A(p));go(mk('💥',{fontSize:'80px'}),[{transform:T(c.x,c.y,.2),opacity:1},{transform:T(c.x,c.y,1.8),opacity:1,offset:.4},{transform:T(c.x,c.y,2.2),opacity:0}],{duration:800});burst(c,['🛡️','💠','🔹','✨'],14,120,900);word({x:c.x,y:c.y-30},'KHIÊN VỠ −'+k,'#4f46e5',{sz:30});await sl(500)},
+ shup:async(p,k)=>{const c=ctr(A(p));go(mk('🛡️',{fontSize:'84px',filter:'drop-shadow(0 0 14px #4f46e5)'}),[{transform:T(c.x,c.y,.3),opacity:0},{transform:T(c.x,c.y,1.3),opacity:1,offset:.4},{transform:T(c.x,c.y,1),opacity:1,offset:.7},{transform:T(c.x,c.y,1.6),opacity:0}],{duration:1000});burst(c,['🛡️','✨','💠'],8,80,900);word({x:c.x,y:c.y+50},'+'+k+' 🛡️','#4f46e5',{sz:28});await sl(350)},
+ shgive:async(a,b)=>{fly('🛡️',ctr(A(a)),ctr(A(b)),{arc:70,dur:800,css:{fontSize:'38px'}});await sl(800)},
+ thorn:async(p,n)=>{pop(p,'🌵','#14b870','GAI −'+n);await sl(500)},
+ mirror:async(p,n)=>{pop(p,'🔮','#8a4fff','PHẢN CHIẾU −'+n);await sl(500)},
+ bank:async(p,n)=>{pop(p,'🏦','#e08a00','GỬI −'+n);await sl(600)},
+ bankout:async(p,n)=>{const c=ctr(A(p));pop(p,'🏦','#14b870','TIẾT KIỆM +'+n);setTimeout(()=>burst(c,['🪙','💰','✨'],16,130,1000),500);await sl(700)},
+ toll:async(a,b)=>{fly('🪙',ctr(A(b)),ctr(A(a)),{arc:50,dur:650,css:{fontSize:'26px'}});setTimeout(()=>word(ctr(A(a)),'+1','#14b870',{sz:28}),600);await sl(120)},
+ ins:async(p,n)=>{pop(p,'🧯','#14b8c4','HOÀN +'+n);await sl(600)},
+ fort:async(p)=>{pop(p,'🏰','#4f46e5','PHÁO ĐÀI!');await sl(700)},
+ relief:async(p)=>{const c=ctr(A(p));pop(p,'🆘','#14b870','CỨU TRỢ +10');setTimeout(()=>burst(c,['💚','✨','🪙'],12,100),500);await sl(500)}
+});
 function parse(lines,label,me){const ev=[],pl=n=>S.st.find(p=>p.n===n);let sk=-1,m;
 if(/Nổ hũ/.test(label||'')&&!lines.some(l=>/Hũ đang trống/.test(l)))ev.push(['gold','🏺 NỔ HŨ!']);
 for(let i=0;i<lines.length;i++){const s=lines[i];
@@ -607,28 +792,54 @@ if(m=s.match(/^🔄 (.+) \((-?\d+)\) ⇄ (.+) \((-?\d+)\)$/)){const a=pl(m[1]),b
 if(/^💣 Bom nổ/.test(s)){me&&ev.push(['boom',me,'💣','BÙM!']);sk=i+1;continue}
 if(/^🪤 Bẫy sập/.test(s)){me&&ev.push(['boom',me,'🪤','SẬP BẪY!']);sk=i+1;continue}
 if(/^🌪️ Thuế bão/.test(s)){ev.push(['storm']);continue}
-if(/^🌟 Giờ vàng/.test(s)){ev.push(['gold','🌟 GIỜ VÀNG ×2']);continue}
+if(/^🌟 Giờ vàng/.test(s))continue;
 if(m=s.match(/^✖️(\d) Phiếu nhân/)){me&&ev.push(['mult',me,+m[1]]);continue}
 if(m=s.match(/^🛡️ Khiên của (.+) chặn/)){pl(m[1])&&ev.push(['blk',pl(m[1]),'🛡️','#4f46e5']);continue}
 if(m=s.match(/^🎫 (.+) dùng Vé miễn tử/)){pl(m[1])&&ev.push(['blk',pl(m[1]),'🎫','#ffb300']);continue}
 if(m=s.match(/^🔰 (.+) dùng Lớp bảo vệ/)){pl(m[1])&&ev.push(['blk',pl(m[1]),'🔰','#14b870']);continue}
 if(m=s.match(/^🪞 (.+) phản đòn khoản phạt (\d+) điểm về (.+) \(/)){const a=pl(m[1]),b=pl(m[3]);a&&b&&ev.push(['refl',a,b,+m[2]]);continue}
 if(m=s.match(/^📦 (.+) giữ phiếu/)){pl(m[1])&&ev.push(['bag',pl(m[1])]);continue}
+if(m=s.match(/^💥 Khiên vỡ: (.+) mất (\d+) khiên/)){pl(m[1])&&ev.push(['shbreak',pl(m[1]),+m[2]]);continue}
+if(m=s.match(/^🔨 (.+) phá (\d+) khiên của (.+) \(/)){pl(m[3])&&ev.push(['shbreak',pl(m[3]),+m[2]]);continue}
+if(m=s.match(/^🤝 (.+) tặng 1 khiên cho (.+)$/)){const a=pl(m[1]),b=pl(m[2]);a&&b&&ev.push(['shgive',a,b]);continue}
+if(m=s.match(/^🌵 Khiên gai: (.+) bị đâm −(\d+)/)){pl(m[1])&&ev.push(['thorn',pl(m[1]),+m[2]]);continue}
+if(m=s.match(/^🔮 Khiên phản chiếu: trả đòn (\d+) điểm về (.+)$/)){pl(m[2])&&ev.push(['mirror',pl(m[2]),+m[1]]);continue}
+if(m=s.match(/^(.+): 🛡️ (\d+)→(\d+)$/)){const p=pl(m[1]);p&&+m[3]>+m[2]&&ev.push(['shup',p,+m[3]-+m[2]]);continue}
+if(m=s.match(/^🏦 (.+) gửi (\d+) điểm tiết kiệm/)){pl(m[1])&&ev.push(['bank',pl(m[1]),+m[2]]);continue}
+if(m=s.match(/^🏦 (.+) nhận lại (\d+) điểm tiết kiệm/)){pl(m[1])&&ev.push(['bankout',pl(m[1]),+m[2]]);continue}
+if(m=s.match(/^🧲 (.+) thu phí qua đường \+1 từ (.+)$/)){const a=pl(m[1]),b=pl(m[2]);a&&b&&ev.push(['toll',a,b]);continue}
+if(m=s.match(/^🧯 (.+) được bảo hiểm hoàn (\d+) điểm/)){pl(m[1])&&ev.push(['ins',pl(m[1]),+m[2]]);continue}
+if(m=s.match(/^🏰 (.+) dựng Pháo đài/)){pl(m[1])&&ev.push(['fort',pl(m[1])]);continue}
+if(m=s.match(/^🆘 Cứu trợ (.+)$/)){pl(m[1])&&ev.push(['relief',pl(m[1])]);continue}
+if(/^🎰 JACKPOT/.test(s)){ev.push(['gold','🎰 JACKPOT!']);continue}
 if(m=s.match(/^(.+): (-?\d+)→(-?\d+)$/)){const p=pl(m[1]),a=+m[2],b=+m[3];if(!p)continue;if(b===0&&a>0)ev.push(['boom',p,'💥','VỀ 0!']);else if(a>0&&b>a&&(b/a===2||b/a===3))ev.push(['mult',p,b/a]);else if(b>a)ev.push(['up',p,b-a]);continue}
-if(m=s.match(/^(.+): -(\d+) \((-?\d+)→(-?\d+)\)$/)){const p=pl(m[1]),n=+m[2],nx=lines[i+1]||'';if(!p)continue;if(sk===i)continue;let q;
+if(m=s.match(/^(.+): -(\d+) \((-?\d+)→(-?\d+)\)$/)){const p=pl(m[1]),n=+m[2];let j=i+1;while(/^🧯/.test(lines[j]||''))j++;const nx=lines[j]||'';if(!p)continue;if(sk===i)continue;let q;for(let k=i+1;k<j;k++){const z=lines[k].match(/^🧯 (.+) được bảo hiểm hoàn (\d+)/);z&&pl(z[1])&&ev.push(['ins',pl(z[1]),+z[2]])}i=j-1;
 if((q=nx.match(/^(.+): \+(\d+) \(/))&&pl(q[1])&&pl(q[1])!==p){ev.push(['steal',p,pl(q[1]),n]);i++;continue}
 if(/^🏺/.test(nx)){ev.push(['pot',p,n]);i++;continue}
 ev.push(['hit',p,n,+m[4]===0]);continue}
 if(m=s.match(/^(.+): \+(\d+) \(/)){const p=pl(m[1]);p&&ev.push(['up',p,+m[2]])}}
 return ev}
 let Q=Promise.resolve();
-const play=(lines,label,me)=>{if(!on())return;const ev=parse(lines,label,me);if(!ev.length)return;top();Q=Q.then(async()=>{for(const e of ev.slice(0,14)){try{await E[e[0]](...e.slice(1))}catch(x){console.warn(x)}}})};
+const run=ev=>{if(!ev.length)return;top();Q=Q.then(async()=>{for(const e of ev.slice(0,14)){try{await E[e[0]](...e.slice(1))}catch(x){console.warn(x)}}})};
+let PEND=[];
+const play=(lines,label,me)=>{if(!on())return;const ev=parse(lines,label,me);if(!ev.length)return;let now=ev;
+ // Thuế bão (và các khoản nộp thuế đi kèm) chỉ chạy hiệu ứng sau khi vòng quay đã đóng
+ if(busy){const k=ev.findIndex(e=>e[0]==='storm');if(k>=0){now=ev.slice(0,k);PEND.push(...ev.slice(k))}}
+ run(now)};
+const _rr=restoreRank;restoreRank=function(){_rr();if(PEND.length){const e=PEND.splice(0);setTimeout(()=>{if(on())run(e)},350)}};
 const _t=txn;txn=async function(...a){const r=await _t(...a);if(r&&on())play(r,a[0]||'',a[2]);return r};
 
 lbHTML=function(){const R=rk();return R.map(p=>{const k=rankOf(R,p),o=lbPrev[p.id],ch=o!==undefined&&o!==p.p?(p.p>o?'up':'dn'):'';return `<li class="r ${p.p>0&&k<4?'rk'+k:''} ${p.id===CUR?'me':''} ${ch}" data-id="${p.id}"><i>${k}</i>${k===1&&p.p>0?'<em class="crn">👑</em>':''}${esc(p.av)}<span>${esc(p.n)}</span><b>${p.p}</b><small>${p.sh?'🛡️'+p.sh:''}${p.fx.map(f=>FI[f.k]).join('')}</small></li>`}).join('')};
 lbRefresh=function(){if(!S)return;const h=lbHTML(),fx=on();document.querySelectorAll('.lbx').forEach(o=>{if(o.dataset.h===h)return;const first={};if(fx)o.querySelectorAll('li[data-id]').forEach(li=>first[li.dataset.id]=li.getBoundingClientRect().top);o.innerHTML=h;o.dataset.h=h;if(!fx)return;o.querySelectorAll('li[data-id]').forEach(li=>{const f=first[li.dataset.id],id=li.dataset.id;if(f!==undefined){const dy=f-li.getBoundingClientRect().top;if(dy)li.animate([{transform:`translateY(${dy}px) scale(1.04)`,zIndex:3},{transform:'none',zIndex:3}],{duration:700,easing:'cubic-bezier(.2,.8,.2,1)'})}const o2=lbPrev[id],b=li.querySelector('b');if(o2!==undefined&&b&&o2!==+b.textContent)tw(b,o2,+b.textContent)})});lbPrev=Object.fromEntries(S.st.map(p=>[p.id,p.p]))};
 
-let FZ=new Set();const _r=render;render=function(){_r();const now=new Set();S.st.forEach(p=>{if(p.fx.some(f=>f.k==='frz')){now.add(p.id);const c=$(`#gr .c[data-id="${p.id}"]`);c&&c.classList.add('frozen')}});if(on())FZ.forEach(id=>{if(now.has(id)||!P(id))return;const c=$(`#gr .c[data-id="${id}"]`);if(c){c.classList.add('thaw');setTimeout(()=>c.classList.remove('thaw'),1500);top();burst(ctr(c),['💧','💧','✨'],8,70,1000,60)}});FZ=now};
+const goldNow=()=>{const n=S.t+1;return S.st.length>0&&n%10===0&&n%20!==0};
+const fmtT=ms=>{const t=Math.max(0,Math.ceil(ms/1000));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0')};
+function goldToast(h,sub,cls){let e=$('#gtoast');if(!e){e=document.createElement('div');e.id='gtoast'}if(e.parentNode!==L)L.appendChild(e);top();e.classList.toggle('st',!!cls);e.innerHTML=`<b>${h}</b><span>${sub}</span>`;e.classList.remove('show');void e.offsetWidth;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),6000)}
+function goldTick(){if(typeof S==='undefined'||!S)return;const a=goldActive(),el=$('#gxt');if(el&&a)el.textContent=fmtT(S.ge-Date.now());if(!a&&document.body.classList.contains('gold')){document.body.classList.remove('gold');goldToast('🌟 Giờ vàng đã kết thúc','Điểm cộng trở về bình thường')}}
+function goldSync(){if(S.st.length&&goldNow()&&S.gm!==S.t&&!goldActive()){S.gm=S.t;S.ge=Date.now()+300000;goldToast('🌟 GIỜ VÀNG BẮT ĐẦU!','Trong 5 phút tới: khoản cộng điểm đầu tiên mỗi lượt quay được ×2');if(on())E.gold()}
+ document.body.classList.toggle('gold',goldActive());goldTick()}
+setInterval(goldTick,1000);
+let FZ=new Set();const _r=render;render=function(){_r();const now=new Set();S.st.forEach(p=>{if(p.fx.some(f=>f.k==='frz')){now.add(p.id);const c=$(`#gr .c[data-id="${p.id}"]`);c&&c.classList.add('frozen')}});if(on())FZ.forEach(id=>{if(now.has(id)||!P(id))return;const c=$(`#gr .c[data-id="${id}"]`);if(c){c.classList.add('thaw');setTimeout(()=>c.classList.remove('thaw'),1500);top();burst(ctr(c),['💧','💧','✨'],8,70,1000,60)}});FZ=now;if(!busy)goldSync()};
 
 const _d=dlg;dlg=function(h,...r){const pr=_d(h,...r);if(on()&&typeof h==='string'&&h.includes('🏁 Tổng kết vòng'))setTimeout(()=>{const R=rk().slice(0,3),box=dg.querySelector('.ch')?.parentElement;if(!box||!R.length)return;const H=[150,115,85],C=['#ffe27a,#f0a800','#f4f6fb,#aeb7c8','#f2c39b,#c47a3d'];box.innerHTML=`<div class="pod">${[1,0,2].filter(i=>R[i]).map(i=>`<div class="pc"><div class="pa">${esc(R[i].av)}</div><small>${esc(R[i].n)}</small><div class="pb" style="height:${H[i]}px;background:linear-gradient(${C[i]})">${['🥇','🥈','🥉'][i]}<b>${R[i].p}</b></div></div>`).join('')}</div>`;box.querySelectorAll('.pb').forEach((e,k)=>e.animate([{transform:'scaleY(0)'},{transform:'scaleY(1)'}],{duration:900,delay:300+k*350,easing:'cubic-bezier(.2,1.3,.4,1)',fill:'backwards'}));setTimeout(conf,700)},50);return pr};
 })();
